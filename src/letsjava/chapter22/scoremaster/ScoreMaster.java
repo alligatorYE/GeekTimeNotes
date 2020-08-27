@@ -9,25 +9,28 @@ import java.util.Scanner;
  * @Date 2020/7/24
  * @Time 15:04
  */
+@SuppressWarnings("ALL" )
 public class ScoreMaster {
+    private static String invalidInput = "invalid input: ";
+
     public static void main(String[] args) {
         //Declare six variables, each representing six disciplines
-        int ChineseIndex = 0;
-        int MathIndex = 1;
-        int EnglishIndex = 2;
-        int PhysicsIndex = 3;
-        int ChemistryIndex = 4;
-        int BiologyIndex = 5;
+        int chineseIndex = 0;
+        int mathIndex = 1;
+        int englishIndex = 2;
+        int physicsIndex = 3;
+        int chemistryIndex = 4;
+        int biologyIndex = 5;
 
         int totalDisciplinesCount = 6;
         //Title of each disciplines
         String[] title = new String[totalDisciplinesCount];
-        title[ChineseIndex] = "Chinese";
-        title[MathIndex] = "Math";
-        title[EnglishIndex] = "English";
-        title[PhysicsIndex] = "Physics";
-        title[ChemistryIndex] = "Chemistry";
-        title[BiologyIndex] = "Biology";
+        title[chineseIndex] = "Chinese";
+        title[mathIndex] = "Math";
+        title[englishIndex] = "English";
+        title[physicsIndex] = "Physics";
+        title[chemistryIndex] = "Chemistry";
+        title[biologyIndex] = "Biology";
 
         //Get years count of having score recored from scanner
         Scanner scanner = new Scanner(System.in);
@@ -57,71 +60,16 @@ public class ScoreMaster {
             int year = 0;
             switch (oprtId) {
                 case 1:
-                    System.out.println("Which year's best score you want to know?");
-                    year = scanner.nextInt();
-                    if (year <= 0 || year > yearCount) {
-                        System.out.println("invalid input: " + year);
-                        cont = false;
-                        break;
-                    }
-                    year -= 1;
-                    int aYearsBestScoreId = 0;
-                    for (int i = 0; i < year; i++) {
-//                        System.out.println("scores[year][aYearsBestScoreId]=" + scores[year][aYearsBestScoreId] + ",year="+ year+ ",aYearsBestScoreId="+aYearsBestScoreId);
-//                        System.out.println( scores[year][i]);
-                        if (scores[year][aYearsBestScoreId] < scores[year][i]) {
-                            aYearsBestScoreId = i;
-                        }
-                    }
-                    System.out.println("The best score for year " + (year + 1) + " is " + scores[year][aYearsBestScoreId]);
+                    cont = seekingTheBestScoreOfYear(scanner, yearCount, scores, cont);
                     break;
                 case 2:
-                    System.out.println("Which year's average score you want to know?");
-                    year = scanner.nextInt();
-                    if (year <= 0 || year > yearCount) {
-                        System.out.println("invalid input: " + year);
-                        cont = false;
-                        break;
-                    }
-                    year -= 1;
-                    double avgScoreInAYear = 0;
-                    for (int i = 0; i < totalDisciplinesCount; i++) {
-                        avgScoreInAYear += scores[year][i];
-                    }
-                    avgScoreInAYear /= totalDisciplinesCount;
-                    System.out.println("The average score for year " + (year + 1) + " is " + avgScoreInAYear);
+                    cont = findTheAverageScoreForYear(totalDisciplinesCount, scanner, yearCount, scores, cont);
                     break;
                 case 3:
-                    int bestYearId = 0;
-                    int bestScoreId = 0;
-                    for (int i = 0; i < yearCount; i++) {
-                        for (int j = 0; j < totalDisciplinesCount; j++) {
-//                            System.out.println("scores[bestYearId][bestScoreId] = " + scores[bestYearId][bestScoreId] + "\tbestYearId=" + bestYearId + ",\tbestScoreId=" + bestScoreId);
-//                            System.out.println("scores[" + i + "][" + j + "] = " + scores[i][j] + "\t");
-                            if (scores[bestYearId][bestScoreId] < scores[i][j]) {
-                                bestYearId = i;
-                                bestScoreId = j;
-                            }
-                        }
-                    }
-                    System.out.println("The best score of all years is " + title[bestScoreId] + " in year " + (bestYearId + 1) + ", with a score of " + scores[bestYearId][bestScoreId]);
+                    findBestScoreOfAllYears(totalDisciplinesCount, title, yearCount, scores);
                     break;
                 case 4:
-                    System.out.println("Which discipline's best score over the year you want to know?");
-                    int disciplineId = scanner.nextInt();
-                    if (disciplineId <= 0 || disciplineId > totalDisciplinesCount) {
-                        System.out.println("invalid input: " + disciplineId);
-                        cont = false;
-                        break;
-                    }
-                    disciplineId -= 1;
-                    year = 0;
-                    for (int i = 0; i < yearCount; i++) {
-                        if (scores[year][disciplineId] < scores[i][disciplineId]) {
-                            year = i;
-                        }
-                    }
-                    System.out.println("The best score of " + title[disciplineId] + " over the years is in year " + (year + 1) + ", with a score of " + scores[year][disciplineId]);
+                    cont = seekingTheBestScoreInDisciplinesOverTheYears(totalDisciplinesCount, title, scanner, yearCount, scores, cont);
                     break;
                 default:
                     cont = false;
@@ -129,4 +77,81 @@ public class ScoreMaster {
             }
         }
     }
+
+    private static boolean seekingTheBestScoreOfYear(Scanner scanner, int yearCount, double[][] scores, boolean cont) {
+        int year;
+        System.out.println("Which year's best score you want to know?");
+        year = scanner.nextInt();
+        if (year <= 0 || year > yearCount) {
+            System.out.println(invalidInput + year);
+            cont = false;
+            return cont;
+        }
+        year -= 1;
+        int aYearsBestScoreId = 0;
+        for (int i = 0; i < year; i++) {
+            if (scores[year][aYearsBestScoreId] < scores[year][i]) {
+                aYearsBestScoreId = i;
+            }
+        }
+        System.out.println("The best score for year " + (year + 1) + " is " + scores[year][aYearsBestScoreId]);
+        return cont;
+    }
+
+    private static boolean findTheAverageScoreForYear(int totalDisciplinesCount, Scanner scanner, int yearCount, double[][] scores, boolean cont) {
+        int year;
+        System.out.println("Which year's average score you want to know?");
+        year = scanner.nextInt();
+        if (year <= 0 || year > yearCount) {
+            System.out.println(invalidInput + year);
+            cont = false;
+            return cont;
+        }
+        year -= 1;
+        double avgScoreInYear = 0;
+        for (int i = 0; i < totalDisciplinesCount; i++) {
+            avgScoreInYear += scores[year][i];
+        }
+        avgScoreInYear /= totalDisciplinesCount;
+        System.out.println("The average score for year " + (year + 1) + " is " + avgScoreInYear);
+        return cont;
+    }
+
+    private static boolean seekingTheBestScoreInDisciplinesOverTheYears(int totalDisciplinesCount, String[] title, Scanner scanner, int yearCount, double[][] scores, boolean cont) {
+        int year;
+        System.out.println("Which discipline's best score over the year you want to know?");
+        for (int i = 0; i < totalDisciplinesCount; i++) {
+            System.out.println((i + 1) + " for -> " + title[i]);
+        }
+        int disciplineId = scanner.nextInt();
+        if (disciplineId <= 0 || disciplineId > totalDisciplinesCount) {
+            System.out.println(invalidInput + disciplineId);
+            cont = false;
+            return cont;
+        }
+        disciplineId -= 1;
+        year = 0;
+        for (int i = 0; i < yearCount; i++) {
+            if (scores[year][disciplineId] < scores[i][disciplineId]) {
+                year = i;
+            }
+        }
+        System.out.println("The best score of " + title[disciplineId] + " over the years is in year " + (year + 1) + ", with a score of " + scores[year][disciplineId]);
+        return cont;
+    }
+
+    private static void findBestScoreOfAllYears(int totalDisciplinesCount, String[] title, int yearCount, double[][] scores) {
+        int bestYearId = 0;
+        int bestScoreId = 0;
+        for (int i = 0; i < yearCount; i++) {
+            for (int j = 0; j < totalDisciplinesCount; j++) {
+                if (scores[bestYearId][bestScoreId] < scores[i][j]) {
+                    bestYearId = i;
+                    bestScoreId = j;
+                }
+            }
+        }
+        System.out.println("The best score of all years is " + title[bestScoreId] + " in year " + (bestYearId + 1) + ", with a score of " + scores[bestYearId][bestScoreId]);
+    }
 }
+//即使处在低谷遭遇挫折和不公也不可以背弃纯良
