@@ -1,0 +1,164 @@
+1、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        String title = "饿了一定要吃饭，对吗？回答：'恩，真的要吃!'" ;
+        String content = "因为一顿不吃饭会饿得慌，一天不吃饭就没力气，十天不吃饭就轮回了~" ;
+        String pubdate = "1971-11-11" ; // 【问题】日期使用字符串描述
+        double price = 0.1 ;
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ; // 实例化Statement对象
+        String sql = "INSERT INTO news (nid,title,pubdate,price,content) VALUES " +
+                " (news_seq.nextval,'"+title+"',TO_DATE('"+pubdate+"','yyyy-mm-dd'), " +
+                price+",'"+content+"')" ; // 如果换行，建议所有的语句前后都追加一个空格
+        System.out.println(sql);
+        int count = stmt.executeUpdate(sql) ; // 执行更新语句
+        System.out.println("【数据库更新】影响到的数据行数为：" + count);
+        conn.close();   // 关闭连接
+    }
+}
+
+2、
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Date;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        String title = "饿了，回答：'恩，真的要吃!'" ;
+        String content = "因为一顿不吃饭会饿得慌，一天不吃饭就没力气，十天不吃饭就轮回了~" ;
+        Date pubdate = new Date() ; // 将当前日期作为发布日期
+        double price = 0.1 ;
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        String sql = "INSERT INTO news (nid,title,pubdate,price,content) VALUES " +
+                " (news_seq.nextval,?,?,?,?)" ; // 如果换行，建议所有的语句前后都追加一个空格
+        PreparedStatement pstmt = conn.prepareStatement(sql) ; // 实例化PreparedStatement接口
+        pstmt.setString(1,title);
+        pstmt.setDate(2,new java.sql.Date(pubdate.getTime()));
+        pstmt.setDouble(3,price);
+        pstmt.setString(4,content);
+        int count = pstmt.executeUpdate() ; // 执行更新语句
+        System.out.println("【数据库更新】影响到的数据行数为：" + count);
+        conn.close();   // 关闭连接
+    }
+}
+
+3、
+package cn.mldn.demo;
+
+import java.sql.*;
+import java.util.Date;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        String sql = "SELECT nid,title,pubdate,price,content FROM news" ;
+        PreparedStatement pstmt = conn.prepareStatement(sql) ; // 实例化PreparedStatement接口
+        ResultSet rs = pstmt.executeQuery() ;
+        while (rs.next()) { // 判断当前是否还有数据行
+            int nid = rs.getInt(1) ;
+            String title = rs.getString(2) ;
+            Date pubdate = rs.getDate(3) ;  // 返回的是java.sql.Date
+            double price = rs.getDouble(4) ;
+            String content = rs.getString(5) ;
+            System.out.println(nid + "、" + title + "、" + pubdate + "、" + price + "、" + content);
+        }
+        conn.close();   // 关闭连接
+    }
+}
+
+4、
+package cn.mldn.demo;
+
+import java.sql.*;
+import java.util.Date;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        String sql = "SELECT nid,title,pubdate,price,content FROM news WHERE nid=?" ;
+        PreparedStatement pstmt = conn.prepareStatement(sql) ; // 实例化PreparedStatement接口
+        pstmt.setInt(1,5);
+        ResultSet rs = pstmt.executeQuery() ;
+        if (rs.next()) { // 判断当前是否还有数据行
+            int nid = rs.getInt(1) ;
+            String title = rs.getString(2) ;
+            Date pubdate = rs.getDate(3) ;  // 返回的是java.sql.Date
+            double price = rs.getDouble(4) ;
+            String content = rs.getString(5) ;
+            System.out.println(nid + "、" + title + "、" + pubdate + "、" + price + "、" + content);
+        }
+        conn.close();   // 关闭连接
+    }
+}
+
+5、
+package cn.mldn.demo;
+
+import java.sql.*;
+import java.util.Date;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        String columnName = "title" ; // 定义要使用的模糊查询列
+        String keyWord = "喜庆" ; // 查询关键字
+        int currentPage = 1 ;   // 当前所在页
+        int lineSize = 2 ; // 每页显示2行数据
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        String sql = " SELECT * FROM ( " +
+                        " SELECT nid,title,pubdate,price,content,ROWNUM rn " +
+                        " FROM news WHERE " + columnName + " LIKE ? AND ROWNUM<=?) temp " +
+                        " WHERE temp.rn>? " ;
+        PreparedStatement pstmt = conn.prepareStatement(sql) ; // 实例化PreparedStatement接口
+        pstmt.setString(1, "%" + keyWord + "%");
+        pstmt.setInt(2,currentPage * lineSize);
+        pstmt.setInt(3,(currentPage - 1) * lineSize);
+        ResultSet rs = pstmt.executeQuery() ;
+        while (rs.next()) { // 判断当前是否还有数据行
+            int nid = rs.getInt(1) ;
+            String title = rs.getString(2) ;
+            Date pubdate = rs.getDate(3) ;  // 返回的是java.sql.Date
+            double price = rs.getDouble(4) ;
+            String content = rs.getString(5) ;
+            System.out.println(nid + "、" + title + "、" + pubdate + "、" + price + "、" + content);
+        }
+        conn.close();   // 关闭连接
+    }
+}
+
+6、

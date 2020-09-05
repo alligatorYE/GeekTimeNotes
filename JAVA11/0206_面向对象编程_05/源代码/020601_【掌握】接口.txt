@@ -1,0 +1,444 @@
+1、
+
+interface IMessage {	// 字母I表示interface
+	public static final String INFO = "www.mldn.cn" ;	// 全局常量
+	public abstract void send(String msg) ;	// 抽象方法
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(IMessage.INFO) ;
+	}
+}
+
+2、
+class 子类 [extends 父类] [implements 父接口,父接口,...] {}
+
+3、
+interface IMessage {	// 字母I表示interface
+	public static final String INFO = "www.mldn.cn" ;	// 全局常量
+	public abstract void send(String msg) ;	// 抽象方法
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println("信息发送：" + msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ; // 子类对象向上转型
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+4、
+interface IMessage {	// 字母I表示interface
+	public static final String INFO = "www.mldn.cn" ;	// 全局常量
+	public abstract void send(String msg) ;	// 抽象方法
+}
+abstract class Connect {
+	public abstract boolean build() ;
+}
+class MessageImpl extends Connect implements IMessage {
+	public boolean build() {
+		System.out.println("进行网络的连接处理 ...") ;
+		return true ;
+	}
+	public void send(String msg) {
+		if (this.build()) {
+			System.out.println("信息发送：" + msg) ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ; // 子类对象向上转型
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+5、
+interface IMessage {	// 字母I表示interface
+	String INFO = "www.mldn.cn" ;	// 全局常量
+	public void send(String msg) ;	// 抽象方法
+}
+abstract class Connect {
+	public abstract boolean build() ;
+}
+class MessageImpl extends Connect implements IMessage {
+	public boolean build() {
+		System.out.println("进行网络的连接处理 ...") ;
+		return true ;
+	}
+	public void send(String msg) {
+		if (this.build()) {
+			System.out.println("信息发送：" + msg) ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ; // 子类对象向上转型
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+6、
+interface IMessage {	// 字母I表示interface
+	public void send(String msg) ;	// 抽象方法
+}
+interface IRule {	// 定义一个消息发送的规则
+	public String getContent(String msg) ;	// 抽象方法
+}
+abstract class AbstractConnect {
+	public abstract boolean build() ;
+}
+class MessageImpl extends AbstractConnect implements IMessage,IRule {
+	public boolean build() {
+		System.out.println("进行网络的连接处理 ...") ;
+		return true ;
+	}
+	public void send(String msg) {
+		if (this.build()) {
+			System.out.println("【信息发送】" + this.getContent(msg)) ;
+		}
+	}
+	public String getContent(String msg) {	// 覆写接口方法
+		return "发送消息：" + msg + "（发送时间为：2019-10-15）" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ; // 子类对象向上转型
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+7、
+interface IMessage {	// 字母I表示interface
+	public void send(String msg) ;	// 抽象方法
+}
+interface IRule {	// 定义一个消息发送的规则
+	public String getContent(String msg) ;	// 抽象方法
+}
+abstract class AbstractConnect {
+	public abstract boolean build() ;
+}
+class MessageImpl extends AbstractConnect implements IMessage,IRule {
+	public boolean build() {
+		System.out.println("进行网络的连接处理 ...") ;
+		return true ;
+	}
+	public void send(String msg) {
+		if (this.build()) {
+			System.out.println("【信息发送】" + this.getContent(msg)) ;
+		}
+	}
+	public String getContent(String msg) {	// 覆写接口方法
+		return "发送消息：" + msg + "（发送时间为：2019-10-15）" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ; // 子类对象向上转型
+		// IMessage和AbstractConnect没有任何关系，但是观察的是new
+		AbstractConnect conn = (AbstractConnect) msg ; 
+		conn.build() ;
+	}
+}
+
+8、
+interface IMessage {	// 字母I表示interface
+	public void send(String msg) ;	// 抽象方法
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println("【信息发送】" + msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ;
+		fun(msg) ;	// 接口实例使用Object接收
+	}
+	public static void fun(Object obj) {
+		if (obj instanceof IMessage) {
+			IMessage temp = (IMessage) obj ;
+			temp.send("www.mldn.cn") ;
+		}
+	}
+}
+
+9、
+
+interface IRule {
+	public String getContent(String msg) ;
+}
+interface IConnect {
+	public boolean build() ;
+}
+interface IMessage extends IRule,IConnect {
+	public void send(String msg) ;	// 抽象方法
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println("【信息发送】" + msg) ;
+	}
+	public boolean build() {
+		return true ;
+	}
+	public String getContent(String msg) {
+		return "消息内容：“"+msg+"”（发送时间：2019-11-11）" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IRule rule = new MessageImpl() ;
+		System.out.println(rule.getContent("www.mldn.cn")) ;
+		IConnect conn = (IConnect) rule ;
+		System.out.println(conn.build()) ;
+	}
+}
+
+10、
+
+interface IMessage {
+	public void send(String msg) ;	// 抽象方法
+	public boolean build() ;	// 新追加的抽象方法
+}
+abstract class AbstractMessageAdapter implements IMessage {
+	// 前提：所有子类对于此方法的实现完全相同
+	public boolean build() {
+		return true ;
+	}
+}
+class NetMessage extends AbstractMessageAdapter implements IMessage {
+	public void send(String msg) {
+		System.out.println(msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new NetMessage() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+11、
+
+interface IMessage {
+	public void send(String msg) ;	// 抽象方法
+	public default boolean build() {	// 统一定义的新方法
+		System.out.println("进行消息网络的连接 ....") ;
+		return true ;
+	}
+}
+class NetMessage implements IMessage {
+	public void send(String msg) {
+		if (this.build()) {
+			System.out.println(msg) ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new NetMessage() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+12、
+interface IMessage {
+	public static void send(String msg) {
+		System.out.println(msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage.send("www.mldn.cn") ;
+	}
+}
+
+13、
+interface IUSB {
+	public void connect() ;	// 连接功能
+	public void work() ;	// 工作功能
+}
+class Computer {
+	public void plugin(IUSB usb) {	// 只要符合USB标准设备都可以插入
+		usb.connect() ;
+		usb.work() ;
+	}
+}
+class Mouse implements IUSB {
+	public void connect() {
+		System.out.println("【Mouse】鼠标与电脑进行连接匹配 ...") ;
+	}
+	public void work() {
+		System.out.println("【Mouse】鼠标开始工作 ...") ;
+	}
+}
+class Print implements IUSB {
+	public void connect() {
+		System.out.println("【Print】打印机与电脑进行连接匹配 ...") ;
+	}
+	public void work() {
+		System.out.println("【Print】打印机进行内容的打印 ...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Computer com = new Computer() ;
+		com.plugin(new Mouse()) ;
+		com.plugin(new Print()) ;
+	}
+}
+
+14、
+
+interface IMessage {
+	public String getContent() ;
+}
+class NetMessage implements IMessage {
+	public String getContent() {
+		return "【网络消息】今天下午放假，回去睡觉~" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new NetMessage() ;
+		System.out.println(msg.getContent()) ;
+	}
+}
+
+15、
+
+interface IMessage {
+	public String getContent() ;
+}
+class NetMessage implements IMessage {
+	public String getContent() {
+		return "【网络消息】今天下午放假，回去睡觉~" ;
+	}
+}
+class Factory {
+	public static IMessage getInstance(String className) {
+		if ("netmessage".equalsIgnoreCase(className)) {
+			return new NetMessage() ;
+		}
+		return null ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = Factory.getInstance("netmessage") ;
+		System.out.println(msg.getContent()) ;
+	}
+}
+
+16、
+interface IMessage {
+	public String getContent() ;
+}
+class NetMessage implements IMessage {
+	public String getContent() {
+		return "【网络消息】今天下午放假，回去睡觉~" ;
+	}
+}
+class NewsPaper implements IMessage {
+	public String getContent() {
+		return "【报纸消息】今天中午我们可以吃饭~" ;
+	}
+}
+class Factory {
+	public static IMessage getInstance(String className) {
+		if ("netmessage".equalsIgnoreCase(className)) {
+			return new NetMessage() ;
+		} 
+		if ("newspaper".equalsIgnoreCase(className)) {
+			return new NewsPaper() ;
+		}
+		return null ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = Factory.getInstance("newspaper") ;
+		System.out.println(msg.getContent()) ;
+	}
+}
+
+17、
+interface IMessage {
+	public void send(String msg) ;
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println("【真实实现类】消息发送：" + msg) ;
+	}
+}
+class MessageProxy implements IMessage {
+	private IMessage real ; // 真实主题对象
+	public MessageProxy(IMessage real) {
+		this.real = real ;
+	}
+	public void build() {
+		System.out.println("【代理主题类】建立网络连接通道 ...") ;
+	}
+	public void send(String msg) {
+		this.build() ;
+		this.real.send(msg) ;	// 实现消息发送
+		this.close() ;
+	}
+	public void close() {
+		System.out.println("【代理主题类】关闭网络连接通道 ...") ;
+	}
+}
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageProxy(new MessageImpl()) ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+18、
+interface IMessage {
+	public void send(String msg) ;
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println("【真实实现类】消息发送：" + msg) ;
+	}
+}
+class MessageProxy implements IMessage {
+	private IMessage real ; // 真实主题对象
+	public MessageProxy(IMessage real) {
+		this.real = real ;
+	}
+	public void build() {
+		System.out.println("【代理主题类】建立网络连接通道 ...") ;
+	}
+	public void send(String msg) {
+		this.build() ;
+		this.real.send(msg) ;	// 实现消息发送
+		this.close() ;
+	}
+	public void close() {
+		System.out.println("【代理主题类】关闭网络连接通道 ...") ;
+	}
+}
+class Factory {
+	public static IMessage getInstance() {
+		return new MessageProxy(new MessageImpl()) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = Factory.getInstance() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+19、
+
+

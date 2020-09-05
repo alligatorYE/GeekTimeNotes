@@ -1,0 +1,172 @@
+1、
+
+class Ball {
+	private String brand ;
+	private double price ;
+	public void setBrand(String brand) {
+		this.brand = brand ;
+	}
+	public void setPrice(double price) {
+		this.price = price ;
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+	public double getPrice() {
+		return this.price ;
+	}
+}
+class BasketBall {
+	private String brand ;
+	private double price ;
+	private String ground ;	// 场地
+	public void setBrand(String brand) {
+		this.brand = brand ;
+	}
+	public void setPrice(double price) {
+		this.price = price ;
+	}
+	public void setGround(String ground) {
+		this.ground = ground ;
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+	public double getPrice() {
+		return this.price ;
+	}
+	public String getGround() {
+		return this.ground ;
+	}
+}
+
+2、
+
+class Ball {
+	private String brand ;
+	private double price ;
+	public void setBrand(String brand) {
+		this.brand = brand ;
+	}
+	public void setPrice(double price) {
+		this.price = price ;
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+	public double getPrice() {
+		return this.price ;
+	}
+}
+class BasketBall extends Ball {	// BasketBall继承自Ball类
+	// 此时该类中并没有定义任何的其它操作
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.setBrand("新酷") ;	// 父类继承
+		basket.setPrice(899.99) ;	// 父类继承
+		System.out.println("篮球的品牌：" + basket.getBrand() + "、篮球的价格：" + basket.getPrice()) ;
+	}
+}
+
+
+3、
+class Ball {
+	private String brand ;
+	private double price ;
+	public void setBrand(String brand) {
+		this.brand = brand ;
+	}
+	public void setPrice(double price) {
+		this.price = price ;
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+	public double getPrice() {
+		return this.price ;
+	}
+}
+class BasketBall extends Ball {	// BasketBall继承自Ball类
+	private String ground ;
+	public void setGround(String ground) {
+		this.ground = ground ;
+	}
+	public String getGround() {
+		return this.ground ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.setBrand("新酷") ;	// 父类继承
+		basket.setPrice(899.99) ;	// 父类继承
+		basket.setGround("五棵松万事达体育中心") ;	// 扩充的方法
+		System.out.println("篮球的品牌：" + basket.getBrand() + "、篮球的价格：" + basket.getPrice() + "、场地：" + basket.getGround()) ;
+	}
+}
+
+
+4、
+
+class Ball {
+	public Ball() {	// 无参构造
+		System.out.println("【Ball】无参构造方法。") ;
+	}
+}
+class BasketBall extends Ball {	// BasketBall继承自Ball类
+	public BasketBall() {
+		System.out.println("【BasketBall】无参构造方法。") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+	}
+}
+
+
+5、
+class Ball {
+	public Ball(String brand, double price) {	// 无参构造
+		System.out.println("【Ball】双参构造方法。") ;
+	}
+}
+class BasketBall extends Ball {	// BasketBall继承自Ball类
+	public BasketBall(String brand, double price, String ground) {
+		super(brand,price) ; // 明确调用父类构造
+		System.out.println("【BasketBall】三参构造方法。") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall("新酷",789.9,"五棵松体育馆") ;	// 实例化子类对象
+	}
+}
+
+6、
+class Ball {
+	private String brand ;
+	public void setBrand(String brand) {
+		this.brand = brand ;
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+}
+class BasketBall extends Ball {
+	public void print() {
+		System.out.println(getBrand()) ;	// 间接访问
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;
+		basket.setBrand("新酷") ;
+		basket.print() ;
+	}
+}
+
+
+

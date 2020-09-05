@@ -1,0 +1,80 @@
+class Dept {
+	private int deptno ;
+	private String dname ;
+	private String loc ;
+	private Emp emps [] ;
+	public Dept(int deptno, String dname, String loc) {
+		this.deptno = deptno ;
+		this.dname = dname ;
+		this.loc = loc ;
+	}
+	public void setEmps(Emp emps[]) {
+		this.emps = emps ;
+	}
+	public Emp [] getEmps() {
+		return this.emps ;
+	}
+	public String getInfo() {
+		return "【Dept】部门编号：" + this.deptno + "、部门名称：" + this.dname + "、部门位置：" + this.loc ;
+	}
+	// setter、getter、无参构造略 ...
+}
+class Emp {
+	private int empno ;
+	private String ename ;
+	private String job ;
+	private double sal ;
+	private double comm ;
+	private Emp mgr ;
+	private Dept dept ;
+	public Emp(int empno,String ename,String job,double sal,double comm) {
+		this.empno = empno ;
+		this.ename = ename ;
+		this.job = job ;
+		this.sal = sal ;
+		this.comm = comm ;
+	}
+	public void setMgr(Emp mgr) {
+		this.mgr = mgr ;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept ;
+	}
+	public Emp getMgr() {
+		return this.mgr ;
+	}
+	public Dept getDept() {
+		return this.dept ;
+	}
+	public String getInfo() {
+		return "【Emp】雇员编号：" + this.empno + "、姓名：" + this.ename + "、职位：" + this.job + "、基本工资：" + this.sal + "、佣金：" + this.comm ;
+	}
+	// setter、getter、无参构造略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 第一步：根据关系设置数据
+		// 1、实例化各个类的对象，但是没有引用关联
+		Dept dept = new Dept(10,"财务部","纽约") ;
+		Emp empA = new Emp(7369,"SMITH","CLERK",800.0,0.0) ;
+		Emp empB = new Emp(7566,"ALLEN","MANAGER",2450.0,0.0) ;
+		Emp empC = new Emp(7839,"KING","PRESIDENT",5000.0,0.0) ;
+		// 2、设置雇员与部门间引用关联
+		empA.setDept(dept) ;	// 雇员与部门之间的引用关联
+		empB.setDept(dept) ;	// 雇员与部门之间的引用关联
+		empC.setDept(dept) ;	// 雇员与部门之间的引用关联
+		// 3、设置雇员与领导间引用关联
+		empA.setMgr(empB) ;
+		empB.setMgr(empC) ;
+		// 4、设置部门与雇员间的引用关联
+		dept.setEmps(new Emp[] {empA,empB,empC}) ;
+		// 第二步：根据结构获取数据
+		System.out.println(dept.getInfo()) ;
+		for (Emp emp : dept.getEmps()) {
+			System.out.println("\t|- " + emp.getInfo()) ;
+			if (emp.getMgr() != null) {
+				System.out.println("\t\t|- " + emp.getMgr().getInfo()) ;
+			}
+		}
+	}
+}

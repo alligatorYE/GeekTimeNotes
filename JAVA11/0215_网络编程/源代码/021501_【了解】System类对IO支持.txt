@@ -1,0 +1,44 @@
+1、
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        OutputStream output = System.out ; // 利用系统的标准输出为输出流实例化
+        output.write("www.mldn.cn".getBytes());
+    }
+}
+
+2、
+
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        try {
+            Integer.parseInt("abc");
+        } catch (Exception e) {
+            System.out.println(e);
+            System.err.println(e);
+        }
+    }
+}
+
+3、
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        InputStream input = System.in ; // 描述的是键盘输入
+        byte data [] = new byte [1024] ; // 开辟一块空间
+        System.out.print("请输入数据：" );
+        int length = input.read(data) ; // 向字节数组进行读取
+        System.out.println("【输入数据】" + new String(data, 0, length));
+    }
+}
+
+4、
+辛博同学说要请大家喝咖啡！
+
+
+
+

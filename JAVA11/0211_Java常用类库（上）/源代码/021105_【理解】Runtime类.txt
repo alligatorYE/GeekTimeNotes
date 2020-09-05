@@ -1,0 +1,51 @@
+1、
+
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Runtime run = Runtime.getRuntime() ; // 获取Runtime类的实例化
+        Process process = run.exec("calc.exe") ; // 启动一个新的进程
+        Thread.sleep(2000); // 2秒后关闭
+        process.destroy(); // 结束进程
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Runtime run = Runtime.getRuntime() ; // 获取Runtime类的实例化
+        System.out.println("MAX_MEMORY：" + run.maxMemory());
+        System.out.println("TOTAL_MEMORY：" + run.totalMemory());
+        System.out.println("FREE_MEMORY：" + run.freeMemory());
+    }
+}
+
+
+3
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Runtime run = Runtime.getRuntime() ; // 获取Runtime类的实例化
+        System.out.println("【产生垃圾前】MAX_MEMORY：" + run.maxMemory());
+        System.out.println("【产生垃圾前】TOTAL_MEMORY：" + run.totalMemory());
+        System.out.println("【产生垃圾前】FREE_MEMORY：" + run.freeMemory());
+        System.out.println("--------------------------------------------------------------------");
+        String str = "饿了吗？" ;
+        for (int x = 0 ; x < 5000 ; x ++) {
+            str += x ; // 产生大量的垃圾
+        }
+        System.out.println("【产生垃圾后】MAX_MEMORY：" + run.maxMemory());
+        System.out.println("【产生垃圾后】TOTAL_MEMORY：" + run.totalMemory());
+        System.out.println("【产生垃圾后】FREE_MEMORY：" + run.freeMemory());
+        System.out.println("--------------------------------------------------------------------");
+        run.gc(); // 手工垃圾回收
+        System.out.println("【GC处理后】MAX_MEMORY：" + run.maxMemory());
+        System.out.println("【GC处理后】TOTAL_MEMORY：" + run.totalMemory());
+        System.out.println("【GC处理后】FREE_MEMORY：" + run.freeMemory());
+    }
+}
+
+

@@ -1,0 +1,126 @@
+1、
+
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+class Message {
+    private String info ;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+    public String getInfo() {
+        return info;
+    }
+}
+class MessagePrint {
+    public static void print(Message message) {
+        System.out.println(message.getInfo());
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Message message = new Message() ;
+        message.setInfo("下课准备测试~对所有人都有效（除了我）");
+        MessagePrint.print(message);
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+class Message {
+    private String info ;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+    public String getInfo() {
+        return info;
+    }
+}
+class MessagePrint {
+    public static void print() {
+        Message message = Resource.message ;
+        System.out.println(message.getInfo());
+    }
+}
+class Resource {
+    public static Message message ;
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Message message = new Message() ;
+        Resource.message = message ;
+        message.setInfo("下课准备测试~对所有人都有效（除了我）");
+        MessagePrint.print();
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+class Message {
+    private String info ;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+    public String getInfo() {
+        return info;
+    }
+}
+class MessagePrint {
+    public static void print() {
+        Message message = Resource.getMessage() ;
+        System.out.println(message.getInfo());
+    }
+}
+class Resource {
+    private static final ThreadLocal<Message> MESSAGES = new ThreadLocal<>() ;
+    public static void setMessage(Message message) {
+        MESSAGES.set(message);
+    }
+    public static Message getMessage() {
+        return MESSAGES.get() ;
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        new Thread(()->{
+            Message message = new Message() ;
+            message.setInfo("恭喜大家毕业了，好好工作吧，争取月薪拿到10W~");
+            Resource.setMessage(message) ;
+            MessagePrint.print();
+        }).start();
+        new Thread(()->{
+            Message message = new Message() ;
+            message.setInfo("新博心碎了，因为被君君伤害了~，菊花没了~");
+            Resource.setMessage(message) ;
+            MessagePrint.print();
+        }).start();
+        new Thread(()->{
+            Message message = new Message() ;
+            message.setInfo("今天下午测试，很重要的哦~");
+            Resource.setMessage(message) ;
+            MessagePrint.print();
+        }).start();
+    }
+}
+
+
+
+

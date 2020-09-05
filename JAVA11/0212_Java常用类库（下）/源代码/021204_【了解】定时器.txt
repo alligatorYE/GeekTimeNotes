@@ -1,0 +1,88 @@
+1、
+
+package cn.mldn.demo;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+class TaskThread extends TimerTask {    // 强制性继承
+    @Override
+    public void run() { // 线程执行体
+        System.out.println("www.mldn.cn");
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Timer timer = new Timer() ;
+        // 延迟1秒开始进行调度，每2秒的时间进行间隔调度处理
+        timer.schedule(new TaskThread(), 1000, 2000);
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+import java.util.Timer;
+import java.util.TimerTask;
+class TaskThread extends TimerTask {    // 强制性继承
+    @Override
+    public void run() { // 线程执行体
+        System.out.println("【A】www.mldn.cn");
+    }
+}
+class SlowTaskThread extends TimerTask {
+    @Override
+    public void run() {
+        System.out.print("【B】Hello");
+        try {
+            Thread.sleep(3000); // 每次操作延迟3000毫秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(" MLDN .");
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Timer timer = new Timer() ;
+        // 延迟1秒开始进行调度，每2秒的时间进行间隔调度处理
+        timer.schedule(new TaskThread(), 1000, 1);
+        timer.schedule(new SlowTaskThread(), 1000, 1000);
+    }
+}
+
+
+
+3、
+package cn.mldn.demo;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+class TaskThread extends TimerTask {    // 强制性继承
+    @Override
+    public void run() { // 线程执行体
+        System.out.println("【A】www.mldn.cn");
+    }
+}
+class SlowTaskThread extends TimerTask {
+    @Override
+    public void run() {
+        System.out.print("【B】Hello");
+        try {
+            Thread.sleep(3000); // 每次操作延迟3000毫秒
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(" MLDN .");
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Timer timer = new Timer() ;
+        // 延迟1秒开始进行调度，每2秒的时间进行间隔调度处理
+        timer.scheduleAtFixedRate(new TaskThread(), 1000, 1);
+        timer.scheduleAtFixedRate(new SlowTaskThread(), 1000, 1000);
+    }
+}

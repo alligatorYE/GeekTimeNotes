@@ -1,0 +1,310 @@
+1、
+
+class Point {
+	private Object x ;
+	private Object y ;
+	public void setX(Object x) {
+		this.x = x ;
+	}
+	public void setY(Object y) {
+		this.y = y ;
+	}
+	public Object getX() {
+		return this.x ;
+	}
+	public Object getY() {
+		return this.y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Point point = new Point() ;
+		// 第一部分：设置坐标数据
+		point.setX(10) ;	// 自动装箱&向上转型
+		point.setY(20) ;	// 自动装箱&向上转型
+		// 第二部分：获取坐标数据
+		int x = (Integer) point.getX() ;	// 向下转型 & 自动拆箱
+		int y = (Integer) point.getY() ;	// 向下转型 & 自动拆箱
+		System.out.println("x = " + x + "、y = " + y) ;
+	}
+}
+
+2、
+
+
+class Point {
+	private Object x ;
+	private Object y ;
+	public void setX(Object x) {
+		this.x = x ;
+	}
+	public void setY(Object y) {
+		this.y = y ;
+	}
+	public Object getX() {
+		return this.x ;
+	}
+	public Object getY() {
+		return this.y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Point point = new Point() ;
+		// 第一部分：设置坐标数据
+		point.setX(10) ;	// 自动装箱&向上转型
+		point.setY("北纬20度") ;	// 向上转型
+		// 第二部分：获取坐标数据
+		int x = (Integer) point.getX() ;	// 向下转型 & 自动拆箱
+		int y = (Integer) point.getY() ;	// 向下转型 & 自动拆箱
+		System.out.println("x = " + x + "、y = " + y) ;
+	}
+}
+
+
+3、
+class Point<T> {	// T表示Type
+	private T x ;
+	private T y ;
+	public void setX(T x) {
+		this.x = x ;
+	}
+	public void setY(T y) {
+		this.y = y ;
+	}
+	public T getX() {
+		return this.x ;
+	}
+	public T getY() {
+		return this.y ;
+	}
+}
+
+4、
+class Point<T> {	// T表示Type
+	private T x ;
+	private T y ;
+	public void setX(T x) {
+		this.x = x ;
+	}
+	public void setY(T y) {
+		this.y = y ;
+	}
+	public T getX() {
+		return this.x ;
+	}
+	public T getY() {
+		return this.y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Point<Integer> point = new Point<Integer>() ;
+		// 第一部分：设置坐标数据
+		point.setX(10) ;	// 自动装箱&向上转型
+		point.setY(20) ;	// 向上转型
+		// 第二部分：获取坐标数据
+		int x = point.getX() ;	// 向下转型 & 自动拆箱
+		int y = point.getY() ;	// 向下转型 & 自动拆箱
+		System.out.println("x = " + x + "、y = " + y) ;
+	}
+}
+
+5、
+class Point<T> {	// T表示Type
+	private T x ;
+	private T y ;
+	public void setX(T x) {
+		this.x = x ;
+	}
+	public void setY(T y) {
+		this.y = y ;
+	}
+	public T getX() {
+		return this.x ;
+	}
+	public T getY() {
+		return this.y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Point point = new Point() ;
+		// 第一部分：设置坐标数据
+		point.setX(10) ;	// 自动装箱&向上转型
+		point.setY(20) ;	// 向上转型
+		// 第二部分：获取坐标数据
+		int x = (Integer) point.getX() ;	// 向下转型 & 自动拆箱
+		int y = (Integer) point.getY() ;	// 向下转型 & 自动拆箱
+		System.out.println("x = " + x + "、y = " + y) ;
+	}
+}
+
+6、
+class Message<T> {
+	private T info ;
+	public void setInfo(T info) {
+		this.info = info ;
+	}
+	public T getInfo() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message<String> msg = new Message<String>() ;
+		msg.setInfo("www.mldn.cn") ;
+		fun(msg) ;
+	}
+	public static void fun(Message<String> temp) {
+		System.out.println(temp.getInfo()) ;
+	}
+}
+
+7、
+class Message<T> {
+	private T info ;
+	public void setInfo(T info) {
+		this.info = info ;
+	}
+	public T getInfo() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message<Integer> msg = new Message<Integer>() ;
+		msg.setInfo(100) ;
+		fun(msg) ;
+	}
+	public static void fun(Message temp) {
+		temp.setInfo("Hello Hello Hello") ;
+		System.out.println(temp.getInfo()) ;
+	}
+}
+
+8、
+class Message<T> {
+	private T info ;
+	public void setInfo(T info) {
+		this.info = info ;
+	}
+	public T getInfo() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message<Integer> msg = new Message<Integer>() ;
+		msg.setInfo(100) ;
+		fun(msg) ;
+	}
+	public static void fun(Message<?> temp) {
+		System.out.println(temp.getInfo()) ;
+	}
+}
+
+9、
+class Message<T extends Number> {
+	private T info ;
+	public void setInfo(T info) {
+		this.info = info ;
+	}
+	public T getInfo() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message<Integer> msg = new Message<Integer>() ;
+		msg.setInfo(100) ;
+		fun(msg) ;
+	}
+	public static void fun(Message<? extends Number> temp) {
+		System.out.println(temp.getInfo()) ;
+	}
+}
+
+10、
+class Message<T> {
+	private T info ;
+	public void setInfo(T info) {
+		this.info = info ;
+	}
+	public T getInfo() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message<String> msg = new Message<String>() ;
+		msg.setInfo("Hello World") ;
+		fun(msg) ;
+	}
+	public static void fun(Message<? super String> temp) {
+		System.out.println(temp.getInfo()) ;
+	}
+}
+
+11、
+interface IMessage<T> {
+	public void send(T content) ;
+}
+class MessageImpl<T> implements IMessage<T> {
+	public void send(T content) {
+		System.out.println(content) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage<String> msg = new MessageImpl<String>() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+12、
+interface IMessage<T> {
+	public void send(T content) ;
+}
+class MessageImpl<T> implements IMessage<T> {
+	public void send(T content) {
+		System.out.println(content) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage<String> msg = new MessageImpl<>() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+13、
+interface IMessage<T> {
+	public void send(T content) ;
+}
+class MessageImpl implements IMessage<String> {
+	public void send(String content) {
+		System.out.println(content) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage<String> msg = new MessageImpl() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+14、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Double [] result = init(1.1,2.2,3.3) ;	// 由外部设置泛型类型
+		for (double temp : result) {
+			System.out.print(temp + "、") ;
+		}
+	}
+	public static <T> T[] init(T ... args) {
+		return args ;
+	}
+}
+
+15、

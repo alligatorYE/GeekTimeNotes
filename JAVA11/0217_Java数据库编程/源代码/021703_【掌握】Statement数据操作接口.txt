@@ -1,0 +1,124 @@
+1、
+DROP TABLE news PURGE ;
+DROP SEQUENCE news_seq ;
+CREATE SEQUENCE news_seq ;
+CREATE TABLE news(
+	nid		NUMBER ,
+	title		VARCHAR2(50) ,
+	pubdate		DATE ,
+	price		NUMBER(10,2) ,
+	content		CLOB ,
+	CONSTRAINT pk_nid PRIMARY KEY(nid)
+) ;
+
+
+2、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ; // 实例化Statement对象
+        String sql = "INSERT INTO news (nid,title,pubdate,price,content) VALUES " +
+                " (news_seq.nextval,'喜庆的节日来了',TO_DATE('2059-05-02','yyyy-mm-dd'), " +
+                " '全国洋溢着欢天喜地，迎接20天的长假！')" ; // 如果换行，建议所有的语句前后都追加一个空格
+        int count = stmt.executeUpdate(sql) ; // 执行更新语句
+        System.out.println("【数据库更新】影响到的数据行数为：" + count);
+        conn.close();   // 关闭连接
+    }
+}
+
+
+3、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ; // 实例化Statement对象
+        String sql = "UPDATE news SET title='中国万岁',pubdate=SYSDATE WHERE nid IN (3,5,7)" ; 
+        int count = stmt.executeUpdate(sql) ; // 执行更新语句
+        System.out.println("【数据库更新】影响到的数据行数为：" + count);
+        conn.close();   // 关闭连接
+    }
+}
+
+
+4、
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ; // 实例化Statement对象
+        String sql = "DELETE FROM news WHERE nid BETWEEN 7 AND 10" ;
+        int count = stmt.executeUpdate(sql) ; // 执行更新语句
+        System.out.println("【数据库更新】影响到的数据行数为：" + count);
+        conn.close();   // 关闭连接
+    }
+}
+
+
+5、
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Date;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ; // 实例化Statement对象
+        String sql = "SELECT nid,title,pubdate,price,content FROM news" ;
+        ResultSet rs = stmt.executeQuery(sql) ; // 执行更新语句
+        while (rs.next()) { // 判断当前是否还有数据行
+            int nid = rs.getInt("nid") ;
+            String title = rs.getString("title") ;
+            Date pubdate = rs.getDate("pubdate") ;
+            double price = rs.getDouble("price") ;
+            String content = rs.getString("content") ;
+            System.out.println(nid + "、" + title + "、" + pubdate + "、" + price + "、" + content);
+        }
+        conn.close();   // 关闭连接
+    }
+}
+
+
+6、

@@ -1,0 +1,104 @@
+1、
+
+package cn.mldn.demo;
+
+import java.util.Locale;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Locale loc = Locale.getDefault() ; // 获取当前的语言国家
+        System.out.println(loc);
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+
+import java.util.Locale;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Locale loc = new Locale("zh","CN") ;
+        System.out.println(loc);
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+
+import java.util.Locale;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        System.out.println(Locale.CHINA);
+    }
+}
+
+
+4、
+package cn.mldn.demo;
+
+import java.util.ResourceBundle;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        ResourceBundle resource = ResourceBundle.getBundle("cn.mldn.resource.Message") ;
+        System.out.println(resource.getString("welcome.info"));
+    }
+}
+
+
+5、
+
+package cn.mldn.demo;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Locale loc = new Locale("en","US") ;
+        ResourceBundle resource = ResourceBundle.getBundle("cn.mldn.resource.Message", loc);
+        System.out.println(resource.getString("welcome.info"));
+    }
+}
+
+
+6、
+
+package cn.mldn.demo;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Locale loc = Locale.getDefault() ;
+        ResourceBundle resource = ResourceBundle.getBundle("cn.mldn.resource.Message", loc);
+        System.out.println(resource.getString("welcome.info"));
+    }
+}
+
+
+7、
+Message_zh_CN.properties：	welcome.info = 登录成功，欢迎{0}光临，请访问{1}！
+Message_en_US.properties：	welcome.info = Welcome {0} Please Access to {1}~
+
+
+8、
+package cn.mldn.demo;
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Locale loc = Locale.getDefault() ;
+        ResourceBundle resource = ResourceBundle.getBundle("cn.mldn.resource.Message", loc);
+        String value = resource.getString("welcome.info") ;
+        System.out.println(MessageFormat.format(value,"XinBO","www.mldn.cn"));
+    }
+}
+
+

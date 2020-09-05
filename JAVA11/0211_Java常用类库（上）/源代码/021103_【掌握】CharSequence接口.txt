@@ -1,0 +1,15 @@
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuilder builder = new StringBuilder("www.mldn.cn") ;
+        StringBuffer buf = new StringBuffer("Hello MLDN");
+        String str = "Hello Everyone" ;
+        print(builder) ;
+        print(buf) ;
+        print(str) ;
+    }
+    public static void print(CharSequence seq) {
+        System.out.println(seq);
+    }
+}

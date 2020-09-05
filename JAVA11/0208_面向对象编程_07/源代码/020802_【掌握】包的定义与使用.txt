@@ -1,0 +1,110 @@
+1、
+
+public class Hello {
+	public static void main(String args[]) {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+
+2、
+package cn.mldn.demo ;	// 包名称
+public class Hello {
+	public static void main(String args[]) {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+
+
+3、
+package cn.mldn.util ;
+public class Message {
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+
+4、
+import cn.mldn.util.Message ; // 导入所需要使用的类
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.print() ;
+	}
+}
+
+5、
+import cn.mldn.util.* ;
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.print() ;
+	}
+}
+
+6、
+package cn.mldn.test ;
+import cn.mldn.util.* ;
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.print() ;
+	}
+}
+
+7、
+package org.util ;
+public class Message { 
+	public void out() {
+		System.out.println("Hello MLDN") ;
+	}
+}
+
+8、
+
+package cn.mldn.test ;
+import cn.mldn.util.* ;
+import org.util.* ;
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.print() ;
+	}
+}
+
+9、
+package cn.mldn.util ;
+public class MyMath {
+	public static int add(int ... args) {
+		int sum = 0 ; 
+		for (int temp : args) {
+			sum += temp ;
+		}
+		return sum ;
+	}
+}
+
+
+10、
+
+package cn.mldn.test ;
+import cn.mldn.util.* ;
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(MyMath.add(1,2,3)) ;
+	}
+}
+
+
+11、
+
+SET CLASSPATH=.;D:\mldntest\mldn.jar
+
+12、
+
+package cn.mldn.test ;
+import cn.mldn.util.Message ;
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Message().print() ;
+	}
+}

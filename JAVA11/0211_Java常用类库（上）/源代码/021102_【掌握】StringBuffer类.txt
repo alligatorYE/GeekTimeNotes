@@ -1,0 +1,76 @@
+测试题：在任意的一个字符数组里面位置上追加一个字符串信息。
+
+1、
+
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuffer buf = new StringBuffer(22) ;
+        buf.append("Hello").append(" World").append("\nHello MLDN") ;
+        System.out.println("字母长度：" + buf.length()); // 超过了默认16的长度
+        System.out.println(buf);    // 调用toString()输出
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuffer buf = new StringBuffer("Hello MLDN\n") ;   // 通过字符串构造StringBuffer
+        change(buf) ;
+        System.out.println(buf);
+    }
+    public static void change(StringBuffer buffer) {
+        buffer.append("www.mldn.cn") ;
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        String buf = "Hello MLDN\n" ;   // 通过字符串构造StringBuffer
+        change(buf) ;
+        System.out.println(buf);
+    }
+    public static void change(String buffer) {
+        buffer = "www.mldn.cn" ;
+    }
+}
+
+
+4、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuffer buf = new StringBuffer("www.cn");
+        buf.insert(4, "mldn.");
+        System.out.println(buf);
+    }
+}
+
+
+5、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuffer buf = new StringBuffer("新博第一大衰哥");
+        buf.delete(0,2).insert(0,"成成") ;
+        System.out.println(buf);
+    }
+}
+
+
+6、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        StringBuffer buf = new StringBuffer("新博第一大衰哥");
+        System.out.println(buf.reverse());
+    }
+}

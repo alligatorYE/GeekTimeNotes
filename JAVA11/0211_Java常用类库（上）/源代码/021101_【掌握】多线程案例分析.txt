@@ -1,0 +1,186 @@
+1、
+
+package cn.mldn.demo;
+class Resource {
+    private int number = 0 ; // 表示要共享的操作的数值
+    private boolean flag ; // 设置一个同步属性
+    // flag = true：表示允许进行加法操作，但是不允许进行减法操作；
+    // flag = false：表示允许进行减法操作，但是不允许进行加法操作。
+    public synchronized void add() {
+        if (this.flag == false) {
+            try {
+                super.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        this.number ++ ;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("【" + Thread.currentThread().getName() + "】执行加法操作，操作结果为：" + this.number);
+        this.flag = false ;
+        super.notify();
+    }
+    public synchronized void sub() {
+        if (this.flag == true) {
+            try {
+                super.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        this.number -- ;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("【" + Thread.currentThread().getName() + "】执行减法操作，操作结果为：" + this.number);
+        this.flag = true ;
+        super.notify();
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Resource resource = new Resource() ;
+        for (int x = 0 ; x < 6 ; x ++) {
+            if (x % 2 == 0) {   // 减法线程
+                new Thread(()->{
+                    for (int y = 0 ; y < 50 ; y ++) {   // 处理50次
+                        synchronized (resource) {
+                            resource.sub(); // 执行减法操作
+                        }
+                    }
+                },"减法线程 - " + x).start();
+            } else {    // 加法线程
+                new Thread(()->{
+                    for (int y = 0 ; y < 50 ; y ++) {   // 处理50次
+                        synchronized (resource) {
+                            resource.add(); // 执行加法操作
+                        }
+                    }
+                },"加法线程 - " + x).start();
+            }
+        }
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+class Resource {
+    private int number = 0 ; // 表示要共享的操作的数值
+    private Computer computer ; // 保存电脑的生成
+    public synchronized void create(String brand,double price) {
+        if (this.computer != null) { // 生产过了
+            try {
+                super.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        this.computer = new Computer(brand,price) ;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("〖" + Thread.currentThread().getName() + "〗电脑生产完成：" + this.computer);
+        super.notify();
+    }
+    public synchronized void get() {
+        if (this.computer == null) {    // 等待生产
+            try {
+                super.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("【" + Thread.currentThread().getName() + "】取走电脑：" + this.computer);
+        this.computer = null ; // 清空内容
+        super.notify();
+    }
+}
+class Computer {    // 明确的描述所需要定义的电脑实体
+    private String brand ;
+    private double price ;
+    private static int count ;
+    public Computer(String brand, double price) {
+        System.out.println("电脑生产个数：" + Computer.count ++);
+        this.brand = brand;
+        this.price = price;
+    }
+    @Override
+    public String toString() {
+        return "Computer{" +
+                "brand='" + brand + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Resource resource = new Resource() ;
+        new Thread(()->{
+            for (int y = 0 ; y < 50 ; y ++) {   // 处理50次
+                if (y % 2 == 0) {
+                    resource.create("HP电脑",4399);
+                } else {
+                    resource.create("MacBook",17899);
+                }
+            }
+        },"电脑生产者").start();
+        new Thread(()->{
+            for (int y = 0 ; y < 50 ; y ++) {
+                resource.get();
+            }
+        }, "电脑消费者").start();
+    }
+}
+
+3、
+
+package cn.mldn.demo;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+
+class AnswerThread implements Callable<String> {
+    private boolean flag ; // 描述抢答结果
+    @Override
+    public String call() throws Exception {
+        Thread.sleep(1000);
+        synchronized (this) {
+            if (this.flag == false) {   // 表示可以强大
+                this.flag = true ;
+                String result = "【"+Thread.currentThread().getName()+"】抢答成功！" ;
+                return result ;
+            } else {
+                String result = "【"+Thread.currentThread().getName()+"】抢答失败！" ;
+                return result ;
+            }
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        AnswerThread thread = new AnswerThread() ;
+        FutureTask<String> taskA = new FutureTask<String>(thread) ;
+        FutureTask<String> taskB = new FutureTask<String>(thread) ;
+        FutureTask<String> taskC = new FutureTask<String>(thread) ;
+        new Thread(taskA,"抢答者 - A").start();
+        new Thread(taskB,"抢答者 - B").start();
+        new Thread(taskC,"抢答者 - C").start();
+        System.out.println(taskA.get());
+        System.out.println(taskB.get());
+        System.out.println(taskC.get());
+    }
+}

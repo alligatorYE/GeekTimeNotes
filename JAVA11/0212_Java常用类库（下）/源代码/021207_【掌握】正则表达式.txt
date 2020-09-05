@@ -1,0 +1,288 @@
+1、
+
+package cn.mldn.demo;
+
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "237a892378923" ;
+        if (str.matches("\\d+")) {
+            System.out.println("字符串由数字所组成！");
+        } else {
+            System.out.println("字符串由非数字所组成！");
+        }
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "\\" ;
+        String regex = "\\\\" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+3、
+
+
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "b" ;
+        String regex = "[abc]" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+4、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "fool" ;
+        String regex = "foo[dl]" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+5、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "fooD" ;
+        String regex = "foo[a-zA-Z]" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+6、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "%" ;
+        String regex = "." ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+7、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "a" ;
+        String regex = "\\." ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+8、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "a" ;
+        String regex = "\\w" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+9、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "1" ;
+        String regex = "\\d" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+10、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "" ;
+        String regex = "\\w?" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+11、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "mldn" ;
+        String regex = "\\w{4,}" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+12、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "AKL()JKL@#$&*()fsdafasfasd&*() @#$&*()WERHJILOSWEFG&*()@#$IOs" ;
+        String regex = "[^a-zA-Z]" ;
+        System.out.println(str.replaceAll(regex,""));
+    }
+}
+
+
+13、
+package cn.mldn.demo;
+
+import java.util.Arrays;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "aa1bb22c333dddd44444e55555ffff6666666gggg77777777h" ;
+        String regex = "\\d+" ;
+        System.out.println(Arrays.toString(str.split(regex)));
+    }
+}
+
+
+14、
+package cn.mldn.demo;
+
+import java.util.Arrays;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "234234" ;
+        String regex = "\\d+(\\.\\d+)?" ;
+        if (str.matches(regex)) {
+            System.out.println(Double.parseDouble(str));
+        } else {
+            System.out.println("对不起，结构错误！");
+        }
+    }
+}
+
+
+15、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "1999-09-19" ;
+        String regex = "\\d{4}-\\d{2}-\\d{2}" ;
+        if (str.matches(regex)) {
+            Date date = new SimpleDateFormat("yyyy-MM-dd").parse(str) ;
+            System.out.println(date);
+        } else {
+            System.out.println("对不起，结构错误！");
+        }
+    }
+}
+
+
+16、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "13701566889" ;
+        String regex = "((\\+|00)\\d{1,4})?\\d{11}" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+17、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "mldn-110@mldnjava.com.cn" ;
+        String regex = "[a-zA-Z][a-zA-Z0-9_\\-]+@[a-zA-Z0-9_\\-]+\\.(com|cn|com\\.cn|net|org|gov)" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+
+18、
+package cn.mldn.demo;
+
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "a11b222c33333d555555e" ;
+        String regex = "\\d+" ;
+        Pattern pattern = Pattern.compile(regex) ; // 正则编译
+        System.out.println(Arrays.toString(pattern.split(str)));
+    }
+}
+
+
+19、
+
+package cn.mldn.demo;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "199.99" ;
+        String regex = "\\d+(\\.\\d+)?" ;
+        Pattern pattern = Pattern.compile(regex) ; // 正则编译
+        Matcher matcher = pattern.matcher(str) ;    // 正则匹配对象
+        System.out.println(matcher.matches());
+    }
+}
+
+
+20、
+package cn.mldn.demo;
+
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        // 取出“#{xxx}”定义的所有内容
+        String sql = "INSERT INTO dept(deptno,dname,loc) VALUES (#{deptno},#{dname},#{loc})" ;
+        String regex = "#\\{\\w+\\}" ;
+        Pattern pattern = Pattern.compile(regex) ; // 正则编译
+        Matcher matcher = pattern.matcher(sql) ;    // 正则匹配对象
+        while (matcher.find()) {    // 是否有后续匹配
+            String str = matcher.group(0) ;
+            System.out.print(str.replaceAll("#|\\{|\\}","") + "、");
+        }
+    }
+}

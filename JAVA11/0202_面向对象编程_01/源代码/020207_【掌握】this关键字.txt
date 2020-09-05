@@ -1,0 +1,290 @@
+1、
+
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball(String c, double p) {
+		classify = c ;
+		price = p ;
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + classify + "，此球价值：" + price) ;
+	}
+	// setter、getter略
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball("篮球",99.9).play() ;
+	}
+}
+
+
+2、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		classify = classify ;
+		price = price ;
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + classify + "，此球价值：" + price) ;
+	}
+	// setter、getter略
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball("篮球",99.9).play() ;
+	}
+}
+
+
+3、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + this.classify + "，此球价值：" + this.price) ;
+	}
+	// setter、getter略
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball("篮球",99.9).play() ;
+	}
+}
+
+
+4、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.setClassify(classify) ;	// 本类普通方法调用
+		setPrice(price) ;	// 等价于“this.setPrice()”
+	}
+	public void setClassify(String classify) {	// 普通方法
+		this.classify = classify ;
+	}
+	public void setPrice(double price) {	// 普通方法
+		this.price = price ;
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + this.getClassify() + "，此球价值：" + this.getPrice()) ;
+	}
+	public String getClassify() {
+		return this.classify ;
+	}
+	public double getPrice() {
+		return this.price ;	
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball("篮球",99.9).play() ;
+	}
+}
+
+
+5、
+class Ball {		// 定义一个球类
+	public Ball() {
+		System.out.println("*** 创造了一个新的球~") ;
+	}
+	public Ball(String classify, double price) {
+		this() ; // 调用本类的无参构造方法
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball("篮球",9.9) ;
+	}
+}
+
+
+6、
+class Ball {		// 定义一个球类
+	public Ball() {
+		System.out.println("*** 创造了一个新的球~") ;
+	}
+	public Ball(String classify, double price) {
+		int result = 100 + 200 ;		// 
+		this() ; // 调用本类的无参构造方法
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball("篮球",9.9) ;
+	}
+}
+
+
+7、
+class Ball {		// 定义一个球类
+	public Ball() {
+		System.out.println("*** 创造了一个新的球~") ;
+	}
+	public Ball(String classify, double price) {
+		int result = 100 + 200 ;		// 
+	}
+	public void play() {
+		this() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball("篮球",9.9) ;
+	}
+}
+
+8、
+class Ball {		// 定义一个球类
+	public Ball() {
+		this("排球",1.1) ; // 第一行，调用有参
+	}
+	public Ball(String classify, double price) {
+		this() ;	// 调用无参构造
+	}
+}
+
+9、
+class Employee {	// 定义雇员的类
+	private int empno ;
+	private String ename ;
+	private String job ;
+	private String dept ;
+	public Employee() {
+		this.empno = -1 ;
+		this.ename = "无名氏" ;
+		this.job = "待定" ;
+		this.dept = "未知" ;
+	}
+	public Employee(int empno) {
+		this.empno = empno ;
+		this.ename = "无名氏" ;
+		this.job = "实习生" ;
+		this.dept = "销售部" ;
+	}
+	public Employee(int empno, String ename) {
+		this.empno = empno ;
+		this.ename = ename ;
+		this.job = "工程师" ;
+		this.dept = "开发部" ;
+	}
+	public Employee(int empno,String ename,String job,String dept) {
+		this.empno = empno ;
+		this.ename = ename ;
+		this.job = job ;
+		this.dept = dept ;
+	}
+	// setter、getter略...
+	public String getInfo() {
+		return "雇员编号：" + this.empno + "、雇员姓名：" + this.ename + "、雇员职位：" + this.job + "、所属部门：" + this.dept ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Employee().getInfo()) ;
+		System.out.println(new Employee(7369).getInfo()) ;
+		System.out.println(new Employee(7369,"史密斯").getInfo()) ;
+		System.out.println(new Employee(7369,"史密斯","办事员","财务部").getInfo()) ;
+	}
+}
+
+
+10、
+class Employee {	// 定义雇员的类
+	private int empno ;
+	private String ename ;
+	private String job ;
+	private String dept ;
+	public Employee() {
+		this(-1,"无名氏","待定","未知") ;
+	}
+	public Employee(int empno) {
+		this(empno,"无名氏","实习生","销售部") ;
+	}
+	public Employee(int empno, String ename) {
+		this(empno,ename,"工程师","开发部") ;
+	}
+	public Employee(int empno,String ename,String job,String dept) {
+		this.empno = empno ;
+		this.ename = ename ;
+		this.job = job ;
+		this.dept = dept ;
+	}
+	// setter、getter略...
+	public String getInfo() {
+		return "雇员编号：" + this.empno + "、雇员姓名：" + this.ename + "、雇员职位：" + this.job + "、所属部门：" + this.dept ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Employee().getInfo()) ;
+		System.out.println(new Employee(7369).getInfo()) ;
+		System.out.println(new Employee(7369,"史密斯").getInfo()) ;
+		System.out.println(new Employee(7369,"史密斯","办事员","财务部").getInfo()) ;
+	}
+}
+
+
+11、
+class Ball {
+	public void play() {	// 类中定义的普通方法
+		System.out.println("〖paly()〗this = " + this) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ballA = new Ball() ;	// 实例化类对象
+		System.out.println("【main()】ballA = " + ballA) ;
+		ballA.play() ;
+		Ball ballB = new Ball() ;	// 实例化类对象
+		System.out.println("【main()】ballB = " + ballB) ;
+		ballB.play() ;
+	}
+}
+
+
+12、
+
+class Message {
+	private Connect conn ;
+	public Message(Connect conn) {
+		this.conn = conn ;
+	}
+	public void send(String msg) {
+		if (this.conn.build()) {	// 建立连接
+			System.out.println("【发送消息】" + msg) ;
+			this.conn.close() ;// 连接关闭
+		} else {
+			System.out.println("〖ERROR〗服务通道创建失败，消息无法发送！") ;
+		}
+	}
+}
+class Connect {
+	public boolean build() {	// 建立连接
+		System.out.println("【Connect】建立网络通讯连接 ...") ;
+		return true ;
+	}
+	public void operate(String msg) {	// 实现消息的最终发送
+		new Message(this).send(msg) ;	// 实现消息发送
+	}
+	public void close() {	// 关闭资源
+		System.out.println("【Connect】关闭网络连接 ...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Connect conn = new Connect() ;
+		conn.operate("www.mldn.cn") ;	// 进行操作
+	}
+}
+

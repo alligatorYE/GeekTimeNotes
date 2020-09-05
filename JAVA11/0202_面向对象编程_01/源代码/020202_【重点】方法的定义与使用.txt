@@ -1,0 +1,140 @@
+1、
+public static 方法返回值类型 方法名称([参数类型 参数名称 , ...]) {
+	// 方法体
+	[return [返回值] ;] 
+}
+
+2、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		printInfo() ;	// 一个方法可以重复进行调用
+	}
+	public static void printInfo() {
+		System.out.println("**********************") ;
+		System.out.println("*    www.mldn.cn     *") ;
+		System.out.println("**********************") ;
+	}
+}
+
+3、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		printFab(25) ;	// 一个方法可以重复进行调用
+	}
+	// max描述的是打印数列的最大值
+	public static void printFab(int max) {
+		int numA = 0 ;
+		int numB = 1 ;	// 作为最终的内容输出
+		while (numB < max) {		// 操作范围
+			System.out.print(numB + "、") ;
+			int temp = numA ;
+			numA = numB ;
+			numB = temp + numB ;
+		}
+	}
+}
+
+
+4、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		// 对于有返回值的方法有两种方式进行处理
+		// 处理一：通过一个变量接收方法的返回值
+		String infoA = getInfo(20.0) ;
+		System.out.println(infoA) ;
+		// 处理二：可以直接进行内容的输出
+		System.out.println(getInfo(6000.0)) ;
+	}
+	public static String getInfo(double money) {
+		if (money > 3000.0) {
+			return "我是一个富足的人，生活很好！" ;
+		} else {
+			return "我是一个距离富人还差那么一点的人！" ;
+		}
+	}
+}
+
+
+5、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		System.out.println(handle(100)) ;
+		System.out.println(handle(1)) ;
+	}
+	public static int handle(int x) {
+		if (x % 2 == 1) {	// 为奇数
+			return -1 ;	// 结束操作
+		}
+		System.out.println("接收到一个数据，开始对数据进行处理 ...") ;
+		return x * x ;
+	}
+}
+
+
+6、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		handle(100) ;
+		handle(1) ;
+	}
+	public static void handle(int x) {
+		if (x % 2 == 1) {	// 为奇数
+			return ;
+		}
+		System.out.println("接收到一个数据，开始对数据进行处理 ... x = " + x) ;
+	}
+}
+
+
+7、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		System.out.println(add(10,20)) ;
+		System.out.println(add(10,20,30)) ;
+		System.out.println(add(10.2,20.3)) ;
+	}
+	public static int add(int x, int y) {
+		return x + y ;
+	}
+	public static int add(int x, int y, int z) {	// 参数个数增加
+		return x + y + z ;
+	}
+	public static double add(double x, double y) {	// 参数类型不同
+		return x + y ;
+	}
+}
+
+
+8、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		double resultA = add(10,20) ;
+		double resultB = add(10,20,30) ;
+		double resultC = add(10.2,20.3) ;
+	}
+	// 方法重载后所有的返回值类型统一，则可以方便方法调用
+	public static double add(int x, int y) {
+		return x + y ;
+	}
+	public static double add(int x, int y, int z) {	// 参数个数增加
+		return x + y + z ;
+	}
+	public static double add(double x, double y) {	// 参数类型不同
+		return x + y ;
+	}
+}
+
+
+9、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		System.out.println(sum(100)) ;
+	}
+	// num描述的是累加的最大数据
+	public static i sum(int num) {
+		if (num == 1) {	// 结束条件
+			return 1 ;
+		}
+		return num + sum(num - 1) ;
+	}
+}

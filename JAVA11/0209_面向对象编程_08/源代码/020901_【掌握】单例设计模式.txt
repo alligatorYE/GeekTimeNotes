@@ -1,0 +1,101 @@
+1、
+
+class Singleton {
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Singleton instance = new Singleton() ;
+		instance.print() ;
+	}
+}
+
+
+2、
+class Singleton {
+	private Singleton() {}
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Singleton instance = null ;
+		instance = new Singleton() ;
+		instance.print() ;
+	}
+}
+
+
+3、
+class Singleton {
+	private Singleton() {}
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+	public static Singleton getInstance() {
+		return new Singleton() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Singleton instance = Singleton.getInstance() ;
+		instance.print() ;
+	}
+}
+
+
+4、
+class Singleton {
+	private static final Singleton INSTANCE = new Singleton() ;
+	private Singleton() {}
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+	public static Singleton getInstance() {
+		return INSTANCE ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Singleton instanceA = Singleton.getInstance() ;
+		Singleton instanceB = Singleton.getInstance() ;
+		Singleton instanceC = Singleton.getInstance() ;
+	}
+}
+
+
+5、
+
+class Color {
+	private String info ; // 颜色的信息
+	private static final Color RED = new Color("红色") ;
+	private static final Color GREEN = new Color("绿色") ;
+	private static final Color BLUE = new Color("蓝色") ;
+	private Color(String info) {
+		this.info = info ;
+	}
+	public static Color getInstance(String color) {
+		switch (color) {
+			case "red": 
+				return RED ;
+			case "green":
+				return GREEN ;
+			case "blue": 
+				return BLUE ;
+			default: 
+				return null ;
+		}
+	}
+	public String toString() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Color red = Color.getInstance("red") ;
+		System.out.println(red) ;
+	}
+}

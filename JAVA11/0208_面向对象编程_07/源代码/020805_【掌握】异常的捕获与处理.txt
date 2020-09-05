@@ -1,0 +1,355 @@
+1、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		System.out.println("【2】除法计算：" + (10 / 5)) ;
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+2、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		System.out.println("【2】除法计算：" + (10 / 0)) ;
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+3、
+try {
+	// 有可能产生异常的代码 ;
+} [catch (异常类型 异常类对象) {
+	// 异常的处理语句 
+} catch (异常类型 异常类对象) {
+	// 异常的处理语句 
+} ...] 
+[finally {
+	// 异常的统一出口
+}]
+
+4、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		try {
+			int result = 10 / 0 ; // 进行计算结果的保存
+			System.out.println("【2】除法计算：" + result) ;
+		} catch (ArithmeticException e) {	// 异常处理
+			System.out.println("〖catch〗处理异常：" + e) ;		
+		}
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+5、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		try {
+			int result = 10 / 0 ; // 进行计算结果的保存
+			System.out.println("【2】除法计算：" + result) ;
+		} catch (ArithmeticException e) {	// 异常处理
+			e.printStackTrace() ; // 获取详细异常	
+		}
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+6、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		try {
+			int result = 10 / 0 ; // 进行计算结果的保存
+			System.out.println("【2】除法计算：" + result) ;
+		} catch (ArithmeticException e) {	// 异常处理
+			e.printStackTrace() ; // 获取详细异常	
+		} finally {
+			System.out.println("〖finally〗异常统一出口，不管是否产生异常都执行~") ;
+		}
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+7、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		try {
+			int x = Integer.parseInt(args[0]) ;
+			int y = Integer.parseInt(args[1]) ;
+			int result = x / y ; // 进行计算结果的保存
+			System.out.println("【2】除法计算：" + result) ;
+		} catch (ArithmeticException e) {	// 异常处理
+			e.printStackTrace() ; // 获取详细异常	
+		} catch (NumberFormatException e) {
+			e.printStackTrace() ; // 获取详细异常	
+		} catch (ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace() ; // 获取详细异常	
+		} finally {
+			System.out.println("〖finally〗异常统一出口，不管是否产生异常都执行~") ;
+		}
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+
+8、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		if (args.length != 2) {
+			System.exit(1) ;
+		}
+		if (isNumber(args[0]) && isNumber(args[1])) {
+			int x = Integer.parseInt(args[0]) ;
+			int y = Integer.parseInt(args[1]) ;
+			if (y != 0) {
+				int result = x / y ; // 进行计算结果的保存
+				System.out.println("【2】除法计算：" + result) ;
+				System.out.println("【3】除法计算结束 ...") ;
+			}
+		}
+	}
+	public static boolean isNumber(String str) {
+		char [] data = str.toCharArray() ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			if (data[x] > '9' || data[x] < '0') {
+				return false ;
+			}
+		}
+		return true ;
+	}
+}
+
+9、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("【1】除法计算开始 ...") ;
+		try {
+			int x = Integer.parseInt(args[0]) ;
+			int y = Integer.parseInt(args[1]) ;
+			int result = x / y ; // 进行计算结果的保存
+			System.out.println("【2】除法计算：" + result) ;
+		} catch (Exception e) {	// 异常处理
+			e.printStackTrace() ; // 获取详细异常	
+		} finally {
+			System.out.println("〖finally〗异常统一出口，不管是否产生异常都执行~") ;
+		}
+		System.out.println("【3】除法计算结束 ...") ;
+	}
+}
+
+
+10、
+
+class MyUtil {
+	public static int div(int x, int y) throws Exception {
+		return x / y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		try {
+			System.out.println(MyUtil.div(10,0)) ;
+		} catch (Exception e) {
+			e.printStackTrace() ;
+		}
+	}
+}
+
+
+11、
+class MyUtil {
+	public static int div(int x, int y) throws Exception {
+		return x / y ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) throws Exception {	// 主方法
+		System.out.println(MyUtil.div(10,0)) ;
+	}
+}
+
+
+12、
+class MyUtil {
+	public static void exam(int num) throws Exception {
+		if (num > 10) {
+			throw new Exception("学生集体暴乱，抗议考试~") ;
+		}
+		System.out.println("学生老老实实的进行考试，主动接受惩罚~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) throws Exception {	// 主方法
+		MyUtil.exam(15) ;
+	}
+}
+
+
+13、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "110"	; //字符串，由数字组成
+		int num = Integer.parseInt(str) ;
+		System.out.println(num * 2) ;
+	}
+}
+
+
+14、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num = 10 ;
+		// 中间经历了许多的num的处理操作，省略 ..
+		assert num == 30 : "num的内容不是30！"; // 断言
+		System.out.println("num = " + num) ;
+	}
+}
+
+
+15、
+class BombException extends RuntimeException {	// 此时的异常可以选择性的进行处理
+	public BombException(String msg) {
+		super(msg) ;
+	}
+}
+class Game {
+	public static void eat(int num) throws BombException {
+		if (num > 150) {
+			throw new BombException("肚子爆炸了，零碎出来了~") ;
+		}
+		System.out.println("持续不断的吃，争取拿到大胃王比赛第一名~") ;
+	}
+}
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Game.eat(160) ;	// 不需要进行强制性的异常处理
+	}
+}
+
+
+16、
+class SendFailureException extends Exception {
+	public SendFailureException(String msg) {	// 发送异常
+		super(msg) ;
+	}
+}
+class ConnectTimeoutException extends Exception {
+	public ConnectTimeoutException(String msg) {
+		super(msg) ;
+	}
+}
+class Message {
+	public void send(String msg) throws SendFailureException, ConnectTimeoutException {
+		Connect conn = new Connect() ;
+		try {
+			if (conn.build(1000)) {	// 此时会产生异常
+				if (msg == null || "".equals(msg)) {
+					throw new SendFailureException("发送内容不能为空！") ;
+				}
+				System.out.println("【Message】2、消息发送：" + msg) ;
+			} else {
+				System.out.println("〖Message〗连接创建失败，无法进行消息的发送~") ;
+			}
+		} catch (SendFailureException e) {
+			throw e ;
+		} catch (ConnectTimeoutException e) {
+			throw e ;
+		} finally {
+			conn.close(1000) ; // 必须关闭	
+		}
+	}
+	private class Connect {
+		public boolean build(long timeout) throws ConnectTimeoutException {	// 超时异常
+			System.out.println("【Connect】1、进行服务器连接 ...") ;
+			if (timeout > 2000) {	// 超过了2000毫秒
+				throw new ConnectTimeoutException("服务器连接超时~") ;
+			}
+			return true ; // 连接成功
+		}
+		public void close(long timeout) throws ConnectTimeoutException {
+			System.out.println("【Connect】3、关闭服务器连接 ...") ;
+			if (timeout > 2000) {	// 超过了2000毫秒
+				throw new ConnectTimeoutException("服务器关闭超时~") ;
+			}
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message message = new Message() ;
+		try {
+			//message.send("www.mldn.cn") ;
+			message.send(null) ;
+		} catch (SendFailureException e) {
+			System.out.println("【Main - 消息发送异常】" + e.getMessage()) ;
+		} catch (ConnectTimeoutException e) {
+			System.out.println("【Main - 服务器连接异常】" + e.getMessage()) ;
+		}
+	}
+}
+
+
+17、
+class SendFailureException extends Exception {
+	public SendFailureException(String msg) {	// 发送异常
+		super(msg) ;
+	}
+}
+class ConnectTimeoutException extends Exception {
+	public ConnectTimeoutException(String msg) {
+		super(msg) ;
+	}
+}
+class Message {
+	public void send(String msg) throws SendFailureException, ConnectTimeoutException {
+		Connect conn = new Connect() ;
+		try {
+			if (conn.build(1000)) {	// 此时会产生异常
+				if (msg == null || "".equals(msg)) {
+					throw new SendFailureException("发送内容不能为空！") ;
+				}
+				System.out.println("【Message】2、消息发送：" + msg) ;
+			} else {
+				System.out.println("〖Message〗连接创建失败，无法进行消息的发送~") ;
+			}
+		} finally {
+			conn.close(1000) ; // 必须关闭	
+		}
+	}
+	private class Connect {
+		public boolean build(long timeout) throws ConnectTimeoutException {	// 超时异常
+			System.out.println("【Connect】1、进行服务器连接 ...") ;
+			if (timeout > 2000) {	// 超过了2000毫秒
+				throw new ConnectTimeoutException("服务器连接超时~") ;
+			}
+			return true ; // 连接成功
+		}
+		public void close(long timeout) throws ConnectTimeoutException {
+			System.out.println("【Connect】3、关闭服务器连接 ...") ;
+			if (timeout > 2000) {	// 超过了2000毫秒
+				throw new ConnectTimeoutException("服务器关闭超时~") ;
+			}
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message message = new Message() ;
+		try {
+			//message.send("www.mldn.cn") ;
+			message.send(null) ;
+		} catch (SendFailureException e) {
+			System.out.println("【Main - 消息发送异常】" + e.getMessage()) ;
+		} catch (ConnectTimeoutException e) {
+			System.out.println("【Main - 服务器连接异常】" + e.getMessage()) ;
+		}
+	}
+}

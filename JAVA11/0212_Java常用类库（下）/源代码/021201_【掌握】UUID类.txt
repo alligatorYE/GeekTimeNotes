@@ -1,0 +1,10 @@
+package cn.mldn.demo;
+
+import java.util.UUID;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        UUID uuid = UUID.randomUUID() ; // 随机获取一个UUID的数据
+        System.out.println(uuid);
+    }
+}

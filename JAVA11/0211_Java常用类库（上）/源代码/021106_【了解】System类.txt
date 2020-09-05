@@ -1,0 +1,12 @@
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        long startTimestamp = System.currentTimeMillis() ;
+        String str = "" ;
+        for (int x = 0 ; x < 50000 ; x ++) {
+            str += x ; // 产生大量的垃圾
+        }
+        long endTimestamp = System.currentTimeMillis() ;
+        System.out.println("本次耗时为：" + (endTimestamp - startTimestamp));
+    }
+}

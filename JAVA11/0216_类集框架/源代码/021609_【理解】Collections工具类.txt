@@ -1,0 +1,14 @@
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        Collections.addAll(all, "Hello", "MLDN", "Everyone");
+        Collections.sort(all); // ≈≈–Ú
+        System.out.println(all);
+        System.out.println(Collections.binarySearch(all,"MLDN"));   // ∂˛∑÷≤È’“
+    }
+}

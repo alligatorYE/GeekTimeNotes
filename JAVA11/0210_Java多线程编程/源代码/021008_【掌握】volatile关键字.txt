@@ -1,0 +1,28 @@
+package cn.mldn.demo;
+class TicketThread implements Runnable {
+    private volatile int ticket = 3 ;
+    @Override
+    public void run() {
+        for (int x = 0 ; x < 100 ; x ++) {
+            this.sale();
+        }
+    }
+    private synchronized void sale() {
+        if (this.ticket > 0) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("¡¾" + Thread.currentThread().getName() + "¡¿ÂôÆ±£¬ticket = " + this.ticket --);
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        TicketThread body = new TicketThread() ;
+        for (int x = 0 ; x < 5 ; x ++) {
+            new Thread(body,"Æ±··×Ó - " + x).start();
+        }
+    }
+}

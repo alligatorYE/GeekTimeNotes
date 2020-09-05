@@ -1,0 +1,457 @@
+1、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num [] = new int [3] ;	// 声明并开辟数组
+		System.out.println(num[0]) ;
+		System.out.println(num[1]) ;
+		System.out.println(num[2]) ;
+	}
+}
+
+
+2、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num [] = new int [3] ;	// 声明并开辟数组
+		// 数组的长度为3，而下标范围：0、1、2（一共3个数据）
+		System.out.println(num[3]) ;
+	}
+}
+
+
+3、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num [] = new int [3] ;	// 声明并开辟数组
+		num [0] = 10 ;
+		num [1] = 20 ;
+		num [2] = 30 ;
+		System.out.println("数组长度：" + num.length) ;
+		for (int x = 0 ; x < num.length ; x ++) {
+			System.out.print(num[x] + "、") ;	 // 循环控制下标
+		}
+	}
+}
+
+
+4、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num [] = new int [] {1,3,5,7,9} ;
+		// 静态初始化之后就可以发现，数组之中的动态计算长度很好用
+		for (int x = 0 ; x < num.length ; x ++) {
+			System.out.print(num[x] + "、") ;
+		}
+	}
+}
+
+5、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("\'a\'的编码：" + ((int) 'a')) ;
+		System.out.println("\'z\'的编码：" + ((int) 'z')) ;
+		char c [] = new char [26] ; // 定义26个长度的字符数组
+		int foot = 0 ; // 定义一个下标控制
+		for (int x = 97 ; x <= 122 ; x ++) {
+			c[foot ++] = (char) x ;	// 强制转换后赋值
+		}
+		for (int x = 0 ; x < c.length ; x ++) {
+			System.out.print(c[x] + "（" + ((char) (c[x] - 32)) + "）、") ;
+		}
+	}
+}
+
+6、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [3] ;	// 3个数组长度
+		data [0] = 10 ;
+		data [1] = 20 ;
+		data [2] = 30 ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.print(data[x] + "、") ;
+		}
+	}
+}
+
+
+7、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [3] ;	// 3个数组长度
+		data [0] = 10 ;
+		data [1] = 20 ;
+		data [2] = 30 ;
+		int temp [] = data ;	// 引用传递
+		temp [1] = 90 ;	// 修改数据
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.print(data[x] + "、") ;
+		}
+	}
+}
+
+
+8、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = null ;
+		data [0] = 100 ;
+	}
+}
+
+
+9、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {1,2,3,4,5,6,7,8,9} ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.print(data[x] + "、") ;
+		}
+	}
+}
+
+
+10、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {1,2,3,4,5,6,7,8,9} ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			if (x % 2 == 1) {
+				System.out.print(data[x] + "、") ;
+			}
+		}
+	}
+}
+
+11、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {1,2,3,4,5,6,7,8,9} ;
+		for (int temp : data) {	// 没有索引问题
+			System.out.print(temp + "、") ;
+		}
+	}
+}
+
+
+12、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [][] = new int [3][5] ;	// 开辟二维数组
+		for (int x = 0 ; x < data.length ; x ++) {	// 外层循环
+			for (int y = 0 ; y < data[x].length ; y ++) {
+				data[x][y] = x + y ;
+			}
+		}
+		for (int x = 0 ; x < data.length ; x ++) {	// 外层循环
+			for (int y = 0 ; y < data[x].length ; y ++) {
+				System.out.print(data[x][y] + "\t") ;
+			}
+			System.out.println() ;
+		}
+	}
+}
+
+
+13、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [][] = new int [][] {
+			{1,2,3} , {5,6,7,8}, {9,10}} ;	// 开辟二维数组
+		for (int x = 0 ; x < data.length ; x ++) {	// 外层循环
+			for (int y = 0 ; y < data[x].length ; y ++) {
+				System.out.print(data[x][y] + "\t") ;
+			}
+			System.out.println() ;
+		}
+	}
+}
+
+
+14、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {1,2,3} ;	// 定义数组
+		printArray(data) ;
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+
+15、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {1,2,3} ;	// 定义数组
+		changeArray(data) ;	// 修改内容
+		printArray(data) ;
+	}
+	public static void changeArray(int array[]) {
+		for (int x = 0 ; x < array.length ; x ++) {
+			array[x] *= 2 ;	// 内容扩大一倍
+		}
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+16、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = init() ;	// 接收方法返回值
+		changeArray(data) ;	// 修改内容
+		printArray(data) ;
+	}
+	public static int [] init() {
+		return new int [] {1,2,3} ;	// 完整格式才可以返回
+	}
+	public static void changeArray(int array[]) {
+		for (int x = 0 ; x < array.length ; x ++) {
+			array[x] *= 2 ;	// 内容扩大一倍
+		}
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+
+17、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {10,3,2,8,7,5,1,0,6} ;
+		sort(data) ;
+		printArray(data) ;
+	}
+	public static void sort(int array[]) {	// 定义排序
+		for (int x = 0 ; x < array.length - 1 ; x ++) {	// 控制排序次数
+			for (int y = 0 ; y < array.length - x - 1 ; y ++) {	// 每次排序
+				if (array[y] > array[y + 1]) {	// 前面的内容大于后面的内容
+					int temp = array[y] ;
+					array[y] = array[y + 1] ;
+					array[y + 1] = temp ;
+				}
+			}
+		}
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+
+18、
+
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {0,1,2,3,4,5,6,7,8,9} ;
+		data = reverse(data) ;	// 反转数组
+		printArray(data) ;
+	}
+	public static int [] reverse(int array[]) {
+		int nums [] = new int [array.length] ;	// 以原始数组长度作为新数组长度
+		int arrayFoot = array.length - 1 ;
+		for (int x = 0 ; x < nums.length ; x ++) {
+			nums[x] = array[arrayFoot --] ;
+		}
+		return nums ;
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+19、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {0,1,2,3,4,5,6,7,8,9} ;
+		reverse(data) ;	// 反转数组
+		printArray(data) ;
+	}
+	public static void reverse(int array[]) {
+		int center = array.length / 2 ; // 计算转置次数
+		int head = 0 ; // 首部处理脚标
+		int tail = array.length - 1 ; // 尾部处理脚标
+		for (int x = 0 ; x < center ; x ++) {
+			int temp = array[head] ;
+			array[head] = array[tail] ;
+			array[tail] = temp ;
+			head ++ ;
+			tail -- ;
+		}
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+
+20、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [][] = new int [][] {
+			{1, 2, 3}, {4, 5, 6}, {7, 8, 9}} ;
+		reverse(data) ;
+		printArray(data) ;
+	}
+	public static void reverse(int [][] array) {
+		for (int x = 0 ; x < array.length ; x ++) {
+			for (int y = 0 ; y < x ; y ++) {	// 转一次
+				if (x != y) {
+					int temp = array[x][y] ;
+					array[x][y] = array[y][x] ;
+					array[y][x] = temp ;
+				}
+			}
+		}
+	}
+	public static void printArray(int [][] temp) {
+		for (int x = 0 ; x < temp.length ; x ++) {
+			for (int y = 0 ; y < temp[x].length ; y ++) {
+				System.out.print(temp[x][y] + "\t") ;
+			}
+			System.out.println() ;
+		}
+	}
+}
+
+
+21、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int data [] = new int [] {3,1,3,76,7,98,9,3,0} ;
+		java.util.Arrays.sort(data) ;	// 排序
+		printArray(data) ;
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+22、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int dataA [] = {1,2,3,4,5,6,7,8,9} ;
+		int dataB [] = {11,22,33,44,55,66,77,88,99} ;
+		System.arraycopy(dataA,5,dataB,3,3) ;
+		printArray(dataB) ;
+	}
+	public static void printArray(int temp[]) {
+		for (int num : temp) {
+			System.out.print(num + "、") ;
+		}
+		System.out.println() ;
+	}
+}
+
+
+23、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(add(new int [] {1,2,3})) ;
+		System.out.println(add(new int [] {1,2,3,4,5,6})) ;
+	}
+	public static int add(int [] data) {
+		int sum = 0 ;
+		for (int temp : data) {
+			sum += temp ;
+		}
+		return sum ;
+	}
+}
+
+24、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(add(new int [] {1,2,3})) ;
+		System.out.println(add(1,2,3,4,5,6)) ;
+	}
+	public static int add(int ... data) {	// 可变参数 = 数组
+		int sum = 0 ;
+		for (int temp : data) {
+			sum += temp ;
+		}
+		return sum ;
+	}
+}
+
+25、
+
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String getInfo() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball balls [] = new Ball[3] ;	// 动态初始化
+		balls[0] = new Ball("篮球",89.9) ;
+		balls[1] = new Ball("足球",99.9) ;
+		balls[2] = new Ball("排球",79.9) ;
+		for (Ball temp : balls) {
+			System.out.println(temp.getInfo()) ;
+		}
+	}
+}
+
+
+26、
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String getInfo() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball("篮球",89.9) ;
+		Ball balls [] = new Ball[] {basketball ,
+			new Ball("足球",99.9),	new Ball("排球",79.9)} ;
+		for (Ball temp : balls) {
+			System.out.println(temp.getInfo()) ;
+		}
+	}
+}
+
+
+
+

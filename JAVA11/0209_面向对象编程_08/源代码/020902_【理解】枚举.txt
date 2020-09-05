@@ -1,0 +1,171 @@
+1、
+enum Color {	// 颜色基色的枚举
+	RED, GREEN, BLUE ; // 多例设计中的对象是常量必须大写
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Color red = Color.RED ;	// 直接获取枚举对象
+		System.out.println(red) ;
+	}
+}
+
+
+2、
+enum Color {	// 颜色基色的枚举
+	RED, GREEN, BLUE ; // 多例设计中的对象是常量必须大写
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		for (Color temp : Color.values()) {	// Color.values()返回对象数组
+			System.out.println(temp) ;		
+		}
+	}
+}
+
+
+3、
+enum Color {	// 颜色基色的枚举
+	RED, GREEN, BLUE ; // 多例设计中的对象是常量必须大写
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Color color = Color.RED ;
+		switch (color) {
+			case RED :
+				System.out.println("红色 ~") ;
+				break ;
+			case BLUE :
+				System.out.println("蓝色 ~") ;
+				break ;
+			case GREEN :
+				System.out.println("绿色 ~") ;
+				break ;
+		}
+	}
+}
+
+
+4、
+enum Color {	// 颜色基色的枚举
+	RED, GREEN, BLUE ; // 多例设计中的对象是常量必须大写
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		for (Color temp : Color.values()) {
+			System.out.println(temp.name() + " -- " + temp.ordinal()) ;
+		}
+	}
+}
+
+
+5、
+
+enum Color {	// 颜色基色的枚举
+	RED("红色"), GREEN("绿色"), BLUE("蓝色") ; // 多例设计中的对象是常量必须大写
+	// 枚举中的其它结构必须定义在枚举类对象之后
+	private String info ;
+	private Color(String info) {
+		this.info = info ;
+	}
+	public String toString() {
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(Color.RED) ;
+	}
+}
+
+
+6、
+interface IMessage {
+	public String getInfo() ;
+}
+enum Color implements IMessage {	// 颜色基色的枚举
+	RED("红色"), GREEN("绿色"), BLUE("蓝色") ; // 多例设计中的对象是常量必须大写
+	// 枚举中的其它结构必须定义在枚举类对象之后
+	private String info ;
+	private Color(String info) {
+		this.info = info ;
+	}
+	public String toString() {
+		return this.info ;
+	}
+	public String getInfo() {	// 方法覆写
+		return this.info ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = Color.RED ;
+		System.out.println(msg.getInfo()) ;
+	}
+}
+
+
+7、
+
+enum Color {	// 颜色基色的枚举
+	RED("红色") {
+		public String getInfo() {
+			return "红色" ;
+		}
+	}, GREEN("绿色") {
+		public String getInfo() {
+			return "绿色";
+		}
+	}, BLUE("蓝色") {
+		public String getInfo() {
+			return "蓝色" ;
+		}
+	} ; // 多例设计中的对象是常量必须大写
+	// 枚举中的其它结构必须定义在枚举类对象之后
+	private String info ;
+	private Color(String info) {
+		this.info = info ;
+	}
+	public String toString() {
+		return this.info ;
+	}
+	public abstract String getInfo() ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(Color.RED.getInfo()) ;
+	}
+}
+
+8、
+
+enum Sex {
+	MALE("男"), FEMALE("女") ;
+	private String info ;
+	private Sex(String info) {
+		this.info = info ;
+	}
+	public String toString() {
+		return this.info ;
+	}
+}
+class Member {
+	private String name ;
+	private int age ;
+	private Sex sex ;
+	public Member(String name,int age,Sex sex) {
+		this.name = name ;
+		this.age = age ;
+		this.sex = sex ;
+	}
+	public String toString() {
+		return "姓名：" + this.name + "、年龄：" + this.age + "、性别：" + this.sex ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Member("新博",38,Sex.FEMALE)) ;
+	}
+}
+
+
+

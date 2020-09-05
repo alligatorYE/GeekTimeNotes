@@ -1,0 +1,67 @@
+1、
+
+interface IMessage {
+	public void send(String msg) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new IMessage() {
+			public void send(String msg) {
+				System.out.println(msg) ;
+			}
+		} ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+2、
+
+interface IMessage {
+	public void send(String msg) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = (str) -> {	// lambda表达式
+			System.out.println(str) ;
+		} ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+3、
+(参数, 参数, ...) -> {
+	方法体 ;
+}
+
+(参数, 参数, ...) -> 计算表达式 ;
+
+4、
+@FunctionalInterface
+interface IMessage {
+	public void send(String msg) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = (str) -> {	// lambda表达式
+			System.out.println(str) ;
+		} ;
+		msg.send("www.mldn.cn") ;		
+	}
+}
+
+
+5、
+
+@FunctionalInterface
+interface IMath {
+	public int add(int x, int y) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMath math = (n1, n2) -> n1 + n2 ;
+		System.out.println(math.add(10,20)) ;
+	}
+}
+
+6、
+

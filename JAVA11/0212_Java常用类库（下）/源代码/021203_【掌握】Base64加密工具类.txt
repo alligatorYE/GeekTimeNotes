@@ -1,0 +1,74 @@
+1、
+
+package cn.mldn.demo;
+
+import java.util.Base64;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String info = "Hello XinBo" ;
+        Base64.Encoder encoder = Base64.getEncoder() ;
+        Base64.Decoder decoder = Base64.getDecoder() ;
+        byte [] encodeData = encoder.encode(info.getBytes()) ; // 字节数据
+        System.out.println("【加密后的内容】" + new String(encodeData));
+        byte [] decodeData = decoder.decode(encodeData) ;// 解密处理
+        System.out.println("【解密后的内容】" + new String(decodeData));
+    }
+}
+
+
+2、
+package cn.mldn.util;
+
+import java.util.Base64;
+
+public class PasswordUtil {
+    private static final int REPEAT = 5 ; // 定义加密次数
+    private static final String SALT = "mldnjava" ; // 操作盐值
+    private PasswordUtil() {} // 构造方法私有化
+
+    /**
+     * 实现字符串数据的加密处理
+     * @param str 要进行加密的自复查un
+     * @return 加密后的字符串信息
+     */
+    public static String encrypt(String str) {
+        String encodeData = "{"+SALT+"}" + str ; // 要加密的密码
+        Base64.Encoder encoder = Base64.getEncoder() ;
+        for (int x = 0 ; x < REPEAT ; x ++) {
+            encodeData = encoder.encodeToString(encodeData.getBytes()) ;
+        }
+        return encodeData ;
+    }
+
+    /**
+     * 进行解密处理
+     * @param str 要解密的字符串
+     * @return 解密后的明文数据
+     */
+    public static String decrypt(String str) {
+        Base64.Decoder decoder = Base64.getDecoder() ; // 获取解密器
+        byte data [] = str.getBytes() ; // 获取字节数组
+        for (int x = 0 ; x < REPEAT ; x ++) {
+            data = decoder.decode(data) ;
+        }
+        String decodeData = new String(data) ;
+        return decodeData.substring(("{"+SALT+"}").length()) ;
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+
+import cn.mldn.util.PasswordUtil;
+
+import java.util.Base64;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String info = "www.mldn.cn" ;
+        String encode = PasswordUtil.encrypt(info) ;
+        System.out.println(PasswordUtil.decrypt(encode));
+    }
+}

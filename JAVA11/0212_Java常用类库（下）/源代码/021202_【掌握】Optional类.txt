@@ -1,0 +1,112 @@
+1、
+
+package cn.mldn.demo;
+class Message {
+    public void send(String msg) {
+        System.out.println("【发送消息】" + msg);
+    }
+}
+class Factory {
+    private Factory(){}
+    public static Message getInstance() {
+        return new Message() ;
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Message obj = Factory.getInstance() ;
+        obj.send("www.mldn.cn");
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+class Message {
+    public void send(String msg) {
+        System.out.println("【发送消息】" + msg);
+    }
+}
+class Factory {
+    private Factory(){}
+    public static Message getInstance() {
+        return null ; // 此时处理不当，返回了null
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Message obj = Factory.getInstance() ;
+        obj.send("www.mldn.cn");
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+class Message {
+    public void send(String msg) {
+        System.out.println("【发送消息】" + msg);
+    }
+}
+class Factory {
+    private Factory(){}
+    public static Message getInstance() {
+        return null ; // 此时处理不当，返回了null
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Message obj = Factory.getInstance() ;
+        if (obj != null) {
+            obj.send("www.mldn.cn");
+        }
+    }
+}
+
+
+4、
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Optional<String> optional = Optional.of(null) ;
+    }
+}
+
+
+5、
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Optional<String> optional = Optional.of("www.mldn.cn") ;
+        if (optional.isPresent()) { // 现在有数据存在
+            String str = optional.get() ; // 获取保存的实例
+            System.out.println(str);
+        }
+    }
+}
+
+6、
+package cn.mldn.demo;
+
+import java.util.Optional;
+
+class Message {
+    public void send(String msg) {
+        System.out.println("【发送消息】" + msg);
+    }
+}
+class Factory {
+    private Factory(){}
+    public static Optional<Message> getInstance() {
+        return Optional.of(new Message()) ; // 如果没有实例化对象，此处就报错了
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Message obj = Factory.getInstance().get() ; // 获取实例化对象
+        if (obj != null) {
+            obj.send("www.mldn.cn");
+        }
+    }
+}
+
+

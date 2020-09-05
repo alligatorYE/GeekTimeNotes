@@ -1,0 +1,150 @@
+1、
+
+class Address {
+	private String country ;
+	private String province ;
+	private String city ;
+	private String street ;
+	private String zipcode ;
+	public Address() {}
+	public Address(String country,String province,String city,String street,String zipcode) {
+		this.country = country ;
+		this.province = province ;
+		this.city = city ;
+		this.street = street ;
+		this.zipcode = zipcode ;
+	}
+	public String getInfo() {
+		return "国家名称：" + this.country + "、省份：" + this.province + "、城市：" + this.city + "、街道：" + this.street + "、邮政编码：" + this.zipcode ;
+	}
+	public void setCountry(String country) {
+		this.country = country ;
+	}
+	public void setProvince(String province) {
+		this.province = province ;
+	}
+	public void setCity(String city) {
+		this.city = city ;
+	}
+	public void setStreet(String street) {
+		this.street = street ;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode ;
+	}
+	public String getCountry() {
+		return this.country ;
+	}
+	public String getProvince() {
+		return this.province ;
+	}
+	public String getCity() {
+		return this.city ;
+	}
+	public String getStreet() {
+		return this.street ;
+	}
+	public String getZipcode() {
+		return this.zipcode ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Address addr = new Address("中国","北京","北京","东长安街","000001") ;
+		System.out.println(addr.getInfo()) ;
+	}
+}
+
+
+2、
+class Employee {
+	private int empno ;
+	private String ename ;
+	private double sal ;
+	private double rate ;
+	public Employee() {}
+	public Employee(int empno,String ename,double sal,double rate) {
+		this.empno = empno ;
+		this.ename = ename ;
+		this.sal = sal ;
+		this.rate = rate ;
+	}
+	public double calcSalRate() {	// 实现薪水增长的计算
+		return this.sal * (1 + this.rate) ;
+	}
+	public void saveNewSal() {	// 该工资的计算就直接利用已有的待遇和增长额进行计算
+		this.sal = this.calcSalRate() ;	// 保存新的工资
+	}
+	public String getInfo() {
+		return "雇员编号：" + this.empno + "、姓名：" + this.ename + "、薪水：" + this.sal + "、薪水增长额：" + this.rate ;
+	}
+	// setter、getter略...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Employee emp = new Employee(7369,"史密斯",800,0.2) ;
+		System.out.println(emp.getInfo()) ;
+		System.out.println("薪水增长后的总和：" + emp.calcSalRate()) ;
+		emp.saveNewSal() ;
+		System.out.println(emp.getInfo()) ;
+	}
+}
+
+
+3、
+class Dog {
+	private String name ;
+	private String color ;
+	private int age ;
+	public Dog() {}
+	public Dog(String name,String color,int age) {
+		this.name = name ;
+		this.color = color ;
+		this.age = age ;
+	}
+	public String getInfo() {
+		return "狗名：" + this.name + "、颜色：" + this.color + "、年龄：" + this.age ;
+	}
+	// setter、getter略...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Dog dog = new Dog("斑点狗","黑色",88) ;
+		System.out.println(dog.getInfo()) ;
+	}
+}
+
+
+4、
+class Account {
+	private String name ;
+	private double money ;
+	public Account() {}
+	public Account(String name) {
+		this(name,0.0) ;
+	}
+	public Account(String name,double money) {
+		this.name = name ;
+		this.money = money ;
+	}
+	public String getInfo() {
+		return "账户名称：" + this.name + "、余额：" + this.money ;
+	}
+	public double getMoney() {
+		return this.money ;
+	}
+	public boolean pay(double money) {
+		if (this.money >= money) {
+			this.money -= money ;
+			return true ;
+		}
+		return false ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Account account = new Account("新博",10000.0) ;
+		account.pay(9999.99) ;
+		System.out.println(account.getInfo()) ;
+	}
+}

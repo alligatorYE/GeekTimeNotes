@@ -1,0 +1,223 @@
+1、
+class 类名称 {
+	成员属性（属性）；
+	行为（方法）；
+}
+
+2、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 一个新的球诞生了
+		basketball.classify = "篮球" ; // 设置对象的属性内容
+		basketball.price = 99.9 ;	// 设置对象的属性内容
+		basketball.play() ;		// 调用类中的方法
+	}
+}
+
+
+3、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 一个新的球诞生了
+		//basketball.classify = "篮球" ; // 设置对象的属性内容
+		//basketball.price = 99.9 ;	// 设置对象的属性内容
+		basketball.play() ;		// 调用类中的方法
+	}
+}
+
+4、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num ;
+		System.out.println(num) ;
+	}
+}
+
+
+5、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num ;
+		num = 10 ; // 在使用之前赋值
+		System.out.println(num) ;
+	}
+}
+
+6、
+
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 一个新的球诞生了
+		basketball.classify = "篮球" ; // 设置对象的属性内容
+		basketball.price = 99.9 ;	// 设置对象的属性内容
+		basketball.play() ;		// 调用类中的方法
+	}
+}
+
+
+7、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = null ;	// 声明对象
+		basketball = new Ball() ;	// 实例化对象
+		basketball.classify = "篮球" ; // 设置对象的属性内容
+		basketball.price = 99.9 ;	// 设置对象的属性内容
+		basketball.play() ;		// 调用类中的方法
+	}
+}
+
+
+8、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = null ;	// 声明对象
+		basketball.classify = "篮球" ; // 设置对象的属性内容
+		basketball.price = 99.9 ;	// 设置对象的属性内容
+		basketball.play() ;		// 调用类中的方法
+	}
+}
+
+
+9、
+
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 厂商出货价格，每个篮球是99.9
+		Ball product = new Ball() ;	// 声明并实例化对象
+		product.classify = "篮球" ; // 设置对象的属性内容
+		product.price = 99.9 ;	// 设置对象的属性内容
+		Ball sale = product ;  // 为商品找了一个销售
+		sale.price = 9999.99 ;	// 修改价格
+		product.play() ;		// 调用类中的方法
+	}
+}
+
+10、
+
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 厂商出货价格，每个篮球是99.9
+		Ball product = new Ball() ;	// 声明并实例化对象
+		product.classify = "篮球" ; // 设置对象的属性内容
+		product.price = 99.9 ;	// 设置对象的属性内容
+		change(product) ;	// 引用传递，等价于“Ball sale = product”
+		product.play() ;		// 调用类中的方法
+	}
+	public static void change(Ball sale) {
+		sale.price = 9999.99 ;
+	}
+}
+
+
+11、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 实例化新对象
+		Ball football = new Ball() ;	// 实例化新对象
+		basketball.classify = "篮球" ;
+		basketball.price = 99.9 ;
+		football.classify = "足球" ;
+		football.price = 89.9 ;
+		basketball.play() ;
+		football.play() ;
+	}
+}
+
+
+12、
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 实例化新对象
+		Ball football = new Ball() ;	// 实例化新对象
+		basketball.classify = "篮球" ;
+		basketball.price = 99.9 ;
+		football.classify = "足球" ;
+		football.price = 89.9 ;
+		basketball = football;	// 引用传递
+		basketball.price = 9999.99 ;	// 修改内容
+		football.play() ;
+	}
+}
+
+
+13、
+
+
+
+
+
+
+

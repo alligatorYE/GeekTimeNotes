@@ -1,0 +1,19 @@
+1、
+
+jshell
+
+2、
+
+100 + 200 ;
+
+3、
+	System.out.println("www.mldn.cn") ;
+4、
+System.out.println("www.mldn.cn") ;
+System.out.println(10 + 20) ;
+
+5、
+/open d:\mldnjava\mldn.txt
+
+
+6、/exit

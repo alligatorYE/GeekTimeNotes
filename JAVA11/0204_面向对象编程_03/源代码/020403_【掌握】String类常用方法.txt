@@ -1,0 +1,293 @@
+https://docs.oracle.com/en/java/javase/11/
+
+1、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello MLDN" ; // 字符串
+		System.out.println(str.charAt(0)) ;
+		System.out.println(str.charAt(6)) ;
+	}
+}
+
+2、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello World !" ; // 字符串
+		char [] data = str.toCharArray() ; // 字符串变为字符数组
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.print(data[x] + "、") ;
+		}
+	}
+}
+
+3、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello World !" ; // 字符串
+		char [] data = str.toCharArray() ; // 字符串变为字符数组
+		for (int x = 0 ; x < data.length ; x ++) {
+			if ((data[x] >= 'A' && data[x] <= 'Z') ||
+				(data[x] >= 'a' && data[x] <= 'z')) {	// 是字符
+				if (data[x] >= 'a' && data[x] <= 'z') {	// 这个属于大写字母
+					data[x] -= 32 ;
+				}
+			}			
+		}
+		System.out.println(new String(data)) ;
+		System.out.println(new String(data,6,5)) ;
+	}
+}
+
+4、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "123" ; // 字符串
+		System.out.println(isNumber(str)) ;
+		System.out.println(isNumber("eleme?")) ;
+	}
+	// 如果方法返回的是布尔类型，用于进行是否的判断，就使用is开头
+	public static boolean isNumber(String data) {
+		char [] temp = data.toCharArray() ;
+		for (int x = 0 ; x < temp.length ; x ++) {
+			if (temp[x] <= '0' || temp[x] >= '9') {
+				return false ;	// 有一个是错误的，后面不再判断
+			}
+		}
+		return true ; // 都没问题返回true
+	}
+}
+
+5、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		// 当前的字符串全部由标准的符号所组成，正好在字节范围内
+		byte data [] = str.getBytes() ; // 将内容变为字节数组
+		for (int x = 0 ; x < data.length ; x ++) {
+			if ((data[x] >= 'A' && data[x] <= 'Z') ||
+				(data[x] >= 'a' && data[x] <= 'z')) {
+				if (data[x] >= 'a' && data[x] <= 'z') {	// 这个属于大写字母
+					data[x] -= 32 ;
+				}
+			}
+		}
+		System.out.println(new String(data)) ;
+	}
+}
+
+6、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "王凯很衰~真的很桑心~我爱：MLDN" ;
+		char [] data = str.toCharArray() ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.println(data[x] + " - " + (int) data[x]) ;
+		}
+	}
+}
+
+7、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "中" ;
+		System.out.println("“中”字的编码：" + ((int) str.charAt(0))) ;
+		byte [] data = str.getBytes() ; // 字符串转字节数组
+		System.out.println("字节长度：" + data.length) ;
+		for (int x = 0 ; x < data.length ; x ++) {
+			System.out.println(data[x]) ;	// 数据溢出
+		}
+	}
+}
+
+8、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("中国".equals("中国")) ;
+		System.out.println("www.mldn.cn".equals("www.mldn.cn")) ;
+		System.out.println("www.MLDN.cn".equals("www.mldn.cn")) ;
+	}
+}
+
+9、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("中国".equalsIgnoreCase("中国")) ;
+		System.out.println("www.mldn.cn".equalsIgnoreCase("www.mldn.cn")) ;
+		System.out.println("www.MLDN.cn".equalsIgnoreCase("www.mldn.cn")) ;
+	}
+}
+
+10、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello" ;
+		System.out.println("hello".compareTo(str)) ;	// 小写
+		System.out.println("Hello".compareTo(str)) ;	// 相同
+		System.out.println("hai".compareTo(str)) ;	// 长度不同
+	}
+}
+
+11、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		System.out.println(str.indexOf("mldn")) ;	// 4
+		if (str.indexOf("mldn") != -1) {
+			System.out.println("内容查找到了，字符串中存在有mldn子字符串") ;
+		}
+	}
+}
+
+12、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		if (str.contains("mldn")) {
+			System.out.println("内容查找到了，字符串中存在有mldn子字符串") ;
+		}
+	}
+}
+
+13、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		System.out.println(str.startsWith("www.")) ;
+		System.out.println(str.startsWith("mldn",4)) ;
+		System.out.println(str.endsWith(".cn")) ;
+	}
+}
+
+14、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "**name" ;
+		if (str.startsWith("**")) {
+			System.out.println("此内容需要进行特殊的处理操作！") ;
+		}
+	}
+}
+
+15、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		System.out.println(str.substring(4)) ;
+		System.out.println(str.substring(4,8)) ;
+	}
+}
+
+16、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "HELLO WORLD **www.mldn.cn## wangKAIHenShuai" ;
+		int startIndex = str.indexOf("**") ;
+		int endIndex = str.indexOf("##") ;	
+		if (startIndex != -1 && endIndex != -1) {
+			System.out.println(str.substring(startIndex + 2, endIndex)) ;
+		}		
+	}
+}
+
+17、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello World Hello MLDN Hello Everyone" ;
+		System.out.println(str.replaceAll("Hello","你好")) ;
+		System.out.println(str.replaceFirst("Hello","你好")) ;
+	}
+}
+
+18、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello World Hello MLDN Hello Everyone" ;
+		String result [] = str.split(" ") ;	// 根据空格进行字符串拆分
+		for (int x = 0 ; x < result.length ; x ++) {
+			System.out.print(result[x] + "、") ;
+		}
+	}
+}
+
+19、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello World Hello MLDN Hello Everyone" ;
+		String result [] = str.split(" ", 2) ;	// 根据空格进行字符串拆分
+		for (int x = 0 ; x < result.length ; x ++) {
+			System.out.println(result[x] + "、") ;
+		}
+	}
+}
+
+20、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www.mldn.cn" ;
+		String result [] = str.split("") ;	// 根据空格进行字符串拆分
+		for (int x = 0 ; x < result.length ; x ++) {
+			System.out.print(result[x] + "、") ;
+		}
+	}
+}
+
+21、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println("".isEmpty()) ;
+		System.out.println("mldn.cn".isEmpty()) ;
+	}
+}
+
+22、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String username = "   Hello MLDN   " ;
+		System.out.println("当前的用户信息：【" + username + "】") ;
+		System.out.println("去除空格内容：【" + username.trim() + "】") ;
+		if ("Hello MLDN".equals(username.trim())) {	// 数据处理后返回
+			System.out.println("信息输入成功！") ;
+		}
+	}
+}
+
+23、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "转大写：www.MLDN.cn" ;
+		String strB = "转小写：www.MLDN.cn" ;
+		System.out.println(strA.toUpperCase()) ;
+		System.out.println(strB.toLowerCase()) ;
+	}
+}
+
+24、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ;
+		String title = "mldn" ;
+		String strB = "www.".concat(title).concat(".cn") ;	// 普通连接
+		System.out.println(strA == strB) ;	// false
+	}
+}
+
+25、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String name = "小王" ;
+		int age = 28 ;
+		double score = 89.67812 ;
+		String info = String.format("姓名：%s、年龄：%d、成绩：%5.2f",name,age,score) ;
+		System.out.println(info) ;
+	}
+}
+

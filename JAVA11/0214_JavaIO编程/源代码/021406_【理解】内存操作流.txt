@@ -1,0 +1,42 @@
+1、
+
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        // 设置要进行处理的操作数据，等于此时先把内容通过程序输出到内存流里面
+        InputStream input = new ByteArrayInputStream("www.mldn.cn".getBytes()) ;
+        OutputStream output = new ByteArrayOutputStream() ;
+        int data = 0 ; // 读取单个内容
+        while ((data = input.read()) != -1) {   // 数据全部都在内存输出流中
+            output.write(Character.toUpperCase(data));
+        }
+        System.out.println(output.toString());  // 输出内存流取出的数据
+        output.close();
+        input.close();
+    }
+}
+
+2、
+
+
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        InputStream input = new FileInputStream(new File("D:" + File.separator + "demo.txt")) ;
+        ByteArrayOutputStream output = new ByteArrayOutputStream() ;
+        byte data[] = new byte [1024] ;
+        int len = 0 ;
+        while ((len = input.read(data)) != -1) {
+            output.write(data, 0, len); // 把数据保存在内存输出流
+        }
+        System.out.println(new String(output.toByteArray())); // 获取全部的内容
+        input.close();
+        output.close();
+    }
+}

@@ -1,0 +1,194 @@
+1、
+
+class Member {
+	private String name ;
+	private int age ;
+	private Book books [] ;	// 数组描述多的关联
+	public Member(String name,int age) {
+		this.name = name ;
+		this.age = age ;
+	}
+	public void setBooks(Book books[]) {
+		this.books = books ;
+	}
+	public Book[] getBooks() {
+		return this.books ;
+	}
+	public String getInfo() {
+		return "【Member】姓名：" + this.name + "、年龄：" + this.age ;
+	}
+	// setter、getter、无参构造略...
+}
+class Book {
+	private String title ;
+	private double price ;
+	// 设置归属者，如果没有归属者则内容为null
+	private Member member ;
+	public Book(String title,double price) {
+		this.title = title ;
+		this.price = price ;
+	}
+	public void setMember(Member member) {
+		this.member = member ;
+	}
+	public Member getMember() {
+		return this.member ;
+	}
+	public String getInfo() {
+		return "【Book】书名：" + this.title + "、价格：" + this.price ;
+	}
+	// setter、getter、无参构造略...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 第一步：根据关系设置相应的数据内容
+		// 1、分别实例化各自的对象实例
+		Member member = new Member("辛博",37) ;
+		Book bookA = new Book("宋版-金瓶梅",89991.23) ;
+		Book bookB = new Book("明版-金瓶梅",67991.23) ;
+		Book bookC = new Book("清版-金瓶梅",37991.23) ;
+		// 2、设置彼此之间的引用关联
+		member.setBooks(new Book[] {bookA, bookB, bookC}) ;
+		bookA.setMember(member) ;
+		bookB.setMember(member) ;
+		bookC.setMember(member) ;
+		// 第二步：根据关系获取数据内容
+		System.out.println(member.getInfo()) ;
+		// member.getBooks()方法直接返回对象数组
+		for (Book book : member.getBooks()) {
+			System.out.println("\t|- " + book.getInfo()) ;
+			System.out.println("\t\t|- " + book.getMember().getInfo()) ;	// 代码链
+		}
+	}
+}
+
+
+2、
+class Member {
+	private String name ;
+	private int age ;
+	private Book books [] ;	// 数组描述多的关联
+	private Member spouse ; // 描述配偶
+	private Member children[] ; // 描述后代子女
+	public Member(String name,int age) {
+		this.name = name ;
+		this.age = age ;
+	}
+	public void setSpouse(Member spouse) {
+		this.spouse = spouse ;
+	}
+	public Member getSpouse() {
+		return this.spouse ;
+	}
+	public void setChildren(Member children[]) {
+		this.children = children ;
+	}
+	public Member [] getChildren() {
+		return this.children ;
+	}
+	public void setBooks(Book books[]) {
+		this.books = books ;
+	}
+	public Book[] getBooks() {
+		return this.books ;
+	}
+	public String getInfo() {
+		return "【Member】姓名：" + this.name + "、年龄：" + this.age ;
+	}
+	// setter、getter、无参构造略...
+}
+class Book {
+	private String title ;
+	private double price ;
+	// 设置归属者，如果没有归属者则内容为null
+	private Member member ;
+	public Book(String title,double price) {
+		this.title = title ;
+		this.price = price ;
+	}
+	public void setMember(Member member) {
+		this.member = member ;
+	}
+	public Member getMember() {
+		return this.member ;
+	}
+	public String getInfo() {
+		return "【Book】书名：" + this.title + "、价格：" + this.price ;
+	}
+	// setter、getter、无参构造略...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 第一步：根据关系设置相应的数据内容
+		// 1、分别实例化各自的对象实例
+		Member member = new Member("辛博",37) ;
+		Member wife = new Member("王凯",48) ;
+		Member chdA = new Member("王三",67) ;
+		Member chdB = new Member("赵五",57) ;
+		Book bookA = new Book("宋版-金瓶梅",89991.23) ;
+		Book bookB = new Book("明版-金瓶梅",67991.23) ;
+		Book bookC = new Book("清版-金瓶梅",37991.23) ;
+		// 2、设置彼此之间的引用关联
+		member.setBooks(new Book[] {bookA, bookB, bookC}) ;
+		bookA.setMember(member) ;
+		bookB.setMember(member) ;
+		bookC.setMember(member) ;
+		Book bookD = new Book("灯草和尚",8.9) ;
+		Book bookE = new Book("少女之心",18.9) ;
+		wife.setBooks(new Book[] {bookD,bookE}) ;
+		bookD.setMember(wife) ;
+		bookE.setMember(wife) ;
+		Book bookF = new Book("葫芦娃",9.8) ;
+		Book bookG = new Book("黑猫警长",9.8) ;
+		chdA.setBooks(new Book[]{bookF,bookG}) ; // 孩子的书
+		bookF.setMember(chdA) ;
+		bookG.setMember(chdA) ;
+		Book bookH = new Book("蜘蛛侠",0.8) ;
+		Book bookI = new Book("小猪佩琪",0.1) ;
+		chdB.setBooks(new Book[]{bookH,bookI}) ;	// 孩子的书
+		bookH.setMember(chdB) ;
+		bookI.setMember(chdB) ;
+		member.setSpouse(wife) ; // 设置配偶
+		member.setChildren(new Member[]{chdA,chdB}) ;
+		// 第二步：根据关系获取数据内容
+		// 1、找到主要人员的信息
+		System.out.println(member.getInfo()) ;
+		// member.getBooks()方法直接返回对象数组
+		for (Book book : member.getBooks()) {
+			System.out.println("\t|- " + book.getInfo()) ;
+			System.out.println("\t\t|- " + book.getMember().getInfo()) ;	// 代码链
+		}
+		System.out.println("---------- 让人晕眩的分割线 ----------") ;
+		System.out.println(member.getSpouse().getInfo()) ;
+		for (Book book : member.getSpouse().getBooks()) {
+			System.out.println("\t|- " + book.getInfo()) ;
+			System.out.println("\t\t|- " + book.getMember().getInfo()) ;	// 代码链
+		}
+		System.out.println("---------- 让人懵逼的分割线 ----------") ;
+		for (Member child : member.getChildren()) {
+			System.out.println(child.getInfo()) ;
+			for (Book book : child.getBooks()) {
+				System.out.println("\t|- " + book.getInfo()) ;
+				System.out.println("\t\t|- " + book.getMember().getInfo()) ;	// 代码链
+			}
+		}
+	}
+}
+
+3、
+class 笔记本电脑 {
+	private 显示屏 对象 ;
+	private 键盘 对象 ;
+	private 触摸板 对象 ;
+	private 鼠标 对象 ;
+	private 主板 对象 ;
+}
+class 显示屏 {}
+class 键盘 {}
+class 触摸板 {}
+class 鼠标 {}
+class 主板 {
+	private CPU 对象 ;
+	private 硬盘 [] 对象数组 ;
+	private 内存 [] 对象数组 ;
+}

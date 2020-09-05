@@ -1,0 +1,228 @@
+1、
+
+class Ball {
+	private String classify ;
+	private double price ;
+	String brand ;	// 球的品牌，暂不封装
+	public Ball(String classify,double price,String brand) {
+		this.classify = classify ;
+		this.price = price ;
+		this.brand = brand ;
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball("篮球",9.9,"辛搏") ;
+		Ball football = new Ball("足球",99.9,"辛搏") ;
+		Ball pingpangball = new Ball("乒乓球",10.0,"辛搏") ;
+		System.out.println(basketball.getInfo()) ;
+		System.out.println(football.getInfo()) ;
+		System.out.println(pingpangball.getInfo()) ;
+	}
+}
+
+
+2、
+class Ball {
+	private String classify ;
+	private double price ;
+	String brand ;	// 球的品牌，暂不封装
+	public Ball(String classify,double price,String brand) {
+		this.classify = classify ;
+		this.price = price ;
+		this.brand = brand ;
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball("篮球",9.9,"辛搏") ;
+		Ball football = new Ball("足球",99.9,"辛搏") ;
+		Ball pingpangball = new Ball("乒乓球",10.0,"辛搏") ;
+		basketball.brand = "建军球" ;	// 修改品牌
+		System.out.println(basketball.getInfo()) ;
+		System.out.println(football.getInfo()) ;
+		System.out.println(pingpangball.getInfo()) ;
+	}
+}
+
+
+3、
+class Ball {
+	private String classify ;
+	private double price ;
+	static String brand ;	// 球的品牌，暂不封装
+	public Ball(String classify,double price,String brand) {
+		this.classify = classify ;
+		this.price = price ;
+		this.brand = brand ;
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball("篮球",9.9,"辛搏") ;
+		Ball football = new Ball("足球",99.9,"辛搏") ;
+		Ball pingpangball = new Ball("乒乓球",10.0,"辛搏") ;
+		basketball.brand = "建军球" ;	// 修改品牌
+		System.out.println(basketball.getInfo()) ;
+		System.out.println(football.getInfo()) ;
+		System.out.println(pingpangball.getInfo()) ;
+	}
+}
+
+
+4、
+class Ball {
+	private String classify ;
+	private double price ;
+	static String brand ;	// 球的品牌，暂不封装
+	public Ball(String classify,double price,String brand) {
+		this.classify = classify ;
+		this.price = price ;
+		this.brand = brand ;
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball("篮球",9.9,"辛搏") ;
+		Ball football = new Ball("足球",99.9,"辛搏") ;
+		Ball pingpangball = new Ball("乒乓球",10.0,"辛搏") ;
+		// 直接通过类名称访问Ball类中定义的static属性
+		Ball.brand = "建军球" ;	// 修改品牌
+		System.out.println(basketball.getInfo()) ;
+		System.out.println(football.getInfo()) ;
+		System.out.println(pingpangball.getInfo()) ;
+	}
+}
+
+
+5、
+class Ball {
+	private String classify ;
+	private double price ;
+	static String brand ;	// 球的品牌，暂不封装
+	public Ball(String classify,double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball.brand = "建军球" ;	// 没有实例化对象
+		System.out.println(Ball.brand) ;
+		Ball basketball = new Ball("篮球",9.9) ;
+		System.out.println(basketball.getInfo()) ;
+	}
+}
+
+6、
+
+class Ball {
+	private String classify ;
+	private double price ;
+	private static String brand = "巴巴";
+	public Ball(String classify,double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public static void setBrand(String b) {
+		brand = b ; // 修改品牌的名称
+	}
+	public String getInfo() {
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball.setBrand("建军球") ;	// 没有实例化对象
+		Ball basketball = new Ball("篮球",9.9) ;
+		System.out.println(basketball.getInfo()) ;
+	}
+}
+
+7、
+class Ball {
+	private String classify ;
+	private double price ;
+	private static String brand = "巴巴";
+	public Ball(String classify,double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public static void setBrand(String b) {
+		brand = b ; // 修改品牌的名称
+	}
+	public String getInfo() {
+		this.setBrand("Hello") ;
+		return "球的类型：" + this.classify + "、价格：" + this.price + "、球的品牌：" + this.brand ;
+	}
+	// setter、getter、无参构造、略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball.setBrand("建军球") ;	// 没有实例化对象
+		Ball basketball = new Ball("篮球",9.9) ;
+		System.out.println(basketball.getInfo()) ;
+	}
+}
+
+8、
+class Ball {
+	private static int count = 0 ;	// 保存公共属性
+	public Ball() {	// 构造方法实现统计
+		count ++ ;	// 数据累加
+		System.out.println("当前实例化对象个数：" + count) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		for (int x = 0 ; x < 10 ; x ++) {
+			new Ball() ;
+		}
+	}
+}
+
+
+9、
+class Ball {
+	private String brand ; // 该属性不允许为null
+	private static int count = 0 ;	// 保存公共属性
+	public Ball() {	// 构造方法实现统计
+		this("NoBrand - " + count ++) ;  // 自动命名
+	}
+	public Ball(String brand) {
+		this.brand = brand ;	// 直接赋值
+	}
+	public String getBrand() {
+		return this.brand ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Ball().getBrand()) ;
+		System.out.println(new Ball("建军").getBrand()) ;
+		System.out.println(new Ball("波波").getBrand()) ;
+		System.out.println(new Ball().getBrand()) ;
+		System.out.println(new Ball().getBrand()) ;
+	}
+}

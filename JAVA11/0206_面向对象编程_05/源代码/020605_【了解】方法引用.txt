@@ -1,0 +1,66 @@
+1、
+
+// R表示方法引用的返回值类型、P表示参数类型
+@FunctionalInterface
+interface IFunction<R, P> {
+	public R convert(P param) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IFunction<String, Integer> fun = String :: valueOf ;	// 方法引用
+		String str = fun.convert(100) ; // String str = String.valueOf(100)
+		System.out.println(str) ;
+	}
+}
+
+2、
+// R表示方法引用的返回值类型
+@FunctionalInterface
+interface IFunction<R> {
+	public R upper() ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IFunction<String> fun = "www.mldn.cn" :: toUpperCase ; // 引用
+		String str = fun.upper() ;
+		System.out.println(str) ;
+	}
+}
+
+3、
+// R表示方法引用的返回值类型
+@FunctionalInterface
+interface IFunction<R, P> {
+	public R compare(P p1, P p2) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IFunction<Integer,String> fun = String :: compareTo ; // 引用
+		System.out.println(fun.compare("A","a")) ;
+	}
+}
+
+4、
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String toString() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+}
+// R表示方法引用的返回值类型
+@FunctionalInterface
+interface IFunction<R> {
+	public R create(String p1, double p2) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IFunction<Ball> fun = Ball :: new ; // 引用
+		System.out.println(fun.create("篮球", 9.9)) ;
+	}
+}
+

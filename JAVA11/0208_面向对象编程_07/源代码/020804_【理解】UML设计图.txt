@@ -1,0 +1,17 @@
+interface IMessage {
+	public void send() ;
+}
+class MessageImpl implements IMessage {
+	public void send() {}
+}
+class Factory {
+	public static IMessage getInstance() {
+		return new MessageImpl() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = Factory.getInstance() ;
+		msg.send() ;
+	}
+}

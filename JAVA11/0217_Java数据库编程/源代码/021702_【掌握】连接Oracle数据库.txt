@@ -1,0 +1,29 @@
+1、
+	D:\app\用户名\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar
+	D:\app\mldn\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar
+
+2、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        // 第一步、进行数据库驱动程序的加载
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        // 第二步、根据DriverManager类获取Connection接口实例
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);
+        System.out.println(conn);   // 如果不为空，表示连接成功
+        // 第四步：数据库属于资源操作，而且资源宝贵，一定要在使用后关闭连接
+        conn.close();
+    }
+}
+
+
+3、

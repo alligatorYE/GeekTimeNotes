@@ -1,0 +1,29 @@
+package cn.mldn.demo;
+class Message implements Runnable {
+    private boolean stopFlag = false ;
+    @Override
+    public void run() {
+        for (int x = 0 ; x < 100 ; x ++) {
+            if (this.stopFlag) {
+                break ; // 结束循环
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "运行，x = " + x);
+        }
+    }
+    public void stopThread() {
+        this.stopFlag = true ; // 停止线程
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Message message = new Message() ;
+        new Thread(message).start();
+        Thread.sleep(2000); // 运行2秒的时间
+        message.stopThread(); // 通过一个标志位的形式停止掉线程
+    }
+}

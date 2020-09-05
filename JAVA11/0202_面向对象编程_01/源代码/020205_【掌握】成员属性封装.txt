@@ -1,0 +1,54 @@
+1、
+
+class Ball {
+	String classify ;		// 类型
+	double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 实例化新对象
+		basketball.classify = "篮球" ;
+		basketball.price = -9999.9 ;
+		basketball.play() ;
+	}
+}
+
+
+2、
+
+class Ball {
+	private String classify ;		// 类型
+	private double price ;			// 价格
+	// 此时的方法没有追加static，因为要通过对象进行调用
+	public void play() {	// 定义了一个方法
+		System.out.println("球类型：" + classify + "、球的价格：" + price) ;
+	}
+	public void setClassify(String c) {
+		classify = c ;
+	}
+	public String getClassify() {
+		return classify ;
+	}
+	public void setPrice(double p) {
+		if (p > 0.0) {
+			price = p ;
+		} else {
+			price = -0.1 ;
+		}
+	}
+	public double getPrice() {
+		return price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball basketball = new Ball() ;	// 实例化新对象
+		basketball.setClassify("篮球") ;
+		basketball.setPrice(-9999.9) ;
+		basketball.play() ;
+	}
+}

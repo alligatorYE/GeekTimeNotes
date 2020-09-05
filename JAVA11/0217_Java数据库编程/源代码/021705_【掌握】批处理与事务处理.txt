@@ -1,0 +1,87 @@
+1、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Arrays;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ;
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'Hello')");
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'MLDN')");
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'Happy')");
+        stmt.addBatch("UPDATE news SET pubdate=SYSDATE");  // 多行更新
+        stmt.addBatch("UPDATE news SET price=99.99 WHERE content IS NULL");  // 多行更新
+        int result [] = stmt.executeBatch() ; // 执行批处理并获取返回结果
+        System.out.println("【批处理执行结果】" + Arrays.toString(result));
+        conn.close();   // 关闭连接
+    }
+}
+
+2、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Arrays;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        String sql = "INSERT INTO news(nid,title) VALUES (news_seq.nextval,?)" ;
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        for (int x = 0 ; x < 10 ; x ++) {
+            pstmt.setString(1 , "Happy - " + x);    // 设置数据
+            pstmt.addBatch(); // 追加批处理
+        }
+        int result [] = pstmt.executeBatch() ; // 执行批处理并获取返回结果
+        System.out.println("【批处理执行结果】" + Arrays.toString(result));
+        conn.close();   // 关闭连接
+    }
+}
+
+3、
+
+package cn.mldn.demo;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.Arrays;
+
+public class JDBCDemo {
+    public static final String DBDRIVER = "oracle.jdbc.driver.OracleDriver" ;  // 驱动程序
+    public static final String DBURL = "jdbc:oracle:thin:@localhost:1521:mldn" ;
+    public static final String USER = "scott" ;
+    public static final String PASSWORD = "tiger" ;
+    public static void main(String[] args) throws Exception {
+        Class.forName(DBDRIVER) ; // 反射加载驱动程序
+        Connection conn = DriverManager.getConnection(DBURL, USER, PASSWORD);   // 连接数据库
+        Statement stmt = conn.createStatement() ;
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'MLDN-A')");
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'MLDN-'B')");
+        stmt.addBatch("INSERT INTO news (nid,title) VALUES (news_seq.nextval,'MLDN-C')");
+        int result [] = stmt.executeBatch() ; // 执行批处理并获取返回结果
+        System.out.println("【批处理执行结果】" + Arrays.toString(result));
+        conn.close();   // 关闭连接
+    }
+}
+
+4、

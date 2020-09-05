@@ -1,0 +1,222 @@
+1、
+package cn.mldn.demo;
+
+import java.util.Map;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, Integer> map = Map.of("one", 1, "two", 2, "three", 3);
+        System.out.println(map);
+    }
+}
+
+2、
+package cn.mldn.demo;
+
+import java.util.Map;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, Integer> map = Map.of("one", 1, "two", 2, "three", 3, "three", 3);
+        System.out.println(map);
+    }
+}
+
+3、
+
+package cn.mldn.demo;
+import java.util.HashMap;
+import java.util.Map;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String,String> map = new HashMap<>() ;
+        System.out.println("【未发生替换】" + map.put("Hello","你好"));
+        System.out.println("【已发生替换】" + map.put("Hello","你还好不好？"));
+        System.out.println("【未发生替换】" + map.put("MLDN","www.mldn.cn"));
+        map.put("empty",null) ;
+        map.put(null,"empty") ;
+        System.out.println(map);
+    }
+}
+
+4、
+package cn.mldn.demo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        map.put("empty", null);
+        map.put(null, "empty");
+        System.out.println(map.get("everyone"));
+        System.out.println(map.get(null));
+    }
+}
+
+5、
+package cn.mldn.demo;
+import java.util.LinkedHashMap;
+import java.util.Map;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        map.put("empty", null);
+        map.put(null, "empty");
+        System.out.println(map);
+    }
+}
+
+6、
+package cn.mldn.demo;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new TreeMap<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        map.put("empty", null); // value为空
+        System.out.println(map);
+    }
+}
+
+7、
+package cn.mldn.demo;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new Hashtable<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        System.out.println(map);
+    }
+}
+
+8、
+package cn.mldn.demo;
+
+import java.util.Map;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map.Entry<String,String> entry = Map.entry("mldn","www.mldn.cn") ;
+        System.out.println("key = " + entry.getKey() + "、value = " + entry.getValue());
+    }
+}
+
+9、
+
+package cn.mldn.demo;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        map.put("empty", null); // value为空
+        Set<Map.Entry<String,String>> set = map.entrySet() ;
+        Iterator<Map.Entry<String,String>> iter = set.iterator() ;
+        while (iter.hasNext()) {
+            Map.Entry<String,String> entry = iter.next() ;
+            System.out.println("key = " + entry.getKey() + "、value = " + entry.getValue());
+        }
+    }
+}
+
+10、
+
+package cn.mldn.demo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String, String> map = new HashMap<>();
+        map.put("Hello", "你好");
+        map.put("MLDN", "www.mldn.cn");
+        map.put("empty", null); // value为空
+        for (Map.Entry<String,String> entry : map.entrySet()) {
+            System.out.println("key = " + entry.getKey() + "、value = " + entry.getValue());
+        }
+    }
+}
+
+11、
+package cn.mldn.demo;
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Member {
+    private String name ;
+    private int age ;
+    public Member(String name,int age) {
+        this.name = name ;
+        this.age = age ;
+    }
+    @Override
+    public String toString() {
+        return "姓名：" + this.name + "、年龄：" + this.age ;
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<String,Member> map = new HashMap<>() ;
+        map.put(new String("张三"),new Member("张三",10)) ;
+        System.out.println(map.get(new String("张三")));
+    }
+}
+
+12、
+package cn.mldn.demo;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+class Member {
+    private String name ;
+    private int age ;
+    public Member(String name,int age) {
+        this.name = name ;
+        this.age = age ;
+    }
+    @Override
+    public String toString() {
+        return "姓名：" + this.name + "、年龄：" + this.age ;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return age == member.age &&
+                Objects.equals(name, member.name);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Map<Member,String> map = new HashMap<>() ;
+        map.put(new Member("张三",10),new String("张三")) ;
+        System.out.println(map.get(new Member("张三",10)));
+    }
+}

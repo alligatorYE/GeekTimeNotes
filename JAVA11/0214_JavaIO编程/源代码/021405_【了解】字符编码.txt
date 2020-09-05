@@ -1,0 +1,39 @@
+1、
+
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        System.getProperties().list(System.out);
+    }
+}
+
+2、
+package cn.mldn.demo;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        OutputStream output = new FileOutputStream(new File("D:" + File.separator + "info.txt")) ;
+        output.write("今天是个好日子，春暖花开！好好安心考试，加油！".getBytes());
+        output.close();
+    }
+}
+
+3、
+package cn.mldn.demo;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        OutputStream output = new FileOutputStream(new File("D:" + File.separator + "info.txt")) ;
+        output.write("今天是个好日子，春暖花开！好好安心考试，加油！".getBytes("ISO8859-1"));
+        output.close();
+    }
+}

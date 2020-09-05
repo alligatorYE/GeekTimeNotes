@@ -1,0 +1,269 @@
+1、
+class Item {
+	private int iid ;
+	private String title ;
+	private Subitem subitems []  ; // 保存多个子栏目
+	private Course courses [] ; // 保存多个课程信息
+	public Item(int iid,String title) {
+		this.iid = iid ;
+		this.title = title ;
+	}
+	public void setSubitems(Subitem [] subitems) {
+		this.subitems = subitems ;
+	}
+	public void setCourses(Course [] courses) {
+		this.courses = courses ;
+	}
+	public Subitem [] getSubitems() {
+		return this.subitems ;
+	}
+	public Course [] getCourses() {
+		return this.courses ;
+	}
+	public String getInfo() {
+		return "【Item】分类ID：" + this.iid + "、名称：" + this.title ;
+	}
+	// setter、getter、无参构造略...
+}
+class Subitem{
+	private int sid ;
+	private String title ;
+	private Course courses [] ; // 保存多个课程信息
+	private Item item ;
+	public Subitem(int sid,String title) {
+		this.sid = sid ;
+		this.title = title ;
+	}
+	public void setItem(Item item) {
+		this.item = item ;
+	}
+	public Item getItem() {
+		return this.item ;
+	}
+	public void setCourses(Course [] courses) {
+		this.courses = courses ;
+	}
+	public Course [] getCourses() {
+		return this.courses ;
+	}
+	public String getInfo() {
+		return "【Subitem】子分类ID：" + this.sid + "、名称：" + this.title ;
+	}
+	// setter、getter、无参构造略...
+}
+class Course {
+	private int cid ;
+	private String title ;
+	private double price ;
+	private Item item ;
+	private Subitem subitem ;
+	public Course(int cid,String title,double price) {
+		this.cid = cid ;
+		this.title = title ;
+		this.price = price ;
+	}
+	public void setItem(Item item) {
+		this.item = item ;
+	}
+	public void setSubitem(Subitem subitem) {
+		this.subitem = subitem ;
+	}
+	public Item getItem() {
+		return this.item ;
+	}
+	public Subitem getSubitem() {
+		return this.subitem ;
+	}
+	public String getInfo() {
+		return "【Course】课程ID：" + this.cid + "、名称：" + this.title + "、价格：" + this.price ;
+	}
+	// setter、getter、无参构造略...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 第一步：依据结构设置相应的数据内容
+		Item item = new Item(1,"文学作品") ;
+		Subitem subA = new Subitem(101,"古典文学") ;
+		Subitem subB = new Subitem(102,"现代文摘") ;
+		Subitem subC = new Subitem(103,"短片摘要") ;
+		Course c1 = new Course(1001,"图说金瓶梅",899.99) ;
+		Course c2 = new Course(1002,"真人玉蒲团",8899.99) ;
+		Course c3 = new Course(1003,"辛博真人秀",0.99) ;
+		Course c4 = new Course(1004,"王凯做扫除",0.09) ;
+		Course c5 = new Course(1005,"少女的爱心",77882.09) ;
+		item.setSubitems(new Subitem [] {subA,subB,subC}) ;
+		subA.setItem(item) ;
+		subB.setItem(item) ;
+		subC.setItem(item) ;
+		item.setCourses(new Course[] {c1,c2,c3,c4,c5}) ;
+		c1.setItem(item) ;
+		c2.setItem(item) ;
+		c3.setItem(item) ;
+		c4.setItem(item) ;
+		c5.setItem(item) ;
+		subA.setCourses(new Course[]{c1,c2}) ;
+		c1.setSubitem(subA) ;
+		c2.setSubitem(subA) ;
+		subB.setCourses(new Course[]{c3,c4}) ;
+		c3.setSubitem(subB) ;
+		c4.setSubitem(subB) ;
+		subC.setCourses(new Course[]{c5}) ;
+		c5.setSubitem(subC) ;
+		// 第二步：依据结构获取内容
+		System.out.println(item.getInfo()) ;
+		for (int x = 0 ; x < item.getSubitems().length ; x ++) {
+			System.out.println("\t|- " + item.getSubitems()[x].getInfo()) ;
+			for (int y = 0 ; y < item.getSubitems()[x].getCourses().length ; y ++) {
+				System.out.println("\t\t|- " + item.getSubitems()[x].getCourses()[y].getInfo()) ;
+			}
+		}
+		System.out.println("-----------------------------------------------------") ;
+		System.out.println(c1.getInfo()) ;
+		System.out.println("\t|- " + c1.getItem().getInfo()) ;
+		System.out.println("\t|- " + c1.getSubitem().getInfo()) ;
+		System.out.println("-----------------------------------------------------") ;
+		System.out.println(subA.getInfo()) ;
+		System.out.println("\t|- " + subA.getItem().getInfo()) ;
+		for (int x = 0 ; x < subA.getCourses().length ; x ++) {
+			System.out.println("\t|- " + subA.getCourses()[x].getInfo()) ;
+		}
+	}
+}
+
+
+2、
+
+class Member {
+	private String phone ;
+	private String name ;
+	private String password ;
+	private int lock ;
+	private Role roles [] ;
+	public Member(String phone,String name,String password,int lock) {
+		this.phone = phone ;
+		this.name = name ;
+		this.password = password ;
+		this.lock = lock ; 
+	}
+	public void setRoles(Role [] roles) {
+		this.roles = roles ;
+	}
+	public Role [] getRoles() {
+		return this.roles ;
+	}
+	public String getInfo() {
+		return "【Member】用户手机：" + this.phone + "、姓名：" + this.name + "、密码：" + this.password + "、锁定状态：" + (this.lock == 0 ? "活跃" : "锁定") ;
+	}
+	// setter、getter、无参构造略 ...
+}
+class Role {
+	private int rid ;
+	private String title ;
+	private String content ;
+	private Member members [] ;
+	private Action actions [] ;
+	public Role(int rid,String title,String content) {
+		this.rid = rid ;
+		this.title = title ;
+		this.content = content ;
+	}
+	public void setMembers(Member [] members) {
+		this.members = members ;
+	}
+	public Member[] getMembers() {
+		return this.members ;
+	}
+	public void setActions(Action actions []) {
+		this.actions = actions ;
+	}
+	public Action[] getActions() {
+		return this.actions ;
+	}
+	public String getInfo() {
+		return "【Role】角色Id：" + this.rid + "、名称：" + this.title + "、描述：" + this.content ;
+	}
+	// setter、getter、无参构造略 ...
+}
+class Action {
+	private int aid ;
+	private String title ;
+	private String content ;
+	private Role role ;
+	public Action(int aid,String title,String content) {
+		this.aid = aid ;
+		this.title = title ;
+		this.content = content ;
+	}
+	public void setRole(Role role) {
+		this.role = role ;
+	}
+	public Role getRole() {
+		return this.role ;
+	}
+	public String getInfo() {
+		return "【Action】权限ID：" + this.aid + "、名称：" + this.title + "、描述：" + this.content ;
+	}
+	// setter、getter、无参构造略 ...
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		// 第一步：根据结构进行内容的设置
+		Member memberA = new Member("110","成成","wobushiren,shishenxian",0) ;
+		Member memberB = new Member("120","军军","yuzhoudiyishuaige",0) ;
+		Member memberC = new Member("119","波波","yuzhoudiyichouge",0) ;
+		Role roleA = new Role(1,"用户管理","--- 省略100字 ---") ;
+		Role roleB = new Role(2,"公告管理","--- 省略100字 ---") ;
+		Role roleC = new Role(3,"系统管理","--- 省略100字 ---") ;
+		Action actA = new Action(10001,"用户增加","--- 省略100字 ---") ;
+		Action actB = new Action(10002,"用户删除","--- 省略100字 ---") ;
+		Action actC = new Action(10003,"用户列表","--- 省略100字 ---") ;
+		Action actD = new Action(10004,"用户修改","--- 省略100字 ---") ;
+		Action actE = new Action(10005,"公告发布","--- 省略100字 ---") ;
+		Action actF = new Action(10006,"公告审核","--- 省略100字 ---") ;
+		Action actG = new Action(10007,"公告列表","--- 省略100字 ---") ;
+		Action actH = new Action(10008,"公告删除","--- 省略100字 ---") ;
+		Action actI = new Action(10009,"结构变更","--- 省略100字 ---") ;
+		Action actJ = new Action(10010,"系统备份","--- 省略100字 ---") ;
+		// 设置角色和权限的关系
+		roleA.setActions(new Action[] {actA,actB,actC,actD}) ;
+		roleB.setActions(new Action[] {actE,actF,actG,actH}) ;
+		roleC.setActions(new Action[] {actI,actJ}) ;
+		actA.setRole(roleA) ;
+		actB.setRole(roleA) ;
+		actC.setRole(roleA) ;
+		actD.setRole(roleA) ;
+		actE.setRole(roleB) ;
+		actF.setRole(roleB) ;
+		actG.setRole(roleB) ;
+		actH.setRole(roleB) ;
+		actI.setRole(roleC) ;
+		actJ.setRole(roleC) ;
+		// 设置用户与角色对应关系
+		memberA.setRoles(new Role[] {roleA,roleB,roleC}) ;
+		memberB.setRoles(new Role[] {roleA,roleC}) ;
+		memberC.setRoles(new Role[] {roleB,roleC}) ;
+		roleA.setMembers(new Member[] {memberA,memberB}) ;
+		roleB.setMembers(new Member[] {memberA,memberC}) ;
+		roleC.setMembers(new Member[] {memberA,memberB,memberC}) ;
+		// 第二步：依据关系获取数据
+		System.out.println("---------------- 根据用户获取相应信息 ----------------") ;
+		System.out.println(memberA.getInfo()) ;
+		for (int x = 0 ; x < memberA.getRoles().length ; x ++) {
+			System.out.println("\t|- " + memberA.getRoles()[x].getInfo()) ;
+			for (int y = 0 ; y < memberA.getRoles()[x].getActions().length ; y ++) {
+				System.out.println("\t\t|- " + memberA.getRoles()[x].getActions()[y].getInfo()) ;
+			}
+		}
+		System.out.println("---------------- 根据角色获取用户信息 ----------------") ;
+		System.out.println(roleA.getInfo()) ;
+		for (int x = 0 ; x < roleA.getMembers().length ; x ++) {
+			System.out.println("\t|- " + roleA.getMembers()[x].getInfo()) ;
+		}
+		System.out.println("---------------- 根据权限获取用户信息 ----------------") ;
+		System.out.println(actA.getInfo()) ;
+		for (int x = 0 ; x < actA.getRole().getMembers().length ; x ++) {
+			System.out.println("\t|- " + actA.getRole().getMembers()[x].getInfo()) ;
+		}
+	}
+}
+

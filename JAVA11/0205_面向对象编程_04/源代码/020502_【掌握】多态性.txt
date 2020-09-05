@@ -1,0 +1,300 @@
+1、
+
+class Message{
+	public void print(String msg) {
+		System.out.println(msg) ;
+	}
+	public void print(String sender,String msg) {
+		System.out.println(sender + "发送消息：" + msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.print("www.mldn.cn") ;
+		msg.print("小李老师","www.mldn.cn") ;
+	}
+}
+
+2、
+
+class Ball {
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+class FootBall extends Ball {
+	public void play() {
+		System.out.println("用脚踢足球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall bball = new BasketBall() ;
+		FootBall fball = new FootBall() ;
+		bball.play() ;
+		fball.play() ;
+	}
+}
+
+3、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall ball = new BasketBall() ;
+		ball.play() ;
+	}
+}
+
+4、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new BasketBall() ;	// 向上转型
+		ball.play() ;
+	}
+}
+
+5、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+class FootBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用脚踢足球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		game(new BasketBall()) ;	// 传入篮球
+		game(new FootBall()) ;	// 传入足球
+	}
+	public static void game(Ball ball) {	// 参数类型统一
+		ball.play() ;	// 统一操作（父类定义的）
+	}
+}
+
+6、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+class FootBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用脚踢足球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		game(new BasketBall()) ;	// 传入篮球
+		game(new FootBall()) ;	// 传入足球
+	}
+	public static void game(BasketBall ball) {	// 参数类型统一
+		ball.play() ;	// 统一操作（父类定义的）
+	}
+	public static void game(FootBall ball) {	// 参数类型统一
+		ball.play() ;	// 统一操作（父类定义的）
+	}
+}
+
+7、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new BasketBall() ; // 向上转型
+		BasketBall bb = (BasketBall) ball ; // 向下转型
+		bb.play() ;
+	}
+}
+
+8、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		game(new BasketBall()) ;	// 向上转型
+	}
+	public static void game(Ball ball) {
+		BasketBall basket = (BasketBall) ball ;	// 强制转换
+		basket.rule() ; // 调用子类自己的操作方法
+		ball.play() ;
+	}
+}
+
+9、
+
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+class FootBall extends Ball {	// 下
+	public void play() {
+		System.out.println("用脚踢足球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		game(new BasketBall()) ;	// 向上转型
+		game(new FootBall()) ;
+	}
+	public static void game(Ball ball) {
+		BasketBall basket = (BasketBall) ball ;	// 强制转换
+		basket.rule() ; // 调用子类自己的操作方法
+		ball.play() ;
+	}
+}
+
+10、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new BasketBall() ;	// 向上转型
+		BasketBall bb = (BasketBall) ball ; // 向下转型
+	}
+}
+
+11、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball() ;	// 未转型
+		System.out.println(ball instanceof Ball) ;
+		System.out.println(ball instanceof BasketBall) ;
+	}
+}
+
+12、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new BasketBall() ;	// 未转型
+		System.out.println(ball instanceof Ball) ;
+		if (ball instanceof BasketBall) {
+			BasketBall basket = (BasketBall) ball ;
+			basket.rule() ; // 调用子类扩充的方法
+		}
+	}
+}
+
+13、
+class Ball {	// 上
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+class BasketBall extends Ball {	// 下
+	public void rule() {	// 子类扩充的方法
+		System.out.println("篮球的规则用手 ...") ;
+	}
+	public void play() {
+		System.out.println("用手打篮球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = null ;
+		System.out.println(ball instanceof Ball) ;
+		System.out.println(ball instanceof BasketBall) ;
+	}
+}

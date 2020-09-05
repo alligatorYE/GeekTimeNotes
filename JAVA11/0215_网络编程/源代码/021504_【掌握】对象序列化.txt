@@ -1,0 +1,117 @@
+1、
+package cn.mldn.demo;
+import java.io.*;
+class Ball implements Serializable {    // 该类就属于可以被序列化的类
+    private String brand ;
+    private double price ;
+    public Ball() {   }
+    public Ball(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+    }
+}
+
+2、
+package cn.mldn.demo;
+import java.io.*;
+class Ball implements Serializable {    // 该类就属于可以被序列化的类
+    private String brand ;
+    private double price ;
+    public Ball() {   }
+    public Ball(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+public class TestDemo {
+    private static final File BALL_FILE = new File("D:" + File.separator + "ball.ser") ;
+    public static void main(String args[]) throws Exception {
+        // serial();
+        deserial();
+    }
+    public static void deserial() throws Exception {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(BALL_FILE)) ;
+        Ball ball = (Ball) ois.readObject() ;
+        System.out.println(ball.getBrand() + " - " + ball.getPrice());
+    }
+    public static void serial() throws Exception {
+        Ball ball = new Ball("辛博篮球", 9.9);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BALL_FILE)) ;
+        oos.writeObject(ball); // 序列化对象
+        oos.close();
+    }
+}
+
+3、
+
+package cn.mldn.demo;
+import java.io.*;
+class Ball implements Serializable {    // 该类就属于可以被序列化的类
+    private transient String brand ;
+    private transient double price ;
+    public Ball() {   }
+    public Ball(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+}
+public class TestDemo {
+    private static final File BALL_FILE = new File("D:" + File.separator + "ball.ser") ;
+    public static void main(String args[]) throws Exception {
+        //serial();
+        deserial();
+    }
+    public static void deserial() throws Exception {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(BALL_FILE)) ;
+        Ball ball = (Ball) ois.readObject() ;
+        System.out.println(ball.getBrand() + " - " + ball.getPrice());
+    }
+    public static void serial() throws Exception {
+        Ball ball = new Ball("辛博篮球", 9.9);
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BALL_FILE)) ;
+        oos.writeObject(ball); // 序列化对象
+        oos.close();
+    }
+}
+
+

@@ -1,0 +1,33 @@
+1、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		java.util.function.Function<String,Boolean> fun = "**mldn" :: startsWith ;
+		System.out.println(fun.apply("**")) ;
+	}
+}
+
+
+2、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		java.util.function.Supplier<String> fun = "www.MLDN.cn" :: toLowerCase ;
+		System.out.println(fun.get()) ;
+	}
+}
+
+3、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		java.util.function.Consumer<String> fun = System.out :: println ;
+		fun.accept("www.mldn.cn") ;
+	}
+}
+
+4、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		java.util.function.Predicate<String> fun = "www.mldn.cn" :: contains ;
+		System.out.println(fun.test("mldn")) ;
+	}
+}

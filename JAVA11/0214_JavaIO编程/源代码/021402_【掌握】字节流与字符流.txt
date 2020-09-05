@@ -1,0 +1,184 @@
+1、
+package cn.mldn.demo;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        // 1、定义要进行磁盘输出的完整路径
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs() ; // 创建父路径
+        }
+        // 2、通过子类进行父抽象类的实例化
+        OutputStream output = new FileOutputStream(file) ; // 获得了输出流
+        // 3、实现数据的输出，数据的输出需要将内容变为字节数组
+        output.write("www.mldn.cn".getBytes());
+        output.close(); // 4、关闭输出流
+    }
+}
+
+
+
+2、
+
+
+package cn.mldn.demo;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        // 1、定义要进行磁盘输出的完整路径
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs() ; // 创建父路径
+        }
+        // 2、通过子类进行父抽象类的实例化
+        OutputStream output = new FileOutputStream(file,true) ; // 获得了输出流
+        // 3、实现数据的输出，数据的输出需要将内容变为字节数组
+        output.write("\r\nwww.mldn.cn".getBytes());
+        output.close(); // 4、关闭输出流
+    }
+}
+
+
+
+3、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (file.exists()) {    // 文件路径存在
+            InputStream input = new FileInputStream(file) ; // 实例化输入流对象
+            byte data [] = new byte [1024] ; // 开辟一个空间进行数据读取
+            int len = input.read(data) ; // 将输入流的内容读取到字节数组之中
+            System.out.println("【" + new String(data, 0, len) + "】");
+            input.close();
+        }
+    }
+}
+
+
+
+4、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (file.exists()) {    // 文件路径存在
+            InputStream input = new FileInputStream(file) ; // 实例化输入流对象
+            byte data [] = input.readAllBytes() ; // 读取全部数据
+            System.out.println("【" + new String(data) + "】");
+            input.close();
+        }
+    }
+}
+
+
+5、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "welcome.jpg");
+        if (file.exists()) {    // 文件路径存在
+            InputStream input = new FileInputStream(file) ; // 实例化输入流对象
+            System.out.println(input.available());
+            input.close();
+        }
+    }
+}
+
+
+6、
+
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs() ; // 创建父路径
+        }
+        Writer out = new FileWriter(file) ; // 实例化Writer类对象
+        out.write("www.mldn.cn");   // 输出
+        out.append("Hello MLDN") ;  // 追加
+        out.close(); 
+    }
+}
+
+
+
+7、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (file.exists()) {
+            Reader in = new FileReader(file) ;
+            char [] data = new char[1024] ;
+            int len = in.read(data) ; // 向字节数组中读取
+            System.out.println(new String(data, 0, len));
+            in.close();
+        }
+    }
+}
+
+
+
+8、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (file.exists()) {
+            try (Reader in = new FileReader(file)) {
+                char [] data = new char[1024] ;
+                int len = in.read(data) ; // 向字节数组中读取
+                System.out.println(new String(data, 0, len));
+            } catch (Exception e) {}
+        }
+    }
+}
+
+
+
+9、
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs() ; // 创建父路径
+        }
+        Writer out = new FileWriter(file) ; // 实例化Writer类对象
+        out.write("www.mldn.cn\r\n");   // 输出
+        out.append("Hello MLDN") ;  // 追加
+        out.flush(); 
+    }
+}
+

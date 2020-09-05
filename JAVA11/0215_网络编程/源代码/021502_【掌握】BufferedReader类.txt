@@ -1,0 +1,48 @@
+1、
+
+package cn.mldn.demo;
+        import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Reader in = new FileReader(new File("D:" + File.separator + "demo.txt")) ;
+        BufferedReader buf = new BufferedReader(in) ; // 缓冲读取
+        String line = null ; // 保存每一行读取的内容
+        while ((line = buf.readLine()) != null) {   // 有数据读取进来
+            System.out.println(line);
+        }
+    }
+}
+
+2、
+package cn.mldn.demo;
+        import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in)) ;
+        System.out.print("请输入数据：");
+        String line = input.readLine() ; // 进入到阻塞状态等待数据的接收
+        System.out.println("【输入数据】" + line);
+    }
+}
+
+3、
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in)) ;
+        System.out.print("请输入考试成绩：");
+        String line = input.readLine() ; // 进入到阻塞状态等待数据的接收
+        if (line == null || "".equals(line)) {
+            System.err.println("【错误】输入的数据内容不允许为空！");
+        } else {
+            if (line.matches("\\d+(\\.\\d+)?")) {
+                System.out.println("输入成绩为：" + Double.parseDouble(line));
+            } else {
+                System.err.println("【错误】输入的数据不是数字！");
+            }
+        }
+    }
+}
+
+

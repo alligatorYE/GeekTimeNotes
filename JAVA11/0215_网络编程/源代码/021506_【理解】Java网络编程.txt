@@ -1,0 +1,193 @@
+1、
+
+package cn.mldn.hello;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class HelloServer {
+    public static void main(String[] args) throws Exception {
+        ServerSocket server = new ServerSocket(9999) ;  // 设置绑定端口，使用8000以上的端口
+        System.out.println("服务器端程序运行，等待客户端连接 ... ...");
+        Socket client = server.accept() ; // 等待客户端连接
+        PrintStream out = new PrintStream(client.getOutputStream()) ; // 获取客户端的输出对象
+        out.println("Hello World !") ; // 输出信息
+        client.close();
+        server.close();
+    }
+}
+
+
+2、
+
+package cn.mldn.hello;
+
+import java.net.Socket;
+import java.util.Scanner;
+
+public class HelloClient {
+    public static void main(String[] args) throws Exception{
+        Socket client = new Socket("192.168.28.90",9999) ;  // 连接
+        Scanner scan = new Scanner(client.getInputStream()) ; // 获取服务器端的输入
+        scan.useDelimiter("\n") ;
+        if (scan.hasNext()) {
+            System.out.println("【服务器端回应数据】" + scan.next());
+        }
+        client.close();
+    }
+}
+
+3、
+package cn.mldn.echo;
+
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class EchoServer {
+    public static void main(String[] args) throws Exception{
+        ServerSocket server = new ServerSocket(9999) ;
+        boolean flag = true ; // 表示持续用户发送消息处理
+        System.out.println("服务器端等待客户端进行连接访问 ... ...");
+        Socket client = server.accept() ;
+        PrintStream output = new PrintStream(client.getOutputStream()) ; // 获得客户端输出
+        Scanner scan = new Scanner(client.getInputStream()) ; // 获得客户端输入
+        scan.useDelimiter("\n") ;
+        while (flag) {
+            if (scan.hasNext()) {   // 客户端发送数据
+                String value = scan.next().trim() ; // 获取数据
+                if ("byebye".equalsIgnoreCase(value)) { // 交互结束
+                    output.println("【ECHO】拜拜，下次再见，永不再见！！");
+                    flag = false ; // 结束循环
+                } else {
+                    output.println("【ECHO】" + value);
+                }
+            }
+        }
+        client.close();
+        server.close();
+    }
+}
+
+
+4、
+package cn.mldn.echo;
+
+import cn.mldn.factory.Factory;
+import cn.mldn.service.IInputData;
+
+import java.io.PrintStream;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class EchoClient {
+    public static final IInputData INPUT = Factory.getInputDataInstance() ;
+    public static void main(String[] args) throws Exception {
+        Socket client = new Socket("localhost",9999) ;
+        PrintStream output = new PrintStream(client.getOutputStream()) ; // 向服务器端输出
+        Scanner scan = new Scanner(client.getInputStream()) ; // 获得服务器端输入
+        scan.useDelimiter("\n") ;
+        boolean flag = true ;// 持续进行发送的标记
+        while (flag) {
+            String value = INPUT.getStringNotNull("请输入要发送的数据：").trim() ;
+            output.println(value);  // 一定要换行
+            if (scan.hasNext()) {   // 有内容返回
+                System.err.println(scan.next().trim()); // 输出返回数据
+            }
+            if ("byebye".equalsIgnoreCase(value)) {
+                flag = false ;
+            }
+        }
+        client.close();
+    }
+}
+
+5、
+
+package cn.mldn.echo;
+
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+class ClientThread implements Runnable {
+    private Socket client ;
+    public ClientThread(Socket client) {
+        this.client = client ;
+    }
+    @Override
+    public void run() {
+        boolean flag = true ; // 表示持续用户发送消息处理
+        try {
+            PrintStream output = new PrintStream(client.getOutputStream()) ; // 获得客户端输出
+            Scanner scan = new Scanner(client.getInputStream()) ; // 获得客户端输入
+            scan.useDelimiter("\n") ;
+            while (flag) {
+                if (scan.hasNext()) {   // 客户端发送数据
+                    String value = scan.next().trim() ; // 获取数据
+                    if ("byebye".equalsIgnoreCase(value)) { // 交互结束
+                        output.println("【ECHO】拜拜，下次再见，永不再见！！");
+                        flag = false ; // 结束循环
+                    } else {
+                        output.println("【ECHO】" + value);
+                    }
+                }
+            }
+            client.close();
+        } catch (Exception e) {}
+    }
+}
+public class EchoServer {
+    public static void main(String[] args) throws Exception{
+        ServerSocket server = new ServerSocket(9999) ;
+        boolean flag = true ; // 表示持续用户发送消息处理
+        System.out.println("服务器端等待客户端进行连接访问 ... ...");
+        while (flag) {
+            Socket client = server.accept();
+            new Thread(new ClientThread(client)).start();
+        }
+        server.close();
+    }
+}
+
+
+6、
+
+package cn.mldn.udp;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class UDPClient {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket socket = new DatagramSocket(9999) ; // 连接到指定的监听端口
+        byte data [] = new byte[1024] ; // 等待消息的接收
+        DatagramPacket packet = new DatagramPacket(data, data.length);
+        socket.receive(packet); // 等待接收消息
+        System.out.println("【UDP客户端】接收到的消息为：" + new String(data,0,packet.getLength()));
+        socket.close();
+    }
+}
+
+
+7、
+package cn.mldn.udp;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+
+public class UDPServer {
+    public static void main(String[] args) throws Exception {
+        DatagramSocket server = new DatagramSocket(9000); // 服务器端的地址
+        String value = "www.mldn.cn"; // 要发送的广播消息内容
+        DatagramPacket packet = new DatagramPacket(value.getBytes(), 0, value.length(), InetAddress.getByName("localhost"), 9999);
+        server.send(packet); // 发送数据报
+        server.close();
+    }
+}
+
+

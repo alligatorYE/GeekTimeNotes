@@ -1,0 +1,224 @@
+1、
+
+package cn.mldn.demo;
+
+import java.io.*;
+
+class CopyUtil {    // 定义一个专门实现拷贝的工具类
+    private File srcFile ;  // 拷贝的源文件路径
+    private File desFile ;  // 拷贝的目标文件路径
+    public CopyUtil(String args[]) {
+        if (args.length != 2) { // 如果要拷贝一定是两个参数
+            System.out.println("错误，程序的输入参数不正确，格式为：“java CopyDemo 源文件路径 目标文件路径”");
+            System.exit(1); // 程序结束
+        }   // 如果没有错误，则应该获取源文件路径与目标文件路径
+        this.srcFile = new File(args[0]) ;
+        this.desFile = new File(args[1]) ;
+    }
+    /**
+     * 实现拷贝的操作处理
+     * @return 返回本次拷贝所花费的时间
+     * @throws FileNotFoundException 源文件不存在
+     */
+    public int copy() throws IOException {
+        long start = System.currentTimeMillis() ;
+        if (!this.srcFile.exists()) {   // 文件不存在
+            throw new FileNotFoundException("源文件不存在！") ;
+        }
+        if (!this.desFile.getParentFile().exists()) {
+            this.desFile.getParentFile().mkdirs() ; // 创建目标父目录
+        }
+        InputStream input = null ;
+        OutputStream output = null ;
+        try {
+            input = new FileInputStream(this.srcFile) ;
+            output = new FileOutputStream(this.desFile) ;
+            byte data [] = new byte [1024] ; // 每次读取1024个内容
+            int len = 0 ; // 保存读取的字节个数
+            do {
+                len = input.read(data) ; // 向字节数组中读取数据
+                if (len != -1) {
+                    output.write(data, 0, len);
+                }
+            } while(len != -1) ;    // 没有读取完毕
+        } catch (IOException e) {
+            throw e ; // 向上抛出异常
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        long end = System.currentTimeMillis() ;
+        return (int) (end - start) ;
+    }
+}
+
+public class CopyDemo {
+    public static void main(String[] args) {
+        CopyUtil cu = new CopyUtil(args) ;  // 实例化对象
+        try {
+            System.out.println(cu.copy());  // 调用拷贝操作
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+
+import java.io.*;
+
+class CopyUtil {    // 定义一个专门实现拷贝的工具类
+    private File srcFile ;  // 拷贝的源文件路径
+    private File desFile ;  // 拷贝的目标文件路径
+    public CopyUtil(String args[]) {
+        if (args.length != 2) { // 如果要拷贝一定是两个参数
+            System.out.println("错误，程序的输入参数不正确，格式为：“java CopyDemo 源文件路径 目标文件路径”");
+            System.exit(1); // 程序结束
+        }   // 如果没有错误，则应该获取源文件路径与目标文件路径
+        this.srcFile = new File(args[0]) ;
+        this.desFile = new File(args[1]) ;
+    }
+    /**
+     * 实现拷贝的操作处理
+     * @return 返回本次拷贝所花费的时间
+     * @throws FileNotFoundException 源文件不存在
+     */
+    public int copy() throws IOException {
+        long start = System.currentTimeMillis() ;
+        if (!this.srcFile.exists()) {   // 文件不存在
+            throw new FileNotFoundException("源文件不存在！") ;
+        }
+        if (!this.desFile.getParentFile().exists()) {
+            this.desFile.getParentFile().mkdirs() ; // 创建目标父目录
+        }
+        InputStream input = null ;
+        OutputStream output = null ;
+        try {
+            input = new FileInputStream(this.srcFile) ;
+            output = new FileOutputStream(this.desFile) ;
+            byte data [] = new byte [1024] ; // 每次读取1024个内容
+            int len = 0 ; // 保存读取的字节个数
+            // 第一步执行“input.read(data)”将数据读取到字节数组之中；
+            // 第二步执行“len = input.read(data)”，返回读取个数；
+            // 第三步执行“(len = input.read(data)) != -1”，判断是否读取到底
+            while ((len = input.read(data)) != -1) {
+                output.write(data, 0, len);
+            }
+        } catch (IOException e) {
+            throw e ; // 向上抛出异常
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        long end = System.currentTimeMillis() ;
+        return (int) (end - start) ;
+    }
+}
+
+public class CopyDemo {
+    public static void main(String[] args) {
+        CopyUtil cu = new CopyUtil(args) ;  // 实例化对象
+        try {
+            System.out.println(cu.copy());  // 调用拷贝操作
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+
+import java.io.*;
+
+class CopyUtil {    // 定义一个专门实现拷贝的工具类
+    private File srcFile ;  // 拷贝的源文件路径
+    private File desFile ;  // 拷贝的目标文件路径
+    public CopyUtil(String args[]) {
+        if (args.length != 2) { // 如果要拷贝一定是两个参数
+            System.out.println("错误，程序的输入参数不正确，格式为：“java CopyDemo 源文件路径 目标文件路径”");
+            System.exit(1); // 程序结束
+        }   // 如果没有错误，则应该获取源文件路径与目标文件路径
+        this.srcFile = new File(args[0]) ;
+        this.desFile = new File(args[1]) ;
+    }
+    /**
+     * 实现拷贝的操作处理
+     * @return 返回本次拷贝所花费的时间
+     * @throws FileNotFoundException 源文件不存在
+     */
+    public int copy() throws IOException {
+        long start = System.currentTimeMillis() ;
+        if (!this.srcFile.exists()) {   // 文件不存在
+            throw new FileNotFoundException("源文件不存在！") ;
+        }
+        if (!this.desFile.getParentFile().exists()) {
+            this.desFile.getParentFile().mkdirs() ; // 创建目标父目录
+        }
+        InputStream input = null ;
+        OutputStream output = null ;
+        try {
+            input = new FileInputStream(this.srcFile) ;
+            output = new FileOutputStream(this.desFile) ;
+            input.transferTo(output) ;
+        } catch (IOException e) {
+            throw e ; // 向上抛出异常
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        long end = System.currentTimeMillis() ;
+        return (int) (end - start) ;
+    }
+}
+
+public class CopyDemo {
+    public static void main(String[] args) {
+        CopyUtil cu = new CopyUtil(args) ;  // 实例化对象
+        try {
+            System.out.println(cu.copy());  // 调用拷贝操作
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

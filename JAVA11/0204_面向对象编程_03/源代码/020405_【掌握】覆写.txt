@@ -1,0 +1,131 @@
+1、
+class Ball {
+	public void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.play() ;
+	}
+}
+2
+class Ball {
+	public void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	public void play() {
+		System.out.println("【BasketBall】在广阔的篮球场上奔跑，打篮球比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.play() ;
+	}
+}
+
+3、
+
+class Ball {
+	public void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	public void play() {
+		super.play() ;	// 此时不再搜寻本类，而直接找父类调用
+		System.out.println("【BasketBall】在广阔的篮球场上奔跑，打篮球比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.play() ;
+	}
+}
+
+4、
+
+class Ball {
+	public void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	void play() {	// 原本是public，现在权限严格了
+		System.out.println("【BasketBall】在广阔的篮球场上奔跑，打篮球比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.play() ;
+	}
+}
+
+5、
+class Ball {
+	public void start() {
+		this.play() ;
+	}
+	public void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	public void play() {	// 原本是public，现在权限严格了
+		System.out.println("【BasketBall】在广阔的篮球场上奔跑，打篮球比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.start() ;
+	}
+}
+
+6、
+class Ball {
+	public void start() {
+		this.play() ;
+	}
+	private void play() {
+		System.out.println("【Ball】玩球儿 ~") ;
+	}
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	public void play() {	// 原本是public，现在权限严格了
+		System.out.println("【BasketBall】在广阔的篮球场上奔跑，打篮球比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.start() ;
+	}
+}
+
+7、
+class Ball {
+	double price = 999.99 ;
+}
+class BasketBall extends Ball {	// 继承自Ball类
+	String price = "美金3999.99" ;	// 名称相同
+	public void sale() {
+		System.out.println(super.price) ;
+		System.out.println(this.price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		BasketBall basket = new BasketBall() ;	// 实例化子类对象
+		basket.sale() ;
+	}
+}
+

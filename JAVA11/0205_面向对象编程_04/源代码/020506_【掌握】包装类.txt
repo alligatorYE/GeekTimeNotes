@@ -1,0 +1,140 @@
+1、
+
+class IntWrap {	// int包装
+	private int num ;
+	public IntWrap(int num) {	// 将基本数据类型保存在类中
+		this.num = num ;
+	}
+	public int intValue() {	// 获取包装的内容
+		return this.num ; 
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IntWrap wrap = new IntWrap(99) ;	// 将99基本类型包装在类对象中
+		ref(wrap) ;	// 所有类都是Object子类
+	}
+	public static void ref(Object obj) {	// 引用传递
+		IntWrap temp = (IntWrap) obj ; // 向下转型
+		System.out.println(temp.intValue()) ;	// 获取基本数据
+	}
+}
+
+2、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Integer obj = new Integer(99) ;	// 装箱处理
+		int num = obj.intValue() ; // 拆箱方法
+		System.out.println(num * num) ;
+	}
+}
+
+3、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Integer obj = 99 ; // 自动装箱
+		obj ++ ; // 对象直接进行自增操作
+		int num = obj ; // 自动拆箱
+		System.out.println(num * num) ;
+	}
+}
+
+4、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Integer numA = -129 ;
+		Integer numB = -129 ;
+		System.out.println(numA == numB) ;
+	}
+}
+
+5、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Double obj = 1.2 ;
+		double num = obj ;
+		System.out.println(num * 2) ;
+	}
+}
+
+6、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Float obj = 1.2F ;
+		float num = obj ;
+		System.out.println(num * 2) ;
+	}
+}
+
+7、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Object obj = 2.3 ;	// 2.3自动装箱为Double，Double实例向上转型
+		double num = (Double) obj ; // 向下转型为包装类后自动拆箱
+		System.out.println(num * 2) ;
+	}
+}
+
+8、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "100" ;	// 字符串
+		int num = Integer.parseInt(str) ; // 转换为int
+		System.out.println(num * num) ;
+	}
+}
+
+9、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "100ab" ;	// 字符串
+		int num = Integer.parseInt(str) ; // 转换为int
+		System.out.println(num * num) ;
+	}
+}
+
+10、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "100" ;	// 字符串
+		double num = Double.parseDouble(str) ; // 转换为double
+		System.out.println(num * num) ;
+	}
+}
+
+11、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "true" ;	// 字符串
+		boolean flag = Boolean.parseBoolean(str) ;
+		if (flag) {
+			System.out.println("条件满足！") ;
+		} else {
+			System.out.println("条件不满足！") ;
+		}
+	}
+}
+
+12、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num = 100 ;
+		String str = "" + num ; // 成字符串
+		System.out.println(str.length()) ;
+	}
+}
+
+13、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int num = 100 ;
+		String str = String.valueOf(num) ; // 成字符串
+		System.out.println(str.length()) ;
+	}
+}

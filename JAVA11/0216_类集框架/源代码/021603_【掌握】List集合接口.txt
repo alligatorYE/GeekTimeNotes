@@ -1,0 +1,121 @@
+1、
+
+package cn.mldn.demo;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = List.of("Hello", "MLDN", "Hello", "MLDN", "mldnjava");
+        System.out.println(all);
+    }
+}
+
+2、
+package cn.mldn.demo;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = List.of("Hello", "MLDN", "Hello", "MLDN", "mldnjava");
+        // all.add("ABC") ;
+        // System.out.println(all.contains("Hello"));
+        // all.remove("Hello") ;
+        all.set(0,"haha") ;
+        System.out.println(all);
+    }
+}
+
+3、
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<String>() ;
+        System.out.printf("【集合未保存数据前的状态】集合长度：%s、是否为空：%s。\n",all.size(),all.isEmpty());
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("大家每天嗨皮") ;
+        all.remove("大家每天嗨皮") ;  // 删除集合数据
+        System.out.printf("【集合保存数据后的状态】集合长度：%s、是否为空：%s。\n",all.size(),all.isEmpty());
+        System.out.println(all);    // 是直接利用了toString()实现了集合的输出
+        Object obj [] = all.toArray() ;
+        for (int x = 0 ; x < obj.length ; x ++) {
+            System.out.print(obj[x] + "、");
+        }
+    }
+}
+
+4、
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.List;
+class Ball {
+    private String brand ;
+    private double price ;
+    public Ball(String brand, double price) {
+        this.brand = brand;
+        this.price = price;
+    }
+    @Override
+    public String toString() {
+        return "厂商名称：" + this.brand + "、价格：" + this.price + "\n" ;
+    }
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true ;
+        }
+        if (obj == null) {
+            return false ;
+        }
+        if (!(obj instanceof Ball)) {
+            return false ;
+        }
+        Ball ball = (Ball) obj ;
+        return this.brand.equals(ball.brand) && this.price == ball.price ;
+    }
+    // setter、getter、无参构造略 ... ...
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<Ball> list = new ArrayList<Ball>() ;
+        list.add(new Ball("王宁",1.2)) ;
+        list.add(new Ball("抛伯丁",2.2)) ;
+        list.add(new Ball("365",2.3)) ;
+        System.out.println(list.contains(new Ball("抛伯丁",2.2)));
+        list.remove(new Ball("抛伯丁",2.2)) ;
+        System.out.println(list);
+    }
+}
+
+5、
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> list = new LinkedList<>() ;
+        list.add("Hello") ;
+        list.add("MLDN") ;
+        System.out.println(list);
+        System.out.println(list.get(1));
+    }
+}
+
+6、
+package cn.mldn.demo;
+
+import java.util.List;
+import java.util.Vector;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> list = new Vector<>() ;
+        list.add("Hello") ;
+        list.add("MLDN") ;
+        System.out.println(list);
+        System.out.println(list.get(1));
+    }
+}
+
+
+

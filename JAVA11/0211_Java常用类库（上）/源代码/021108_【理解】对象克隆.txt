@@ -1,0 +1,26 @@
+package cn.mldn.demo;
+
+class Member implements Cloneable {
+    private String name ;
+    private int age ;
+    public Member(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    @Override
+    public String toString() {
+        return "【" + super.toString() + "】Member{" + "name='" + name + '\'' + ", age=" + age + '}';
+    }
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();   // 交由Object实现克隆
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Member memberA = new Member("波波",38) ;
+        Member memberB = (Member) memberA.clone() ;
+        System.out.println(memberA);
+        System.out.println(memberB);
+    }
+}

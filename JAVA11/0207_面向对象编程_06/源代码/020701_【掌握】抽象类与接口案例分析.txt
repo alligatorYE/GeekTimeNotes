@@ -1,0 +1,144 @@
+1、
+interface IClassName {
+	public String getClassName() ;
+}
+class Company implements IClassName {
+	public String getClassName() {
+		return "Company Class" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IClassName cn = new Company() ;
+		System.out.println(cn.getClassName()) ;
+	}
+}
+
+2、
+interface IGraphics { // 定义一个绘制标准
+	public void paint() ; // 绘图
+}
+class Point {	// 描述坐标信息
+	private double x ;
+	private double y ;
+	public Point() {}
+	public Point(double x, double y) {
+		this.x = x ; 
+		this.y = y ;
+	}
+	public double getX() {
+		return this.x ;
+	}
+	public double getY() {
+		return this.y ;
+	}
+}
+class Circular implements IGraphics {
+	private Point center ;
+	private double radius ;
+	public Circular(Point center, double radius) {
+		this.center = center ;
+		this.radius = radius ;
+	}
+	public void paint() {
+		System.out.println("【圆形】中心坐标点（" + this.center.getX() + " , " + this.center.getY() + "），半径为：" + this.radius) ;
+	}
+}
+class Triangle implements IGraphics {	// 三角形
+	private Point [] points ; // 描述坐标点
+	public Triangle(Point p1, Point p2, Point p3) {
+		this.points = new Point [] {p1, p2, p3} ;	// 保存三个点
+	}
+	public void paint() {
+		System.out.println("【三角形】绘制第一条边：起始坐标（" + 
+			this.points[0].getX() + ", " + 
+			this.points[0].getY() + 
+			"） ~ 结束坐标（" + 
+			this.points[1].getX() + ", " + 
+			this.points[1].getY() + "）") ;
+		System.out.println("【三角形】绘制第二条边：起始坐标（" + 
+			this.points[1].getX() + ", " + 
+			this.points[1].getY() + 
+			"） ~ 结束坐标（" + 
+			this.points[2].getX() + ", " + 
+			this.points[2].getY() + "）") ;
+		System.out.println("【三角形】绘制第三条边：起始坐标（" + 
+			this.points[2].getX() + ", " + 
+			this.points[2].getY() + 
+			"） ~ 结束坐标（" + 
+			this.points[0].getX() + ", " + 
+			this.points[0].getY() + "）") ;
+	}
+}
+class Factory {
+	public static IGraphics getInstance(String type, double ... args) {
+		if ("triangle".equalsIgnoreCase(type)) {
+			return new Triangle(new Point(args[0], args[1]), new Point(args[2], args[3]), new Point(args[4], args[5])) ;
+		}
+		if ("circular".equalsIgnoreCase(type)) {
+			return new Circular(new Point(args[0], args[1]), args[2]) ;
+		}
+		return null ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IGraphics graphicsA = Factory.getInstance("triangle", 1.1, 2.2, 3.3, 4.4, 5.5, 6.6) ;
+		IGraphics graphicsB = Factory.getInstance("circular", 5.5, 6.6, 3.7) ;
+		graphicsA.paint() ;
+		graphicsB.paint() ;
+	}
+}
+
+3、
+
+
+abstract class AbstractShape {
+	public abstract double perimeter() ;
+	public abstract double area() ;
+}
+class Circular extends AbstractShape {
+	private double radius ;
+	public Circular(double radius) {
+		this.radius = radius ;
+	}
+	public double perimeter() {
+		return 2 * 3.14 * this.radius ;
+	}
+	public double area() {
+		return 3.14 * this.radius * this.radius ;
+	}
+}
+class Rectangle extends AbstractShape {
+	private double length ;
+	private double width ;
+	public Rectangle(double length, double width) {
+		this.length = length ;
+		this.width = width ;
+	}
+	public double perimeter() {
+		return (this.length + this.width) * 2 ;
+	}
+	public double area() {
+		return this.length * this.width ;
+	}
+}
+class Factory {
+	public static AbstractShape getInstance(String type,double ... args) {
+		if ("Circular".equalsIgnoreCase(type)) {
+			return new Circular(args[0]) ;
+		}
+		if ("Rectangle".equalsIgnoreCase(type)) {
+			return new Rectangle(args[0], args[1]) ;
+		}
+		return null ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractShape shapeA = Factory.getInstance("Circular", 5.6) ;
+		AbstractShape shapeB = Factory.getInstance("Rectangle", 5.6, 6.3) ;
+		System.out.println("【圆形】面积：" + shapeA.area() + "、周长：" + shapeA.perimeter()) ;
+		System.out.println("【矩形】面积：" + shapeB.area() + "、周长：" + shapeB.perimeter()) ;
+	}
+}

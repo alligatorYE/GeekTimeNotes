@@ -1,0 +1,64 @@
+1、
+package cn.mldn.demo;
+import java.io.*;
+import java.util.Scanner;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Scanner scan = new Scanner(System.in) ; // 直接接收字节流
+        System.out.print("请输入数据：");
+        if (scan.hasNext()) {   // 有数据，空格也算数据
+            String value = scan.next() ; // 获取数据
+            System.out.println("输入数据为：" + value);
+        }
+    }
+}
+
+2、
+
+package cn.mldn.demo;
+import java.io.*;
+import java.util.Scanner;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Scanner scan = new Scanner(System.in) ; // 直接接收字节流
+        System.out.print("请输入工资：");
+        if (scan.hasNextDouble()) {   // 如果输入了小数
+            double value = scan.nextDouble() ; // 获取数据
+            System.out.println("输入数据为：" + value);
+        }
+    }
+}
+
+3、
+package cn.mldn.demo;
+import java.io.*;
+import java.util.Scanner;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Scanner scan = new Scanner(System.in) ; // 直接接收字节流
+        System.out.print("请辛博的生日（yyyy-mm-dd）：");
+        if (scan.hasNext("\\d{4}-\\d{2}-\\d{2}")) {
+            String value = scan.next("\\d{4}-\\d{2}-\\d{2}") ;
+            System.out.println("输入数据为：" + value);
+        }
+    }
+}
+
+4、
+package cn.mldn.demo;
+import java.io.*;
+import java.util.Scanner;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Scanner scan = new Scanner(new File("D:" + File.separator + "demo.txt")) ;
+        scan.useDelimiter("\r\n") ; // 设置分隔符
+        while(scan.hasNext()) { // 有数据
+            String value = scan.next() ; // 获取一个分隔符的数据
+            System.out.println(value);
+        }
+        scan.close();
+    }
+}
+
+

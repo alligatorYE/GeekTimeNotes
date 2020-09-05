@@ -1,0 +1,43 @@
+1、
+
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        int dataA[] = new int[]{3, 2, 1};
+        int dataB[] = new int[]{2, 1, 3};
+        System.out.println(Arrays.equals(dataA,dataB));// false，顺序不同
+        Arrays.sort(dataA);
+        Arrays.sort(dataB);
+        System.out.println(Arrays.equals(dataA,dataB));// true，顺序相同
+        Arrays.fill(dataA,9);
+        System.out.println(Arrays.toString(dataA));
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        int data[] = new int[]{3, 2, 1, 9, 8, 10, 99, 88};
+        System.out.println(Arrays.binarySearch(data, 88));  // 如果未排序，无法得到正确的结果
+        Arrays.sort(data);
+        System.out.println(Arrays.binarySearch(data, 88));  // 存在返回数据索引
+        System.out.println(Arrays.binarySearch(data, 100)); // 如果返回负数则认为数据不存在
+    }
+}
+
+
+3、

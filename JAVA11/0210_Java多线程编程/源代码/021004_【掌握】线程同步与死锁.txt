@@ -1,0 +1,130 @@
+1、
+
+package cn.mldn.demo;
+class TicketThread implements Runnable {
+    private int ticket = 5 ; // 表示总共要卖出的票数
+    @Override
+    public void run() {
+        for (int x = 0 ; x < 100 ; x ++) {
+            if (this.ticket > 0) {  // 判断
+                try {
+                    Thread.sleep(100);  // 延迟
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + "售票，当前票数：" + this.ticket --);
+            }
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        TicketThread body = new TicketThread() ;
+        for (int x = 0 ; x < 5 ; x ++) {
+            new Thread(body,"票贩子 - " + x).start();
+        }
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+class TicketThread implements Runnable {
+    private int ticket = 6 ; // 表示总共要卖出的票数
+    @Override
+    public void run() {
+        for (int x = 0 ; x < 100 ; x ++) {
+            synchronized (this) {
+                if (this.ticket > 0) {  // 判断
+                    try {
+                        Thread.sleep(2000);  // 延迟
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + "售票，当前票数：" + this.ticket --);
+                }
+            }
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        TicketThread body = new TicketThread() ;
+        for (int x = 0 ; x < 5 ; x ++) {
+            new Thread(body,"票贩子 - " + x).start();
+        }
+    }
+}
+
+
+3、
+
+package cn.mldn.demo;
+class TicketThread implements Runnable {
+    private int ticket = 6 ; // 表示总共要卖出的票数
+    @Override
+    public void run() {
+        for (int x = 0 ; x < 100 ; x ++) {
+            this.sale();
+        }
+    }
+    private synchronized void sale() {
+        if (this.ticket > 0) {  // 判断
+            try {
+                Thread.sleep(10);  // 延迟
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + "售票，当前票数：" + this.ticket --);
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        TicketThread body = new TicketThread() ;
+        for (int x = 0 ; x < 5 ; x ++) {
+            new Thread(body,"票贩子 - " + x).start();
+        }
+    }
+}
+
+
+4、
+package cn.mldn.test;
+class Book {
+    public synchronized void say(Picture pic) {
+        System.out.println("冯继成说：给我你的“蒙娜丽莎”，我给你《金瓶梅》，清版的，全是彩色画。");
+        pic.get();
+    }
+    public synchronized void get() {
+        System.out.println("冯继成得到了李版的“蒙娜丽莎”，拿去拍卖了~");
+    }
+}
+class Picture {
+    public synchronized void say(Book book) {
+        System.out.println("新博说：给我你的“金瓶梅”，我给你我自己画的“蒙娜丽莎”");
+        book.get();
+    }
+    public synchronized void get() {
+        System.out.println("新博得到了全彩版的金瓶梅，与伍姑娘一起研究~");
+    }
+}
+public class DeadLock implements Runnable {
+    private Book book = new Book() ;
+    private Picture pic = new Picture() ;
+    @Override
+    public void run() {
+        pic.say(book);
+    }
+    public DeadLock() {
+        new Thread(this).start();
+        book.say(pic);
+    }
+    public static void main(String[] args) {
+        new DeadLock() ;
+    }
+}
+
+
+5、

@@ -1,0 +1,344 @@
+1、
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		String info = "小成成是男优" ;
+		info += "是著名的演员" ;
+		System.out.println(info) ;
+	}
+}
+
+
+2、
+if (布尔表达式) {
+	条件满足时执行 ;
+}
+
+if (布尔表达式) {
+	条件满足时执行 ;
+} else {
+	条件不满足时执行 ;
+}
+
+if (布尔表达式) {
+	条件满足时执行 ;
+} else if (布尔表达式) {
+	条件满足时执行 ;
+} ... [else {
+	条件不满足时执行 ;
+}]
+
+3、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int age = 18 ;		// 成年了
+		if (age >= 18) {	// 设置了一个条件
+			System.out.println("可以开始没羞没臊的生活了...") ;
+		}
+	}
+}
+
+4、
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int age = 17 ;		// 成年了
+		boolean black = true ;
+		if (black || age >= 18) {	// 设置了一个条件
+			System.out.println("可以开始没羞没臊的生活了...") ;
+		}
+	}
+}
+
+
+5、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		double money = 10.0 ;	// 全部的资产
+		if (money > 19.8) {	// 19.8为饭费
+			System.out.println("我支付饭费，2毛钱不用找了，送你了！") ;
+		} else {
+			System.out.println("找到一个阴暗的角落，观察别人的剩饭，而后以猛虎的速度扑向客人离开的桌子。") ;
+		}
+		System.out.println("开始吃饭...") ;
+	}
+}
+
+
+6、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		double score = 78.9 ;
+		if (score >= 90 && score <= 100) {
+			System.out.println("优秀成绩。") ;
+		} else if (score >= 60 && score < 90) {
+			System.out.println("中等成绩。") ;
+		} else {
+			System.out.println("差等成绩。") ;
+		}
+	}
+}
+
+7、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		double score = 78.9 ;
+		if (score >= 90 && score <= 100) {
+			System.out.println("优秀成绩。") ;
+		} else if (score >= 60 && score < 90) {
+			if (score >= 75 && score < 90) {
+				System.out.println("中等偏上成绩。") ;
+			} else {
+				System.out.println("中等偏下成绩。") ;
+			}			
+		} else {
+			System.out.println("差等成绩。") ;
+		}
+	}
+}
+
+
+8、
+switch(数字 | 字符 | 枚举) {
+	case 匹配内容:
+		程序相关代码;
+		[break ;]
+	case 匹配内容:{
+		程序相关代码;
+		[break ;]
+	} 
+	[default:
+		任何判断都不满足时执行 ;]
+}
+
+9、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int ch = 2 ;
+		switch (ch) {
+			case 1 :
+				System.out.println("匹配的内容是1。") ;
+				break ;
+			case 2 : {
+				System.out.println("匹配的内容是2。") ;
+				break ;
+			}
+			case 3 : {
+				System.out.println("匹配的内容是3。") ;
+				break ;
+			}
+		}
+	}
+}
+
+10、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int ch = 2 ;
+		switch (ch) {
+			case 2 : {
+				System.out.println("匹配的内容是2。") ;
+			}
+			case 1 :
+				System.out.println("匹配的内容是1。") ;
+			case 3 : {
+				System.out.println("匹配的内容是3。") ;
+			}
+		}
+	}
+}
+
+
+11、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		char c = 'A' ;
+		switch (c) {
+			case 'A' : {
+				System.out.println("匹配的内容是A。") ;
+				break ;
+			}
+			case 'X' :
+				System.out.println("匹配的内容是X。") ;
+				break ;
+			case 'B' : {
+				System.out.println("匹配的内容是B。") ;
+				break ;
+			}
+			default:{
+				System.out.println("都不匹配！") ;
+				break ;
+			}
+		}
+	}
+}
+
+
+12、
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		char c = 'A' ;
+		switch (c) {
+			case 65 : {
+				System.out.println("匹配的内容是A。") ;
+				break ;
+			}
+			default:{
+				System.out.println("都不匹配！") ;
+				break ;
+			}
+		}
+	}
+}
+
+13、
+循环初始化条件 ;
+while (循环表达式) {
+	循环体操作 ;
+	循环条件的变更 ;
+}
+
+循环初始化条件 ;
+do {
+	循环体操作 ;
+	循环条件的变更 ;
+} while (循环表达式) ;
+
+14、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int num = 1 ;			// 循环的初始化条件
+		int sum = 0 ;			// 保存累加结果
+		while (num <= 100) {	// 循环条件
+			sum += num ;		// 执行累加
+			num ++ ;			// 修改循环条件
+		}
+		System.out.println(sum) ;
+	}
+}
+
+15、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int num = 1 ;			// 循环的初始化条件
+		int sum = 0 ;			// 保存累加结果
+		do {					// 循环主体
+			sum += num ;		// 执行累加
+			num ++ ;			// 修改循环条件
+		} while (num <= 100) ;	// 下次循环条件
+		System.out.println(sum) ;
+	}
+}
+
+16、
+for (循环初始化条件 ; 循环执行判断 ; 修改循环条件) {
+	循环体
+}
+
+17、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int sum = 0 ;			// 保存累加结果
+		for (int num = 1 ; num <= 100 ; num ++) {
+			sum += num ;		// 实现累加
+		}
+		System.out.println(sum) ;
+	}
+}
+
+
+18、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int sum = 0 ;			// 保存累加结果
+		int num = 1 ;		// 循环初始化条件
+		for (; num <= 100 ; ) {
+			sum += num ;		// 实现累加
+			num ++ ;			// 循环条件变更
+		}
+		System.out.println(sum) ;
+	}
+}
+
+19、
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		for (int num = 0 ; num < 10 ; num ++) {
+			if (num > 3) {	// 循环控制一定要与分支结构结合
+				break ;
+			}
+			System.out.print(num + "、") ;
+		}
+	}
+}
+
+
+20、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		for (int num = 0 ; num < 10 ; num ++) {
+			if (num == 3) {	// 循环控制一定要与分支结构结合
+				continue ;	// 循环体的后续不执行
+			}
+			System.out.print(num + "、") ;
+		}
+	}
+}
+
+
+21、
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		flag: for (int x = 0 ; x < 3 ; x ++) {
+			for (int y = 0 ; y < 3 ; y ++) {
+				if (x == y) {
+					continue flag ;	// 跳转到指定的标志位
+				}
+				System.out.println("x = " + x + "、y = " + y) ;
+			}
+		}
+	}
+}
+
+
+22、
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		for (int x = 1 ; x <= 9 ; x ++) {	// 控制行
+			for (int y = 1 ; y <= x ; y ++) {	// 控制列
+				System.out.print(x + "*" + y + "=" + (x * y) + "\t") ;
+			}
+			System.out.println() ;	// 换行处理
+		}
+	}
+}
+
+
+23、
+	_______* 
+	______* *
+	_____* * *
+	____* * * *
+	___* * * * *
+	__* * * * * *
+	_* * * * * * * 
+	* * * * * * * *
+
+class TestDemo {
+	public static void main(String args[]) {	// 主方法
+		int line = 5 ;	// 定义输出的总行数
+		for (int x = 0 ; x < line ; x ++) {	// 外层控制行
+			for (int y = 0 ; y < line - x ; y ++) {	// 空格数量
+				System.out.print(" ") ;
+			}
+			for (int y = 0 ; y <= x ; y ++) {
+				System.out.print("* ") ;
+			}
+			System.out.println() ;	// 换行
+		}
+	}
+}
+

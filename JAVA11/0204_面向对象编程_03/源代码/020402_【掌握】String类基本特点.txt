@@ -1,0 +1,209 @@
+1、
+	String 对象 = "字符串" ;
+
+class Ball {
+	private String classify ;
+	public Ball(String classify) {
+		this.classify = classify ;
+	}
+}
+	String 对象 = new String("字符串")
+
+
+2、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ; // 直接赋值
+		String strB = new String("www.mldn.cn") ;	// 构造方法
+		System.out.println(strA) ;
+		System.out.println(strB) ;
+	}
+}
+
+
+3、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ; // 直接赋值
+		String strB = new String("www.mldn.cn") ;	// 构造方法
+		System.out.println(strA == strB) ;
+	}
+}
+
+
+4、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		int x = 10 ;
+		int y = 10 ;
+		System.out.println(x == y) ;
+	}
+}
+
+
+5、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ; // 直接赋值
+		String strB = new String("www.mldn.cn") ;	// 构造方法
+		String strC = strB ;	// 引用传递
+		System.out.println(strA == strB) ;
+		System.out.println(strA == strC) ;
+		System.out.println(strB == strC) ;
+	}
+}
+
+6、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ; // 直接赋值
+		String strB = new String("www.mldn.cn") ;	// 构造方法
+		String strC = strB ;	// 引用传递
+		System.out.println(strA.equals(strB)) ;
+		System.out.println(strA.equals(strC)) ;
+		System.out.println(strB.equals(strC)) ;
+	}
+}
+
+7、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "Hello" ;
+		// 此时直接利用字符串调用了比较方法
+		System.out.println("Hello".equals(str)) ;
+	}
+}
+
+8、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String input = null ;	// 由外部输入的内容
+		if (input.equals("mldn")) {	// 判断输入的内容
+			System.out.println("【ECHO】java") ;
+		}
+	}
+}
+
+9、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String input = null ;	// 由外部输入的内容
+		if ("mldn".equals(input)) {	// 判断输入的内容
+			System.out.println("【ECHO】java") ;
+		}
+	}
+}
+
+10、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www.mldn.cn" ;
+		String strB = "www.mldn.cn" ;
+		System.out.println(strA == strB) ;
+		System.out.println("www.mldn.cn" == strB) ;
+	}
+}
+
+11、
+
+	String str = new String("www.mldn.cn") ;
+
+12、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = new String("www.mldn.cn") ;
+		String strB = "www.mldn.cn" ;
+		System.out.println(strA == strB) ;
+		System.out.println("www.mldn.cn" == strA) ;
+	}
+}
+
+13、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String strA = "www." + "mldn" + ".cn" ;	// 字符串连接
+		String strB = "www.mldn.cn" ;
+		System.out.println(strA == strB) ;
+		System.out.println("www.mldn.cn" == strA) ;
+	}
+}
+
+14、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String title = "mldn" ; // 变量
+		String strA = "www." + title + ".cn" ;	// 字符串连接
+		String strB = "www.mldn.cn" ;
+		System.out.println(strA == strB) ;
+		System.out.println("www.mldn.cn" == strA) ;
+	}
+}
+
+15、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "www." ;
+		str += "mldn" ;
+		str = str + ".cn" ;
+		System.out.println(str) ;
+	}
+}
+
+16、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "" ;
+		for (int x = 0 ; x < 1000 ; x ++) {
+			str += x ; // 运行时对象池
+		}
+		System.out.println(str) ;
+	}
+}
+
+17、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		for (int x = 0 ; x < args.length ; x ++) {
+			System.out.print(args[x] + "、") ;
+		}
+	}
+}
+
+18、
+
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		if (args.length != 2) {	// 参数个数不是2个
+			System.out.println("程序运行一定要有两个参数！") ;
+			System.exit(1) ;	// 结束程序
+		}
+		for (int x = 0 ; x < args.length ; x ++) {
+			System.out.print(args[x] + "、") ;
+		}
+	}
+}
+
+19、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		print() ;
+	}
+	public static void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+}
+
+20、
+public class StringDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new StringDemo().print() ;
+	}
+	public void print() {
+		System.out.println("www.mldn.cn") ;
+	}
+}

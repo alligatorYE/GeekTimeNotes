@@ -1,0 +1,153 @@
+1、
+
+package cn.mldn.demo;
+class MyThread extends Thread { // 得到了一个线程主体类
+    private String name ;
+    public MyThread(String name) {  // 保存线程名称
+        this.name = name ;
+    }
+    @Override
+    public void run() {         // 覆写run()方法
+        for (int x = 0 ; x < 50 ; x ++) {
+            System.out.println("【"+this.name+" - 线程】运行，x = " + x);
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        MyThread threadA = new MyThread("线程A") ;
+        MyThread threadB = new MyThread("线程B") ;
+        MyThread threadC = new MyThread("线程C") ;
+        threadA.start();    // 通过Thread类继承而来
+        threadB.start();    // 通过Thread类继承而来
+        threadC.start();    // 通过Thread类继承而来
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+class MyThread implements Runnable { // 得到了一个线程主体类
+    private String name ;
+    public MyThread(String name) {  // 保存线程名称
+        this.name = name ;
+    }
+    @Override
+    public void run() {         // 覆写run()方法
+        for (int x = 0 ; x < 50 ; x ++) {
+            System.out.println("【"+this.name+" - 线程】运行，x = " + x);
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        MyThread threadA = new MyThread("线程A") ;
+        MyThread threadB = new MyThread("线程B") ;
+        MyThread threadC = new MyThread("线程C") ;
+        new Thread(threadA).start();
+        new Thread(threadB).start();
+        new Thread(threadC).start();
+    }
+}
+
+
+
+3、
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) {
+        String names [] = new String [] {"线程A", "线程B", "线程C"} ;
+        for (String name : names) {
+            new Thread(()->{
+                for (int x = 0 ; x < 50 ; x ++) {
+                    System.out.println("【" + name + " - 线程】运行，x = " + x);
+                }
+            }).start();
+        }
+    }
+}
+
+
+
+4、
+package cn.mldn.demo;
+class MyThread implements Runnable { // 得到了一个线程主体类
+    private int ticket = 20 ;   // 一共卖20张票
+    @Override
+    public void run() {         // 覆写run()方法
+        for (int x = 0 ; x < 50 ; x ++) {
+            if (this.ticket > 0) {
+                System.out.println("卖票：" + ticket --);
+            }
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        MyThread threadBody = new MyThread() ; // 定义多线程的公共处理
+        new Thread(threadBody).start() ;
+        new Thread(threadBody).start() ;
+        new Thread(threadBody).start() ;
+    }
+}
+
+5、
+package cn.mldn.demo;
+class MyThread extends Thread { // 得到了一个线程主体类
+    private int ticket = 20 ;   // 一共卖20张票
+    @Override
+    public void run() {         // 覆写run()方法
+        for (int x = 0 ; x < 50 ; x ++) {
+            if (this.ticket > 0) {
+                System.out.println("卖票：" + ticket --);
+            }
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        MyThread threadBody = new MyThread() ; // 定义多线程的公共处理
+        new Thread(threadBody).start() ;
+        new Thread(threadBody).start() ;
+        new Thread(threadBody).start() ;
+    }
+}
+
+6、
+package cn.mldn.demo;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+
+class MyThread implements Callable<String> {
+    private String name ;
+    public MyThread(String name) {
+        this.name = name ;
+    }
+
+    @Override
+    public String call() throws Exception {
+        for (int x = 0 ; x < 50 ; x ++) {
+            System.out.println(this.name + "线程运行，x = " + x);
+        }
+        return "执行完毕！" ;    // 返回值
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Callable<String> callA = new MyThread("线程A") ; // 定义多线程的公共处理
+        Callable<String> callB = new MyThread("线程B") ; // 定义多线程的公共处理
+        Callable<String> callC = new MyThread("线程C") ; // 定义多线程的公共处理
+        FutureTask<String> futureA = new FutureTask<String>(callA) ;
+        FutureTask<String> futureB = new FutureTask<String>(callB) ;
+        FutureTask<String> futureC = new FutureTask<String>(callC) ;
+        new Thread(futureA).start();
+        new Thread(futureB).start();
+        new Thread(futureC).start();
+        System.out.println("A执行返回结果：" + futureA.get());
+        System.out.println("B执行返回结果：" + futureB.get());
+        System.out.println("C执行返回结果：" + futureC.get());
+    }
+}

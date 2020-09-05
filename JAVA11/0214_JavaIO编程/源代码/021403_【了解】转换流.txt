@@ -1,0 +1,17 @@
+package cn.mldn.demo;
+
+import java.io.*;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        File file = new File("D:" + File.separator + "mldn" + File.separator + "message" + File.separator + "info.txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs() ; // 创建父路径
+        }
+        OutputStream output = new FileOutputStream(file) ; // 字节流
+        Writer out = new OutputStreamWriter(output) ; // 字节流转为字符流
+        out.write("www.mldn.cn");   // 可以直接输出字符串
+        out.write("\n你好，世界！"); // 方便处理中文
+        out.close();
+    }
+}

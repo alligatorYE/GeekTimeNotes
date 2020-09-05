@@ -1,0 +1,163 @@
+1、
+
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        System.out.println(Math.E);
+        System.out.println(Math.PI);
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        int len = 10 ;
+        System.out.println(Math.log(len));
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        System.out.println(Math.round(19.5));
+        System.out.println(Math.round(19.51));
+        System.out.println(Math.round(-19.5));
+        System.out.println(Math.round(-19.51));
+    }
+}
+
+
+4、
+
+package cn.mldn.util;
+public class MathUtil {
+    private MathUtil() {}
+    /**
+     * 实现指定位数的四舍五入操作
+     * @param num 接收要处理的数字
+     * @param scale 保留的小数位数
+     * @return 四舍五入处理后的结果
+     */
+    public static double round(double num, int scale) {
+        return Math.round(num * Math.pow(10,scale)) / Math.pow(10,scale) ;
+    }
+}
+
+
+5、
+
+package cn.mldn.demo;
+import cn.mldn.util.MathUtil;
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        System.out.println(MathUtil.round(87.22331123,2));
+    }
+}
+
+
+6、
+
+package cn.mldn.demo;
+
+import java.util.Random;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Random random = new Random() ;
+        for (int x = 0 ; x < 10 ; x ++) {
+            System.out.print(random.nextInt(100) + "、");    // 0 ~ 99
+        }
+    }
+}
+
+
+7、
+package cn.mldn.demo;
+
+import java.util.Random;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        int data [] = new int [7] ; // 保存7个数据
+        Random random = new Random() ;
+        int foot = 0 ; // 作为操作的脚标
+        while (foot < data.length) {    // 还未全部生成完
+            int num = random.nextInt(37) ; // 随机生成一个内容
+            if (num == 0) { // 该内容无法使用
+                continue;
+            }
+            if (isRepeat(data,num) == false) {  // 不重复
+                data[foot ++] = num ;
+            }
+        }
+        printArray(data);
+    }
+    public static boolean isRepeat(int data [] ,int number) {
+        for (int num : data) {
+            if (num == number) {    // 重复
+                return true ;
+            }
+        }
+        return false ;
+    }
+    public static void printArray(int temp[]) {
+        for (int num : temp) {
+            System.out.print(num + "、");
+        }
+    }
+}
+
+
+8、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        double numA = Double.MAX_VALUE ;
+        double numB = 2389238902389023.23 ;
+        System.out.println(numA * numB);
+    }
+}
+
+
+9、
+package cn.mldn.demo;
+
+import java.math.BigInteger;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        BigInteger numA = new BigInteger("8782378237823782") ;  // 假设很大
+        BigInteger numB = new BigInteger("28923892389") ;  // 假设很大
+        System.out.println("加法计算：" + numA.add(numB));
+        System.out.println("乘法计算：" + numA.multiply(numB));
+        System.out.println("乘方计算：" + numA.pow(2));
+        System.out.println("除法计算：" + numA.divide(numB));
+        BigInteger result [] = numA.divideAndRemainder(numB) ;
+        System.out.println("商：" + result[0] + "、余数：" + result[1]);
+    }
+}
+
+
+10、
+package cn.mldn.demo;
+
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
+
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        BigDecimal numA = new BigDecimal("8782378237823782.2") ;  // 假设很大
+        BigDecimal numB = new BigDecimal(23982382.23) ;  // 假设很大
+        System.out.println("加法计算：" + numA.add(numB));
+        System.out.println("乘法计算：" + numA.multiply(numB));
+        System.out.println("乘方计算：" + numA.pow(2));
+        System.out.println("除法计算：" + numA.divide(numB,RoundingMode.HALF_UP));
+    }
+}

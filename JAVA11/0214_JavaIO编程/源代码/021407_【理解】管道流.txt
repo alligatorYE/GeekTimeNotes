@@ -1,0 +1,41 @@
+package cn.mldn.demo;
+
+import java.io.*;
+class SendThread implements Runnable {
+    private PipedOutputStream output = new PipedOutputStream() ;
+    @Override
+    public void run() {
+        try {
+            this.output.write("晚上不考试了，直接下课（愚人节快乐）！".getBytes());
+        } catch (IOException e) {}
+    }
+    public PipedOutputStream getOutput() {
+        return output;
+    }
+}
+class ReceiveThread implements Runnable {
+    private PipedInputStream input = new PipedInputStream() ;
+    @Override
+    public void run() {
+        byte data [] = new byte [1024] ;
+        try {
+            int len = this.input.read(data) ;
+            System.out.println("【接收数据】" + new String(data,0,len));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public PipedInputStream getInput() {
+        return input;
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        SendThread send = new SendThread() ;
+        ReceiveThread receive = new ReceiveThread() ;
+        send.getOutput().connect(receive.getInput()); // 管道对接
+        new Thread(send).start();
+        new Thread(receive).start();
+    }
+}
+

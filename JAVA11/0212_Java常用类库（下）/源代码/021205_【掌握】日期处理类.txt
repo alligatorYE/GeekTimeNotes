@@ -1,0 +1,420 @@
+1、
+
+package cn.mldn.demo;
+
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Date today = new Date() ; // 实例化当前的日期时间
+        System.out.println(today);
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        // long today = new Date().getTime() ;  // Date转为long
+        long today = System.currentTimeMillis() ; // 获取当前的日期时间
+        today -= 999889292922L ;
+        System.out.println(new Date(today));    // long转Date
+    }
+}
+
+
+3、
+package cn.mldn.demo;
+
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        long start = 1553742396366L ;   // 开始日期时间
+        long end = 1552853121923L ;     // 结束日期时间
+        long hour = (start - end) / 1000 / 3600 ;
+        System.out.println(hour);
+        System.out.println(hour/24);    // 计算天数
+    }
+}
+
+
+4、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Date today = new Date() ; // 获取当前的日期时间
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") ;
+        String str = dateFormat.format(today) ; // 格式化日期时间为字符串
+        System.out.println(str);
+
+    }
+}
+
+
+5、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String birthday = "1996-11-11 11:11:11.111" ; // 一个日期
+        // 如果要想实现字符串转为日期的处理，一定要保证格式完全相同
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") ;
+        Date date = dateFormat.parse(birthday) ; // 字符串转为日期
+        System.out.println(date);
+    }
+}
+
+
+6、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String birthday = "1996-111-111 1111:11111:111.111" ; // 一个日期
+        // 如果要想实现字符串转为日期的处理，一定要保证格式完全相同
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") ;
+        Date date = dateFormat.parse(birthday) ; // 字符串转为日期
+        System.out.println(date);
+    }
+}
+
+
+7、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String birthday = "1996-99-99 99:99:99.111" ; // 一个日期
+        // 如果要想实现字符串转为日期的处理，一定要保证格式完全相同
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") ;
+        Date date = dateFormat.parse(birthday) ; // 字符串转为日期
+        System.out.println(date);
+    }
+}
+
+
+8、
+
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Calendar calendar = Calendar.getInstance() ; // 获取实例化对象
+        System.out.println(String.format("%s-%s-%s %s:%s:%s",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                calendar.get(Calendar.SECOND)));
+    }
+}
+
+
+9、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Calendar calendar = Calendar.getInstance() ; // 获取实例化对象
+        calendar.add(Calendar.YEAR,5);
+        calendar.add(Calendar.MONTH,1); // 一个月之后的日期
+        System.out.println(String.format("%s-%s-%s %s:%s:%s",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                calendar.get(Calendar.SECOND)));
+    }
+}
+
+
+10、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Calendar calendar = Calendar.getInstance() ; // 获取实例化对象
+        calendar.add(Calendar.YEAR,5);
+        calendar.add(Calendar.MONTH,1); // 一个月之后的日期
+        System.out.println(String.format("%s-%s-%s %s:%s:%s",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                calendar.get(Calendar.SECOND)));
+    }
+}
+
+
+11、
+package cn.mldn.demo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Calendar calendar = Calendar.getInstance() ; // 获取实例化对象
+        calendar.set(calendar.get(Calendar.YEAR),8, 1);    // 设置到本年9月的第1天
+        calendar.add(Calendar.DATE ,-1); // 9月-1
+        System.out.println(String.format("%s-%s-%s %s:%s:%s",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                calendar.get(Calendar.SECOND)));
+    }
+}
+
+12、
+package cn.mldn.demo;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        LocalDate todayDate = LocalDate.now() ; // 获取当前的日期
+        LocalTime todayTime = LocalTime.now() ;
+        LocalDateTime todayDateTime = LocalDateTime.now() ;
+        System.out.println(todayDate);
+        System.out.println(todayTime);
+        System.out.println(todayDateTime);
+    }
+}
+
+
+13、
+package cn.mldn.demo;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalField;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        LocalDate today = LocalDate.now() ; // 获取当前的日期
+        System.out.println(String.format("%s-%s-%s",
+                today.getYear(),
+                today.getMonthValue(),
+                today.getDayOfMonth()));
+        System.out.println(today.getDayOfWeek().getValue());    // 获取一周时间数
+        System.out.println(today.get(ChronoField.ALIGNED_WEEK_OF_MONTH));   // 获取当前月的第几周
+        System.out.println(today.getDayOfYear());
+    }
+}
+
+
+14、
+package cn.mldn.demo;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalField;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        LocalDate date = LocalDate.parse("1996-11-11") ;
+        System.out.println("是否为闰年：" + date.isLeapYear());
+        System.out.println(date.getDayOfWeek());
+    }
+}
+
+
+15、
+package cn.mldn.demo;
+
+import java.time.LocalDate;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        LocalDate date = LocalDate.parse("1996-11-11") ;
+        System.out.println("是否为闰年：" + date.isLeapYear());
+        System.out.println(date.getDayOfWeek());
+    }
+}
+
+16、
+package cn.mldn.demo;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        LocalDate date = LocalDate.parse("1996-11-11") ;
+        System.out.println("【所在月第一天】" + date.with(TemporalAdjusters.firstDayOfMonth()));
+        // System.out.println("【所在月第一天】" + date.withDayOfMonth(1));
+        System.out.println("【所在月第二天】" + date.withDayOfMonth(2));
+        System.out.println("【所在月最后一天】" + date.with(TemporalAdjusters.lastDayOfMonth()));
+        System.out.println("【300年后的日期】" + date.plusYears(300));
+        System.out.println("【所处月的第一个周一】" + date.with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY)));
+        System.out.println("【所处年的第一个周一】" + LocalDate.parse("2019-01-01").with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY)));
+    }
+}
+
+17、
+package cn.mldn.demo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+public class DateDemo {
+    public static void main(String[] args) throws Exception {
+        List<String> all = List.of("2017-10-10 11:12:15","2015-08-08 15:13:17","2006-11-11 19:12:15","2008-08-03 11:12:15","2019-08-15 11:12:15") ;
+        for (String str : all) {
+            new Thread(()->{
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+                try {
+                    System.out.println(sdf.parse(str));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+}
+
+
+18、
+package cn.mldn.demo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+public class DateDemo {
+    public static void main(String[] args) throws Exception {
+        List<String> all = List.of("2017-10-10 11:12:15","2015-08-08 15:13:17","2006-11-11 19:12:15","2008-08-03 11:12:15","2019-08-15 11:12:15") ;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+        for (String str : all) {
+            new Thread(()->{
+                try {
+                    System.out.println(sdf.parse(str));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+}
+
+
+19、
+
+package cn.mldn.demo;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+public class DateDemo {
+    public static void main(String[] args) throws Exception {
+        List<Date> all = List.of(new Date(),new Date(),new Date()) ;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") ;
+        for (Date date : all) {
+            new Thread(()->{
+                System.out.println(sdf.format(date));
+            }).start();
+        }
+    }
+}
+
+
+20、
+
+package cn.mldn.demo;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+public class DateDemo {
+    public static void main(String[] args) throws Exception {
+        List<String> all = List.of("2017-10-10 11:12:15","2015-08-08 15:13:17","2006-11-11 19:12:15","2008-08-03 11:12:15","2019-08-15 11:12:15") ;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss") ;
+        ZoneId zoneId = ZoneId.systemDefault() ; // 获取当前的时区
+        for (String str : all) {
+            new Thread(()->{
+                LocalDateTime dateTime = LocalDateTime.parse(str,formatter) ; // 实现转换
+                Instant instant = dateTime.atZone(zoneId).toInstant() ; // 获取一个当前的时区的实例
+                Date date = Date.from(instant) ; // 实现最终的转换处理
+                System.out.println(date);
+            }).start();
+        }
+    }
+}
+
+
+21、
+package cn.mldn.demo;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+public class DateDemo {
+    public static void main(String[] args) throws Exception {
+        List<String> all = List.of("2017-10-10","2015-08-08","2006-11-11","2008-08-03","2019-08-15") ;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd") ;
+        ZoneId zoneId = ZoneId.systemDefault() ; // 获取当前的时区
+        for (String str : all) {
+            new Thread(()->{
+                LocalDate localDate = LocalDate.parse(str,formatter) ; // 实现转换
+                Instant instant = localDate.atStartOfDay().atZone(zoneId).toInstant() ; // 获取一个当前的时区的实例
+                Date date = Date.from(instant) ; // 实现最终的转换处理
+                System.out.println(date);
+            }).start();
+        }
+    }
+}
+
+
+22、

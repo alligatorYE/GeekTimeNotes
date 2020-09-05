@@ -1,0 +1,37 @@
+1、mkdir mldn_svn
+
+2、svnadmin create d:\mldn_svn
+
+3、
+
+anon-access = read
+auth-access = write
+password-db = passwd
+authz-db = authz
+
+
+4、
+mldn = java
+
+5、
+[groups]
+# harry_and_sally = harry,sally
+# harry_sally_and_joe = harry,sally,&joe
+[/]
+mldn = rw
+
+# [/foo/bar]
+# harry = rw
+# &joe = r
+# * =
+mldn = rw
+* =
+
+# [repository:/baz/fuz]
+# @harry_and_sally = rw
+# * = r
+* = r
+
+6、
+
+svnserve -d -r d:\mldn_svn

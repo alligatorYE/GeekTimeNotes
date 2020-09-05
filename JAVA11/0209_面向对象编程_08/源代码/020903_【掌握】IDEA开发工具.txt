@@ -1,0 +1,63 @@
+1、
+
+package cn.mldn.util;
+
+public class MyMath {
+    private MyMath() {}
+    public static int add(int x,int y) {
+        int temp = 0 ;
+        temp = x + y ;
+        return temp ;
+    }
+}
+
+2、
+package cn.mldn.demo;
+
+import cn.mldn.util.MyMath;
+
+public class TestMyMath {
+    public static void main(String[] args) {
+        int numA = 10 ;
+        int numB = 20 ;
+        int result = MyMath.add(numA, numB);
+        System.out.println("加法计算结果：" + result);
+    }
+}
+
+
+3、
+package cn.mldn.util;
+
+public class MyMath {
+    private MyMath() {
+    }
+
+    public static int add(int x, int y) {
+        return x + y;
+    }
+
+    public static int sub(int x, int y) {
+        return x - y;
+    }
+}
+
+
+4、
+package cn.mldn.test;
+
+import cn.mldn.util.MyMath;
+import junit.framework.TestCase;
+import org.junit.Test;
+
+public class MyMathTest {
+    @Test
+    public void add() {
+        TestCase.assertEquals(MyMath.add(10, 20), 30);
+    }
+
+    @Test
+    public void sub() {
+        TestCase.assertTrue(MyMath.sub(20, 10) == 10);
+    }
+}

@@ -1,0 +1,320 @@
+1、
+
+class Person {
+	private String name ;
+	private String addr ;
+	private char sex ;
+	private int age ;
+	public Person() {}
+	public Person(String name,String addr) {
+		this.name = name ;
+		this.addr = addr ;
+	}
+	public Person(String name,String addr,char sex,int age) {
+		this.name = name ;
+		this.addr = addr ;
+		this.sex = sex ;
+		this.age = age ;
+	}
+	public String getInfo() {
+		return "姓名：" + this.name + "、地址：" + this.addr + "、性别：" + this.sex + "、年龄：" + this.age ;
+	}
+	// setter、getter略 ...
+}
+class Student extends Person {
+	private double math ;
+	private double english ;
+	public Student() {}
+	public Student(String name,String addr) {
+		super(name,addr) ;
+	}
+	public Student(String name,String addr,char sex,int age,double math,double english) {
+		super(name,addr,sex,age) ;
+		this.math = math ;
+		this.english = english ;
+	}
+	public String getInfo() {	// 覆写父类中的方法
+		return super.getInfo() + "、数学成绩：" + this.math + "、英语成绩：" + this.english ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Student stu = new Student("波波","监狱",'女',38,16.9,11.2) ;
+		System.out.println(stu.getInfo()) ;
+	}
+}
+
+2、
+class Employee {
+	private String name ;
+	private int age ;
+	private String sex ;
+	public Employee() {}
+	public Employee(String name,int age,String sex) {
+		this.name = name ;
+		this.age = age ;
+		this.sex = sex ;
+	}
+	public String getInfo() {
+		return "姓名：" + this.name + "、年龄：" + age + "、性别：" + this.sex ;
+	}
+}
+class Manager extends Employee {
+	private String job ;
+	private double income ;
+	public Manager(){}
+	public Manager(String name,int age,String sex,String job,double income){
+		super(name,age,sex) ;
+		this.job = job ;
+		this.income = income ;
+	}
+	public String getInfo() {
+		return super.getInfo() + "、职务：" + this.job + "、年薪：" + this.income ;
+	}
+}
+class Worker extends Employee {
+	private String dept ;
+	private double sal ;
+	public Worker() {}
+	public Worker(String name,int age,String sex,String dept,double sal) {
+		super(name,age,sex) ;
+		this.dept = dept ;
+		this.sal = sal ;
+	}
+	public String getInfo() {
+		return super.getInfo() + "、部门：" + this.dept + "、月薪：" + this.sal ;
+
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Manager mgr = new Manager("阿伟",30,"不男非女","总裁",899912.00) ;
+		Worker wkr = new Worker("凯子",18,"男","网络部",4500.00) ;
+		System.out.println(mgr.getInfo()) ;
+		System.out.println(wkr.getInfo()) ;
+	}
+}
+
+3、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		String str = "want you to know one thing" ;
+		char result [] = str.toCharArray() ;
+		int oCount = 0 ;
+		int nCount = 0 ;
+		for (int x = 0 ; x < result.length ; x ++) {
+			if (result[x] == 'o') {
+				oCount ++ ;
+			}
+			if (result[x] == 'n') {
+				nCount ++ ;
+			}
+		}
+		System.out.println("字母o的个数：" + oCount + "、字母n的个数：" + nCount) ;
+	}
+}
+
+4、
+class StringUtil {	// 定义一个专门的字符串工具类
+	private String content ;
+	public StringUtil(String content) {
+		this.content = content ;
+	}
+	public String getContent() {
+		return this.content = content ;
+	}
+	public String getInfo() {
+		return this.content ;
+	}
+}
+class CharCount extends StringUtil {
+	private int oCount ;
+	private int nCount ;
+	public CharCount(String content) {
+		super(content) ;
+		this.handleContent() ;	// 数据处理
+	}
+	public void handleContent() {
+		char result [] = super.getContent().toCharArray() ;
+		for (int x = 0 ; x < result.length ; x ++) {
+			if (result[x] == 'o') {
+				this.oCount ++ ;
+			}
+			if (result[x] == 'n') {
+				this.nCount ++ ;
+			}
+		}
+	}
+	public String getInfo() {
+		return "字母o的个数：" + this.oCount + "、字母n的个数：" + this.nCount ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		CharCount cc = new CharCount("want you to know one thing") ;
+		System.out.println(cc.getInfo()) ;
+	}
+}
+
+5、
+class Array {
+	private int [] data ;	// 数组定义
+	private int foot ; // 当前数据追加的脚标
+	public Array(int len) {
+		if (len > 0) {
+			this.data = new int [len] ;
+		} else {
+			this.data = new int [1] ;
+		}
+	}
+	public boolean add(int data) {	// 数据增加
+		if (this.foot < this.data.length) {
+			this.data[this.foot ++] = data ;
+			return true ;
+		}
+		return false ;
+	}
+	public void increment(int len) {	// 扩充的长度
+		int arr [] = new int [this.data.length + len] ;
+		System.arraycopy(this.data,0,arr,0,this.data.length) ;
+		this.data = arr ; // 修改引用，产生垃圾
+	}
+	public int[] getData() {
+		return this.data ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Array array = new Array(5) ;	// 传递个数
+		System.out.println(array.add(10)) ;
+		System.out.println(array.add(2)) ;
+		System.out.println(array.add(20)) ;
+		System.out.println(array.add(9)) ;
+		System.out.println(array.add(98)) ;
+		System.out.println(array.add(3)) ;
+		for (int x = 0 ; x < array.getData().length ; x ++) {
+			System.out.print(array.getData()[x] + "、") ;
+		}
+	}
+}
+
+6、
+class Array {
+	private int [] data ;	// 数组定义
+	private int foot ; // 当前数据追加的脚标
+	public Array(int len) {
+		if (len > 0) {
+			this.data = new int [len] ;
+		} else {
+			this.data = new int [1] ;
+		}
+	}
+	public boolean add(int data) {	// 数据增加
+		if (this.foot < this.data.length) {
+			this.data[this.foot ++] = data ;
+			return true ;
+		}
+		return false ;
+	}
+	public void increment(int len) {	// 扩充的长度
+		int arr [] = new int [this.data.length + len] ;
+		System.arraycopy(this.data,0,arr,0,this.data.length) ;
+		this.data = arr ; // 修改引用，产生垃圾
+	}
+	public int[] getData() {
+		return this.data ;
+	}
+}
+class SortArray extends Array {
+	public SortArray(int len) {
+		super(len) ;
+	}
+	public int [] getData() {
+		java.util.Arrays.sort(super.getData()) ;
+		return super.getData() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		SortArray array = new SortArray(5) ;	// 传递个数
+		System.out.println(array.add(10)) ;
+		System.out.println(array.add(2)) ;
+		System.out.println(array.add(20)) ;
+		System.out.println(array.add(9)) ;
+		System.out.println(array.add(98)) ;
+		System.out.println(array.add(3)) ;
+		for (int x = 0 ; x < array.getData().length ; x ++) {
+			System.out.print(array.getData()[x] + "、") ;
+		}
+	}
+}
+
+7、
+class Array {
+	private int [] data ;	// 数组定义
+	private int foot ; // 当前数据追加的脚标
+	public Array(int len) {
+		if (len > 0) {
+			this.data = new int [len] ;
+		} else {
+			this.data = new int [1] ;
+		}
+	}
+	public boolean add(int data) {	// 数据增加
+		if (this.foot < this.data.length) {
+			this.data[this.foot ++] = data ;
+			return true ;
+		}
+		return false ;
+	}
+	public void increment(int len) {	// 扩充的长度
+		int arr [] = new int [this.data.length + len] ;
+		System.arraycopy(this.data,0,arr,0,this.data.length) ;
+		this.data = arr ; // 修改引用，产生垃圾
+	}
+	public int[] getData() {
+		return this.data ;
+	}
+}
+class SortArray extends Array {
+	public SortArray(int len) {
+		super(len) ;
+	}
+	public int [] getData() {
+		java.util.Arrays.sort(super.getData()) ;
+		return super.getData() ;
+	}
+}
+class ReverseArray extends Array {
+	public ReverseArray(int len) {
+		super(len) ;
+	}
+	public int [] getData() {
+		int center = super.getData().length / 2 ;
+		int head = 0 ;
+		int tail = super.getData().length - 1 ;
+		for (int x = 0 ; x < center ; x ++) {
+			int temp = super.getData() [head] ;
+			super.getData() [head] = super.getData() [tail] ;
+			super.getData() [tail] = temp ;
+			head ++ ;
+			tail -- ;
+		}
+		return super.getData() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		ReverseArray array = new ReverseArray(5) ;	// 传递个数
+		System.out.println(array.add(10)) ;
+		System.out.println(array.add(2)) ;
+		System.out.println(array.add(20)) ;
+		System.out.println(array.add(9)) ;
+		System.out.println(array.add(98)) ;
+		System.out.println(array.add(3)) ;
+		int result [] = array.getData() ;
+		for (int x = 0 ; x < result.length ; x ++) {
+			System.out.print(result[x] + "、") ;
+		}
+	}
+}

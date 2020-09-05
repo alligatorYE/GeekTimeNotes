@@ -1,0 +1,142 @@
+1、
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		if (true) {	// 条件一定被满足
+			int num = 10 ;
+			System.out.println("【1】num = " + num) ;
+		}
+		int num = 100 ;
+		System.out.println("【2】num = " + num) ;
+	}
+}
+
+
+2、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		{	// 普通代码代码块
+			int num = 10 ;	// 局部变量
+			System.out.println("【1】num = " + num) ;
+		}
+		{	// 这样的观察会更加的清晰，每个num都属于局部变量
+			int num = 100 ;	// 局部变量
+			System.out.println("【2】num = " + num) ;
+		}
+	}
+}
+
+
+3、
+class Ball {
+	{	// 代码块直接写在了类之中
+		System.out.println("【构造块】Ball类...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball() ;
+	}
+}
+
+
+4、
+class Ball {
+	public Ball() {
+		System.out.println("【构造方法】public Ball() {...}") ;
+	}
+	{	// 代码块直接写在了类之中
+		System.out.println("【构造块】Ball类...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball() ;
+	}
+}
+
+
+5、
+class Ball {
+	private double size ;
+	private double maxSize ; // 设置最大尺寸
+	private double minSize ; // 最小尺寸
+	public Ball(double size) {
+		System.out.println("【构造方法】public Ball() {...}") ;
+		if (size >= minSize && size <= maxSize) {
+			this.size = size ;
+		} else {
+			this.size = -0.1 ;
+		}
+	}
+	{	// 代码块直接写在了类之中
+		System.out.println("【构造块】Ball类...") ;
+		maxSize = 10 + 1.2 ; // 额外的计算代码
+		minSize = 9.8 + 1.2 ; // 额外的计算代码
+	}
+	public double getSize() {
+		return this.size ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball(5.0) ;
+		System.out.println(ball.getSize()) ;
+	}
+}
+
+
+6、
+class Ball {
+	public Ball() {
+		System.out.println("【构造方法】public Ball() {...}") ;
+	}
+	{	// 代码块直接写在了类之中
+		System.out.println("【构造块】Ball类...") ;
+	}
+	static {	// 代码块使用了static声明
+		System.out.println("【静态块】Ball类...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball() ;
+		new Ball() ;
+	}
+}
+
+7、
+class Ball {
+	private String classify ;
+	private static String brand ;
+	public Ball(String classify) {
+		this.classify = classify ;
+	}
+	static {	// 代码块使用了static声明
+		brand = "辛+2" + "独资品牌 - " ;
+		for (int x = 1 ; x <= 10 ; x ++) {
+			brand += x ;
+		}
+	}
+	public String getInfo() {
+		return "球类型：" + this.classify + "、品牌：" + this.brand ;
+	} 
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Ball("篮球").getInfo()) ;
+	}
+}
+
+
+8、
+public class TestDemo {	// 主类
+	static {
+		System.out.println("Hello MLDN .") ;
+	}
+	public static void main(String args[]) {	// 主方法
+		System.out.println("www.mldn.cn") ;
+	}
+}

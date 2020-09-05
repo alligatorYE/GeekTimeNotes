@@ -1,0 +1,5 @@
+1¡¢cpu get Name
+
+2¡¢cpu get NumberOfCores
+
+3¡¢cpu get NumberOfLogicalProcessors

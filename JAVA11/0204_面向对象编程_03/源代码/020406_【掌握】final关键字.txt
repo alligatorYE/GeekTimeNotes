@@ -1,0 +1,29 @@
+1、
+final class Ball {}	// 太监类
+class BasketBall extends Ball {}
+
+
+
+2、
+class Ball {
+	public final void play() {}
+}
+class BasketBall extends Ball {
+	public void play() {}
+}
+
+3、
+
+class Ball {
+	// 使用final定义的变量就成为了常量，常量在定义时必须赋值，
+	// 并且不允许修改，常量全部大写
+	final int START = 1 ;	// 启动状态
+	final int STOP = 0 ;	// 停止状态
+	public void change() {
+		START = 0 ;	// 错误
+	}
+}
+
+4、
+	public static final int START = 1 ;	// 启动状态
+	public static final int STOP = 0 ;	// 停止状态

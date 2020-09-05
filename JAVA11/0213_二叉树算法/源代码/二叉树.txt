@@ -1,0 +1,193 @@
+package cn.mldn.test;
+import java.util.Arrays;
+interface IBinaryTree<T>{
+    public void add(T data);
+    public int size();
+    public Object[] toArray();
+    public boolean contains(T data);
+    public void remove(T data);
+}
+class BinaryTreeImpl<T> implements IBinaryTree<T>{
+    private class Node{
+         private Comparable<T> data;
+         private Node left;
+         private Node right;
+         private Node parent;
+         public Node (Comparable<T> data){
+             this.data = data;
+         }
+         public void addNode(Node parent,Node newNode){
+             if(this.data.compareTo((T)newNode.data) > 0){
+                    if(this.left == null){
+                        this.left = newNode;
+                        this.left.parent = parent;
+                    }else{
+                        this.left.addNode(this.left,newNode);
+                    }
+             }else{
+                 if(this.right == null){
+                     this.right = newNode;
+                     this.right.parent = parent;
+                 }else{
+                     this.right.addNode(this.right,newNode);
+                 }
+             }
+         }
+         public void toArrayNode(){
+             if(this.left != null){
+                 this.left.toArrayNode();
+             }
+             BinaryTreeImpl.this.retArray[BinaryTreeImpl.this.foot ++] = this.data;
+             if(this.right != null){
+                 this.right.toArrayNode();
+             }
+         }
+         public boolean containsNode(T data){
+             if(this.data.compareTo(data) == 0){  //查找到数据
+                 return true;
+             }else{
+                 if(this.data.compareTo(data) > 0){
+                     if(this.left != null){
+                         return this.left.containsNode(data);
+                     }else{
+                         return false;
+                     }
+                 }else{
+                     if(this.right != null){
+                         return this.right.containsNode(data);
+                     }else{
+                         return false;
+                     }
+                 }
+             }
+         }
+         public Node getRemoveNode(T data){  //得到要删除的节点对象，由根节点调用，并且一定存在;
+             if(this.data.compareTo(data) == 0){
+                 return this;
+             }else{
+                 if(this.data.compareTo(data) > 0){
+                     return this.left.getRemoveNode(data);
+                 }else{
+                     return this.right.getRemoveNode(data);
+                 }
+             }
+         }
+         public Node getMoveNode(Node node){  //得到要删除节点右节点的父节点。
+             if(node.right != null){
+                 return node.getMoveNode(node.right);
+             }
+             return node;
+         }
+    }
+    //以下为BinaryTree类定义----------------------------
+    private int count;
+    private int foot;
+    private Node root;
+    private Object[] retArray;
+    public void add (T data){
+        if(data == null){
+            return ;
+        }
+        Node newNode = new Node((Comparable)data);
+        if(this.root == null){
+            this.root = newNode;
+        }else{
+            this.root.addNode(this.root,newNode);
+        }
+        this.count ++ ;  //数组增加
+    }
+    public int size(){
+        return this.count;
+    }
+    public boolean isEmpty(){
+        return this.size() == 0 && this.root == null;
+    }
+    public Object[] toArray(){
+        if(isEmpty()){
+            return null;
+        }
+        this.foot = 0;  //每次查询都需要脚标清零
+        this.retArray = new Object[this.count];
+        this.root.toArrayNode();
+        return this.retArray;
+    }
+    public boolean contains(T data){
+        if(isEmpty()){
+            return false;
+        }
+        return this.root.containsNode(data);
+    }
+    public void remove(T data){
+        if(this.contains(data)){
+            if(this.root.data.compareTo(data) == 0){  //根节点为要删除节点
+                this.root = this.removeNode(data);
+            }else{
+                this.removeNode(data);
+            }
+            this.count --;  //数据删除之后减一
+        }
+    }
+    public Node removeNode(T data){
+        Node move = null;
+        Node deleteNode = this.root.getRemoveNode(data);  //得到要删除节点
+        if(deleteNode.left == null && deleteNode.right == null){  //是一个独立节点
+            if(deleteNode.parent != null){
+                if(deleteNode.parent.data.compareTo(data) > 0){
+                    deleteNode.parent.left = null;
+                }else{
+                    deleteNode.parent.right = null;
+                }
+                deleteNode.parent = null;
+            }
+        }
+        if(deleteNode.left == null & deleteNode.right != null || deleteNode.right == null & deleteNode.left != null ){  //有单一节点
+            if(deleteNode.left == null){  //要删除节点只有右节点
+                move = deleteNode.right;   //取得要删除节点的右节点
+                deleteNode.right = null;   //dN右节点为null
+            }else{   //要删除节点只有左节点
+                move = deleteNode.left;   //取得要删除节点的左节点
+                deleteNode.left = null;   //dN左节点为null
+            }
+            if(deleteNode.parent != null){  //有父节点
+                if(deleteNode.parent.data.compareTo(data) > 0){  //要删除节点是父节点左节点
+                    deleteNode.parent.left = move;  //父节点左节点 = dN子节点
+                }else{    //要删除节点是父节点的右节点
+                    deleteNode.parent.right = move;  //父节点左节点 = dN子节点
+                }
+            }
+            move.parent = deleteNode.parent;  //先让dN子节点指向dN父节点
+            deleteNode.parent = null;  //dN父节点为null
+        }
+        if(deleteNode.left != null && deleteNode.right != null){  //有左右两个节点
+            move = deleteNode.left;  //取得删除节点的左节点，作为新的父节点
+            deleteNode.left = null;  //取消删除节点左节点引用
+            move.parent = deleteNode.parent;  //新的父节点确定父节点关系
+            if(deleteNode.parent != null){  //有父节点
+                if(deleteNode.parent.data.compareTo(data) > 0){  //要删除节点是父节点左节点
+                    deleteNode.parent.left = move;  //父节点左节点 = dN子节点
+                }else{    //要删除节点是父节点的右节点
+                    deleteNode.parent.right = move;  //父节点左节点 = dN子节点
+                }
+                deleteNode.parent = null;
+            }
+            Node moveRight = this.root.getMoveNode(move);
+            moveRight.right = deleteNode.right;
+            deleteNode.right.parent = moveRight;
+            deleteNode.right = null;
+        }
+        return move;
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) {
+        BinaryTreeImpl<Integer> bt = new BinaryTreeImpl<>();
+        bt.add(10);bt.add(5);bt.add(12);bt.add(6);bt.add(2);bt.add(11);bt.add(14);bt.add(1); bt.add(4);bt.add(7);
+        System.out.println(Arrays.toString(bt.toArray()));
+        bt.remove(12);
+        System.out.println(Arrays.toString(bt.toArray()));
+        bt.remove(5);
+        System.out.println(Arrays.toString(bt.toArray()));
+        bt.remove(2);
+        System.out.println(Arrays.toString(bt.toArray()));
+    }
+}

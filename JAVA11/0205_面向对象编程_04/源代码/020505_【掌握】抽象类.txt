@@ -1,0 +1,209 @@
+1、
+
+class Message {
+	public void build() {
+		// 是一个消息处理的公共类，不具备良好的连接实现
+	}
+	public void send(String msg) {}
+}
+class NetMessage extends Message { // 建立网络消息类
+	public void build() {
+		// 针对于网络消息进行连接的处理操作。
+		// 只有正确覆写了此方法之后才可以实现代码的正确执行。
+	}
+}
+
+2、
+
+abstract class Message {	// 抽象类
+	public abstract boolean build() ; // 建立抽象方法
+	public void send(String msg) {
+		if (this.build()) {	// 看起来是调用抽象方法
+			System.out.println("【消息发送】" + msg) ;
+		}
+	}
+}
+class NetMessage extends Message {
+	public boolean build() {	// 强制子类覆写
+		System.out.println("【NetMessage子类】建立网络连接 ...") ;
+		return true ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new NetMessage() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+3、
+abstract class AbstractMessage {	// 抽象类
+	public abstract boolean build() ; // 建立抽象方法
+	public void send(String msg) {
+		if (this.build()) {	// 看起来是调用抽象方法
+			System.out.println("【消息发送】" + msg) ;
+		}
+	}
+}
+class NetMessage extends AbstractMessage {
+	public boolean build() {	// 强制子类覆写
+		System.out.println("【NetMessage子类】建立网络连接 ...") ;
+		return true ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractMessage msg = new NetMessage() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+4、
+abstract class AbstractMessage {	// 抽象类
+	public void send(String msg) {
+		System.out.println(msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractMessage msg = new AbstractMessage() ;
+	}
+}
+
+5、
+abstract class AbstractBall {	// 抽象类
+	private String brand ;
+	private double price ;
+	public AbstractBall(String brand,double price) {
+		this.brand = brand ;
+		this.price = price ;
+	}
+	@Override
+	public String toString() {
+		return "生产商：" + this.brand + "、价格：" + this.price ;
+	}
+}
+class BasketBall extends AbstractBall {
+	private String ground ;
+	public BasketBall(String brand,double price,String ground) {
+		super(brand,price) ;	// 父类没有无参构造，必须手工调用有参
+		this.ground = ground ;
+	}
+	@Override
+	public String toString() {
+		return "【篮球信息】" + super.toString() + "、场地：" + this.ground ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractBall ball = new BasketBall("新宁",899.99,"鸟巢篮球中心") ;
+		System.out.println(ball) ;
+	}
+}
+
+6、
+abstract class AbstractBall {	// 抽象类
+	public static void watch() {	// 看球
+		System.out.println("观众看球类比赛~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractBall.watch() ;
+	}
+}
+
+7、
+abstract class AbstractBall {	// 抽象类
+	public static AbstractBall getInstance() {	// 看球
+		return new BasketBall() ;
+	}
+	public abstract void play() ;
+}
+class BasketBall extends AbstractBall {
+	public void play() {
+		System.out.println("玩篮球~") ;
+	}
+}
+class FootBall extends AbstractBall {
+	public void play() {
+		System.out.println("踢足球~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		AbstractBall basketA = AbstractBall.getInstance() ;
+		basketA.play() ;
+		AbstractBall basketB = new BasketBall() ;
+		basketB.play() ;
+		AbstractBall foot = new FootBall() ;
+		foot.play() ;
+	}
+}
+
+8、
+abstract class AbstractAction {	// 定义公共行为
+	public static final int EAT = 1 ;
+	public static final int SLEEP = 2 ;
+	public static final int WORK = 5 ;
+	public void command(int ch) {
+		switch(ch){
+			case EAT :
+				this.eat() ;
+				break ;
+			case SLEEP :
+				this.sleep() ;
+				break ;
+			case WORK :
+				this.work() ;
+				break ;
+			case EAT + SLEEP + WORK :
+				this.eat() ;
+				this.sleep() ;
+				this.work() ;
+				break ;
+		}
+	}
+	public abstract void eat() ;
+	public abstract void sleep() ;
+	public abstract void work() ;
+}
+class Human extends AbstractAction {
+	public void eat() {
+		System.out.println("人安静的坐下吃饭！") ;
+	}
+	public void sleep() {
+		System.out.println("躺在石头上睡觉~") ;
+	}
+	public void work() {
+		System.out.println("人类需要努力的工作~~~") ;
+	}
+}
+class Pig extends AbstractAction {
+	public void eat() {
+		System.out.println("猪直接啃食槽~") ;
+	}
+	public void sleep() {
+		System.out.println("躺在猪圈里睡觉~") ;
+	}
+	public void work() {}
+}
+class Robot extends AbstractAction {
+	public void eat() {
+		System.out.println("机器人在补充能量~") ;
+	}
+	public void sleep() {}
+	public void work() {
+		System.out.println("机器人按照既定的流程开始工作~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		execute(new Human()) ;
+		execute(new Pig()) ;
+		execute(new Robot()) ;
+	}
+	public static void execute(AbstractAction action) {
+		action.command(AbstractAction.EAT + AbstractAction.SLEEP + AbstractAction.WORK) ;
+	}
+}

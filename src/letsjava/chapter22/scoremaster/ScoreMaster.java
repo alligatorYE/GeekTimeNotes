@@ -154,3 +154,4 @@ public class ScoreMaster {
         System.out.println("The best score of all years is " + title[bestScoreId] + " in year " + (bestYearId + 1) + ", with a score of " + scores[bestYearId][bestScoreId]);
     }
 }
+

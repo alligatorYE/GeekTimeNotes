@@ -1,0 +1,55 @@
+1、
+
+class Ball {
+	public String tostring() {	// 方法覆写
+		return "玩球儿~" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Ball()) ;
+	}
+}
+
+
+2、
+
+class Ball {
+	@Override
+	public String toString() {	// 方法覆写
+		return "玩球儿~" ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		System.out.println(new Ball()) ;
+	}
+}
+
+3、
+
+@Deprecated
+class Message {	// 整个类都过期了
+	@Deprecated
+	public void send() {}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;	// 使用了过期的类
+		msg.send() ; // 使用过期的方法
+	}
+}
+
+4、
+@Deprecated
+class Message {	// 整个类都过期了
+	@Deprecated
+	public void send() {}
+}
+public class TestDemo {	// 主类
+	@SuppressWarnings({"deprecation"})
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;	// 使用了过期的类
+		msg.send() ; // 使用过期的方法
+	}
+}

@@ -1,0 +1,63 @@
+1、
+
+package cn.mldn.demo;
+class Member {
+    public Member() {
+        System.out.println("【对象实例化时调用】电闪雷鸣，一代妖孽诞生了！");
+    }
+    @Override
+    protected void finalize() throws Throwable {// C++析构函数
+        System.out.println("【Member被回收了】老天爷，要把妖孽收走了！");
+        Thread.sleep(Long.MAX_VALUE);
+        throw new Exception("老子还想再活500年 ...") ; // 是否抛出异常不影响程序的执行
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Member mem = new Member() ;
+        mem = null ; // 当前的对象已经不再拥有指向了
+        System.gc();    // 强制性的进行回收
+    }
+}
+
+
+2、
+package cn.mldn.demo;
+
+import java.lang.ref.Cleaner;
+
+class Member implements Runnable {  // 线程类
+    public Member() {
+        System.out.println("【对象实例化时调用】电闪雷鸣，一代妖孽诞生了！");
+    }
+    @Override
+    public void run() {
+        System.out.println("【对象回收】老天把妖孽收走了~");
+    }
+}
+class MemberCleaner implements AutoCloseable {
+    private static final Cleaner cleaner = Cleaner.create() ; // 创建一个回收对象
+    private Cleaner.Cleanable cleanable ; // 可以被回收的对象
+    public MemberCleaner(Member member) {   // 处理要回收的对象
+        this.cleanable = cleaner.register(this, member) ;   // 注册一个可回收对象
+    }
+    @Override
+    public void close() throws Exception {  // 释放资源
+        this.cleanable.clean(); // 回收对象
+    }
+}
+public class TestDemo {
+    public static void main(String[] args) throws Exception {
+        Member mem = new Member() ;
+        System.gc();    // 强制性的进行回收
+        try (MemberCleaner mc = new MemberCleaner(mem)) {   // 进行对象回收的处理
+            // 如果有需求则可以进行其它的处理操作
+        } catch (Exception e) {}
+    }
+}
+
+
+
+
+
+

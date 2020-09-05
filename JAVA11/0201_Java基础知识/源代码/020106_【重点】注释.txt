@@ -1,0 +1,23 @@
+1、
+
+// 定义一个Hello类，该类的功能是进行一些欢迎信息的提示
+class Hello {
+	public static void main(String args[]) {	// 主方法
+		// 进行系统内容信息的提示输出。
+		System.out.println("www.mldn.cn") ;
+	}
+}
+
+2、
+
+// 定义一个Hello类，该类的功能是进行一些欢迎信息的提示
+class Hello {
+	public static void main(String args[]) {	// 主方法
+		/*
+			多行注释的好处在于代码的优雅性
+			因为可以分很多的行编写， 所以看起来更加有调理
+			但是真正好用的还是单行注释，以后我会以单行注释为主
+		*/
+		System.out.println("www.mldn.cn") ;
+	}
+}

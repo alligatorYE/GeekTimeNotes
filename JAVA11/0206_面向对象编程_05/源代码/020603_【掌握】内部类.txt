@@ -1,0 +1,349 @@
+1、
+
+class Outer {	// 外部类
+	// 非static属性，所有非static属性必须在类对象实例化之后才可以访问
+	private String info = "www.mldn.cn" ; // 普通私有属性
+	class Inner {	// 内部类
+		public void print() {	// 普通方法
+			System.out.println(info) ;
+		}
+	}
+	public void fun() {
+		Inner in = new Inner() ;	// 实例化内部类对象
+		in.print() ;
+	}
+}
+
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Outer out = new Outer() ;	// 实例化外部类对象
+		out.fun() ;
+	}
+}
+
+2、
+
+class Outer {	// 外部类
+	// 非static属性，所有非static属性必须在类对象实例化之后才可以访问
+	private String info = "www.mldn.cn" ; // 普通私有属性
+	public void fun() {
+		Inner in = new Inner(this) ;	// 实例化内部类对象
+		in.print() ;
+	}
+	public String getInfo() {
+		return this.info ;
+	}
+}
+class Inner {	// 内部类
+	private Outer out ;
+	public Inner(Outer out) {
+		this.out = out ;
+	}
+	public void print() {	// 普通方法
+		System.out.println(this.out.getInfo()) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Outer out = new Outer() ;	// 实例化外部类对象
+		out.fun() ;
+	}
+}
+
+3、
+
+class Outer {	// 外部类
+	// 非static属性，所有非static属性必须在类对象实例化之后才可以访问
+	private String info = "www.mldn.cn" ; // 普通私有属性
+	class Inner {	// 内部类
+		private String title = "Hello MLDN" ;	// 内部类私有
+		public void print() {	// 普通方法
+			System.out.println(info) ;
+		}
+	}
+	public void fun() {
+		Inner in = new Inner() ;	// 实例化内部类对象
+		in.print() ;
+		System.out.println(in.title) ;	// 直接访问私有成员
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Outer out = new Outer() ;	// 实例化外部类对象
+		out.fun() ;
+	}
+}
+
+4、
+class Message {
+	public void send(String msg) {
+		Connect conn = new Connect() ;
+		if (conn.build()) {
+			System.out.println("【消息发送】" + msg) ;
+			conn.close() ;
+		} else {
+			System.out.println("〖ERROR〗消息通道创建失败，消息无法发送 ...") ;
+		}
+	}
+	// Connect类不再受到外部的关注，该类只为Message类服务
+	class Connect {	// 定义一个专属的连接类，只为Message服务
+		public boolean build() {
+			System.out.println("【Connect】建立消息发送通道...") ;
+			return true ;
+		}
+		public void close() {
+			System.out.println("【Connect】关闭连接通道...") ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+5、
+	外部类.内部类 = new 外部类().new 内部类() ;
+
+
+6、
+
+class Message {
+	public void send(String msg) {
+		Connect conn = new Connect() ;
+		if (conn.build()) {
+			System.out.println("【消息发送】" + msg) ;
+			conn.close() ;
+		} else {
+			System.out.println("〖ERROR〗消息通道创建失败，消息无法发送 ...") ;
+		}
+	}
+	// Connect类不再受到外部的关注，该类只为Message类服务
+	class Connect {	// 定义一个专属的连接类，只为Message服务
+		public boolean build() {
+			System.out.println("【Connect】建立消息发送通道...") ;
+			return true ;
+		}
+		public void close() {
+			System.out.println("【Connect】关闭连接通道...") ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message.Connect conn = new Message().new Connect() ;
+		System.out.println(conn.build()) ;
+	}
+}
+
+7、
+
+class Message {
+	public void send(String msg) {
+		Connect conn = new Connect() ;
+		if (conn.build()) {
+			System.out.println("【消息发送】" + msg) ;
+			conn.close() ;
+		} else {
+			System.out.println("〖ERROR〗消息通道创建失败，消息无法发送 ...") ;
+		}
+	}
+	// Connect类不再受到外部的关注，该类只为Message类服务
+	private class Connect {	// 定义一个专属的连接类，只为Message服务
+		public boolean build() {
+			System.out.println("【Connect】建立消息发送通道...") ;
+			return true ;
+		}
+		public void close() {
+			System.out.println("【Connect】关闭连接通道...") ;
+		}
+	}
+}
+
+8、
+interface IMessage {
+	public void send(String msg) ;
+	interface IConnect {	// 内部接口，不一定必须实现
+		public boolean build() ;
+	}
+}
+class MessageImpl implements IMessage {	// 外部接口实现子类
+	public void send(String msg) {
+		System.out.println(msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+9、
+interface IMessage {
+	public void send(String msg) ;
+	interface IConnect {	// 内部接口，不一定必须实现
+		public boolean build() ;
+	}
+}
+class MessageImpl implements IMessage {	// 外部接口实现子类
+	public void send(String msg) {
+		System.out.println(msg) ;
+	}
+	// 内部接口可以选择性的进行子类的实现
+	class ConnectImpl implements IConnect {
+		public boolean build() {
+			return true ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ;
+		msg.send("www.mldn.cn") ;
+		IMessage.IConnect conn = ((MessageImpl)msg).new ConnectImpl() ;
+		System.out.println(conn.build()) ;
+	}
+}
+
+10、
+interface IMessage {
+	public void send(String msg) ;
+	// 接口中全部的访问权限都是public
+	public class MessageImpl implements IMessage {
+		public void send(String msg) {
+			System.out.println(msg) ;
+		}
+	}
+	public static IMessage getInstance() {
+		return new MessageImpl() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = IMessage.getInstance() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+11、
+interface IMessage {
+	public void send(String msg) ;
+	abstract class AbstractConnect {
+		public abstract boolean build() ;
+	}
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		AbstractConnect conn = new ConnectImpl() ;
+		if (conn.build()) {
+			System.out.println(msg) ;
+		}
+	}
+	private class ConnectImpl extends AbstractConnect {
+		public boolean build() {
+			return true ;
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+12、
+	外部类.内部类 = new 外部类().new 内部类() ;
+	外部类.内部类 = new 外部类.内部类() ;
+
+13、
+class Message {
+	private static final String INFO = "www.mldn.cn" ;
+	static class Connect {	// 外部类
+		public void print() {
+			System.out.println(Message.INFO) ;	// 访问static属性
+		}
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message.Connect conn = new Message.Connect() ;
+		conn.print() ;
+	}
+}
+
+14、
+
+interface IMessage {
+	static interface IConnect {	// “外部接口”
+		public boolean build() ;
+	}
+}
+class ConnectImpl implements IMessage.IConnect {
+	public boolean build() {
+		return true ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage.IConnect conn = new ConnectImpl() ;
+		System.out.println(conn.build()) ;
+	}
+}
+
+15、
+class Message {	// 普通类
+	public void send(String msg) {
+		// 定义内部类的意义在于，可以将所有对于传入数据进行一些复杂的处理操作
+		class Connect {	// 方法中定义内部类
+			public void print() {
+				for (int x = 0 ; x < 3 ; x ++) {
+					System.out.println(msg) ;
+				}
+			}
+		}
+		Connect conn = new Connect() ;
+		conn.print() ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Message msg = new Message() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+16、
+
+interface IMessage {
+	public void send(String msg) ;
+}
+class MessageImpl implements IMessage {
+	public void send(String msg) {
+		System.out.println(msg) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new MessageImpl() ;
+		msg.send("www.mldn.cn") ;
+	}
+}
+
+17、
+
+interface IMessage {
+	public void send(String msg) ;
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		IMessage msg = new IMessage() {
+			public void send(String msg) {
+				System.out.println(msg) ;
+			}
+		} ;
+		msg.send("www.mldn.cn") ;
+	}
+}

@@ -1,0 +1,150 @@
+1、
+class Ball {	// 默认继承Object父类
+	public void play() {
+		System.out.println("玩球儿~") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Object obj = new Ball() ; // 向上转型
+		Ball ball = (Ball) obj ; // 向下转型
+		ball.play() ;
+	}
+}
+
+2、
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Object obj = new int [] {1,2,3} ; // 向上转型
+		fun(obj) ;	// 操作处理
+	}
+	public static void fun(Object obj) {
+		if (obj instanceof int[]) {
+			int data [] = (int []) obj ;	// 向下转型
+			for (int temp : data) {
+				System.out.print(temp + "、") ;
+			}
+		}
+	}
+}
+
+3、
+
+class Ball {}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball() ;
+		System.out.println(ball) ;
+		System.out.println(ball.toString()) ;
+	}
+}
+
+4、
+class Ball {}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball() ;
+		System.out.println("对象信息：" + ball) ;
+	}
+}
+
+5、
+class Ball {}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball() ;
+		// “+”表示的是字符串连接，任何的类型与字符串连接都变为字符串处理
+		System.out.println("对象信息：" + ball) ;
+	}
+}
+
+6、
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String toString() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball("篮球",9.9) ;
+		System.out.println(ball) ;	// 直接输出对象
+	}
+}
+
+7、
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String toString() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+	public String getClassify() {
+		return this.classify ;
+	}
+	public double getPrice() {
+		return this.price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ballA = new Ball("篮球",9.9) ;
+		Ball ballB = new Ball("篮球",9.9) ;
+		// 两个关键字new，开辟了两个不同的堆内存，所以地址数值不等；
+		// System.out.println(ballA == ballB) ;
+		if (ballA.getClassify().equals(ballB.getClassify()) 
+				&& ballA.getPrice() == ballB.getPrice()) {
+			System.out.println("两个对象的内容相同。") ;
+		} else {
+			System.out.println("两个对象的内容不同！") ;
+		}
+	}
+}
+
+8、
+class Ball {
+	private String classify ;
+	private double price ;
+	public Ball(String classify, double price) {
+		this.classify = classify ;
+		this.price = price ;
+	}
+	public String toString() {
+		return "球类型：" + this.classify + "、价格：" + this.price ;
+	}
+	// equals在调用的时候会存在有两个对象：传入的obj、当前的this
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Ball)) {	// 不是本类实例
+			return false ;
+		}
+		if (this == obj) {	// 地址相
+			return true ;
+		}
+		if (obj == null) {
+			return false ;
+		}
+		Ball ball = (Ball) obj ;	// 向下转型
+		return ball.classify.equals(this.classify) && this.price == ball.price ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ballA = new Ball("篮球",9.9) ;
+		Ball ballB = new Ball("篮球",9.9) ;
+		if (ballA.equals(ballB)) {
+			System.out.println("两个对象的内容相同。") ;
+		} else {
+			System.out.println("两个对象的内容不同！") ;
+		}
+	}
+}
+

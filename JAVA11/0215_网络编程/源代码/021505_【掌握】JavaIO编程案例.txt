@@ -1,0 +1,451 @@
+1-1、
+
+package cn.mldn.service;
+public interface IInputData {
+    /**
+     * 实现字符串数据的输入
+     * @param prompt 输入时的提示信息
+     * @return 返回一个输入的字符串（可以为空）
+     */
+    public String getString(String prompt) ;
+    /**
+     * 实现字符串数据的输入
+     * @param prompt 输入时的提示信息
+     * @return 返回一个不为空的字符串
+     */
+    public String getStringNotNull(String prompt) ;
+}
+
+
+1-2、
+package cn.mldn.service;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class KeyboardInputData implements IInputData {
+    private static final BufferedReader INPUT = new BufferedReader(new InputStreamReader(System.in)) ;
+    @Override
+    public String getString(String prompt) {
+        System.out.print(prompt);
+        String value = null ;
+        try {
+            value = INPUT.readLine() ;
+        } catch (IOException e) {}
+        return value ;
+    }
+    @Override
+    public String getStringNotNull(String prompt) {
+        boolean flag = true ;
+        String value = null ; // 接收数据的输入
+        while (flag) {
+            value = this.getString(prompt) ; // 接收输入数据
+            if (!(value == null || "".equals(value))) {
+                flag = false ;
+            } else {
+                System.err.println("输入的数据不允许为空！");
+            }
+        }
+        return value;
+    }
+}
+
+
+1-3、
+package cn.mldn.factory;
+
+import cn.mldn.service.IInputData;
+import cn.mldn.service.KeyboardInputData;
+
+public class Factory {
+    private Factory() {}
+    public static IInputData getInputDataInstance() {
+        return new KeyboardInputData() ;
+    }
+}
+
+
+1-4、
+package cn.mldn.service;
+import cn.mldn.factory.Factory;
+public class Stat {
+    private int odd ;   // 保存奇数个数
+    private int even ;  // 保存偶数个数
+    private String inputData ; // 保存输入的字符串
+    private IInputData input = Factory.getInputDataInstance() ;
+    public void input() {   // 数据输入操作
+        boolean flag = true ; // 循环标记
+        while (flag) {
+            String value = input.getStringNotNull("请输入一串数字：") ;
+            if (!value.matches("\\d+")) {    // 是正确的数字
+                System.err.println("输入的内容必须是一串数字，请重新输入！");
+            } else {
+                this.inputData = value ; // 保存输入数据
+                flag = false ; // 结束循环
+            }
+        }
+    }
+    public void cal() { // 进行最终的统计计算
+        if (this.inputData != null) {   // 已经输入过数据了
+            char data [] = this.inputData.toCharArray() ;
+            for (int x = 0 ; x < data.length ; x ++) {
+                if (data[x] == '0' || data[x] == '2' || data[x] == '4' || data[x] == '6' || data[x] == '8') {
+                    this.even ++ ;
+                } else {
+                    this.odd ++ ;
+                }
+            }
+        }
+    }
+    public int getOdd() {
+        return odd;
+    }
+    public int getEven() {
+        return even;
+    }
+}
+
+
+1-5、
+package cn.mldn.demo;
+
+import cn.mldn.service.Stat;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Stat stat = new Stat() ;
+        stat.input(); // 输入数据
+        stat.cal(); // 统计计算
+        System.out.println("奇数个数：" + stat.getOdd() + "、偶数个数：" + stat.getEven());
+    }
+}
+
+2-1、
+package cn.mldn.co;
+// CO：Comparable Object，比较对象
+public class Student implements Comparable<Student>{
+    private String name ;
+    private double score ;
+    public Student(String name, double score) {
+        this.name = name;
+        this.score = score;
+    }
+    @Override
+    public int compareTo(Student o) {
+        if (this.score < o.score) {
+            return 1 ;
+        } else if (this.score > o.score) {
+            return -1 ;
+        } else {
+            return 0;
+        }
+    }
+}
+
+
+2-2、
+package cn.mldn.validate;
+public interface IValidator {
+    /**
+     * 实现验证的处理操作
+     * @param value 要验证的数据
+     * @return 验证成功返回true，否则返回false
+     */
+    public boolean check(String value) ; // 正则验证处理
+}
+
+
+2-3、
+package cn.mldn.validate.impl;
+
+import cn.mldn.validate.IValidator;
+
+public class RegexValidator implements IValidator { // 正则验证器
+    private String regex ;
+    public RegexValidator(String regex) {
+        this.regex = regex ;
+    }
+    @Override
+    public boolean check(String value) {
+        return value.matches(this.regex);
+    }
+}
+
+
+2-4、
+
+package cn.mldn.factory;
+
+import cn.mldn.service.IInputData;
+import cn.mldn.service.KeyboardInputData;
+import cn.mldn.validate.IValidator;
+import cn.mldn.validate.impl.RegexValidator;
+
+public class Factory {
+    private Factory() {}
+    public static IInputData getInputDataInstance() {
+        return new KeyboardInputData() ;
+    }
+    public static IValidator getValidatorInstance(String regex) {
+        return new RegexValidator(regex) ;
+    }
+}
+
+
+2-5、
+package cn.mldn.demo;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        String str = "TOM:89|JERRY:90|TONY:95" ;
+        String regex = "([a-zA-Z]+:\\d{1,3}(\\.\\d{1,2})?\\|?)+" ;
+        System.out.println(str.matches(regex));
+    }
+}
+
+2-6、
+package cn.mldn.service;
+
+import cn.mldn.co.Student;
+import cn.mldn.factory.Factory;
+import cn.mldn.validate.IValidator;
+import java.util.Arrays;
+public class MainService {
+    private IInputData input = Factory.getInputDataInstance() ;
+    private IValidator validator = Factory.getValidatorInstance("([a-zA-Z]+:\\d{1,3}(\\.\\d{1,2})?\\|?)+") ;
+    private String inputData ; // 保存输入数据
+    private Student[] students ;    // 保存学生信息
+    public void input() {
+        boolean flag = true ;
+        while(flag) {
+            String value = this.input.getStringNotNull("请输入统计记录（格式：“姓名:成绩|姓名:成绩|...”）：");
+            if (this.validator.check(value)) { // 验证通过
+                this.inputData = value;
+                this.handleData(); // 进行数据处理
+                flag = false ; // 结束循环
+            } else {
+                System.err.println("数据格式输入错误，请重新输入！");
+            }
+        }
+    }
+    private void handleData() {  // 进行数据
+        String result[] = this.inputData.split("\\|") ;
+        this.students = new Student[result.length] ;
+        for (int x = 0 ; x < students.length ; x ++) {
+            String temp [] = result[x].split(":") ;
+            students[x] = new Student(temp[0],Double.parseDouble(temp[1])) ;
+        }
+        Arrays.sort(this.students);
+    }
+    public Student[] getStudents() {
+        return students;
+    }
+}
+
+
+3-1、
+
+package cn.mldn.service;
+
+public interface ILoginService {
+    public boolean login() ;
+}
+
+
+3-2、
+package cn.mldn.service.impl;
+
+import cn.mldn.service.ILoginService;
+
+public class ValueLoginService implements ILoginService {
+    private String username ;
+    private String password ;
+    public ValueLoginService(String username,String password) {
+        this.username = username ;
+        this.password = password ;
+    }
+    @Override
+    public boolean login() {
+        return "mldn".equals(this.username) && "hello".equals(this.password);
+    }
+}
+
+
+
+3-3、
+package cn.mldn.factory;
+
+import cn.mldn.service.IInputData;
+import cn.mldn.service.ILoginService;
+import cn.mldn.service.KeyboardInputData;
+import cn.mldn.service.impl.ValueLoginService;
+import cn.mldn.validate.IValidator;
+import cn.mldn.validate.impl.RegexValidator;
+
+public class Factory {
+    private Factory() {}
+    public static IInputData getInputDataInstance() {
+        return new KeyboardInputData() ;
+    }
+    public static IValidator getValidatorInstance(String regex) {
+        return new RegexValidator(regex) ;
+    }
+    public static ILoginService getLoginServiceInstance(String username,String password) {
+        return new ValueLoginService(username,password) ;
+    }
+}
+
+
+
+3-4、
+package cn.mldn.service;
+
+import cn.mldn.factory.Factory;
+public class MainService {
+    private IInputData input = Factory.getInputDataInstance() ;
+    private String username = null ;
+    private String password = null ;
+    private static int count = 0 ; // 登录次数
+    public void input() {   // 实现数据的输入处理
+        String content = this.input.getStringNotNull("请输入登录用户名：") ;
+        if (content.contains("/")) {    // 输入了用户名和密码
+            String result[] = content.split("/"); ;
+            if (!content.endsWith("/")) {
+                if (result.length == 2) {   // 是正确的
+                    username = result[0];
+                    password = result[1];
+                }
+            } else {
+                this.username = result[0] ;
+                password = this.input.getStringNotNull("请输入登录密码：") ;
+            }
+        } else {    // 只有用户名
+            username = content ;
+            password = this.input.getStringNotNull("请输入登录密码：") ;
+        }
+    }
+    public String login() {
+        ILoginService loginService = Factory.getLoginServiceInstance(this.username,this.password) ;
+        if (count >= 2) {
+            return "登录尝试次数过多，无法登录，程序退出！" ;
+        }
+        if (loginService.login()) {
+            return "登录成功，欢迎光临！" ;
+        } else {
+            System.err.println("登录失败，错误的用户名和密码！");
+            count ++ ;
+            this.input() ; // 重新进行内容的输入
+            return this.login() ;
+        }
+    }
+}
+
+3-5、
+package cn.mldn.demo;
+
+import cn.mldn.service.MainService;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {   // TOM:89|JERRY:90|TONY:95
+        MainService main = new MainService() ;
+        main.input(); // 获取输入信息
+        System.out.println(main.login());
+    }
+}
+
+4-1、
+package cn.mldn.co;
+// CO：Comparable Object，比较对象
+public class Student implements Comparable<Student>{
+    private String name ;
+    private int count ;
+    public Student(String name) {
+        this.name = name;
+        this.count = 0;
+    }
+    public void addCount() {
+        this.count += 1;
+    }
+    @Override
+    public int compareTo(Student o) {
+        return o.count - this.count ;
+    }
+    @Override
+    public String toString() {
+        return "候选人姓名：" + this.name + "、票数：" + this.count;
+    }
+}
+
+
+
+4-2、
+package cn.mldn.service;
+
+import cn.mldn.co.Student;
+import cn.mldn.factory.Factory;
+
+import java.util.Arrays;
+
+public class Vote {
+    private Student students [] = new Student[] {
+            new Student("张三") , new Student("李四") ,
+            new Student("王五") , new Student("赵六")} ;
+    private IInputData input = Factory.getInputDataInstance() ;
+    public Vote() {
+        this.show();
+        this.start();
+    }
+    public void show() {    // 显示所有候选人的信息
+        for (Student stu : this.students) {
+            System.out.println(stu);
+        }
+    }
+    public void start() {   // 开始投票
+        int choose = this.input.getIntNotNull("请输入候选人编号（输入0表示结束！）：") ;
+        switch(choose) {
+            case 0: {
+                this.result();
+                break;
+            }
+            case 1: {
+                this.students[0].addCount(); // 追加选票
+                this.start();
+                break ;
+            }
+            case 2: {
+                this.students[1].addCount(); // 追加选票
+                this.start();
+                break ;
+            }
+            case 3: {
+                this.students[2].addCount(); // 追加选票
+                this.start();
+                break ;
+            }
+            case 4: {
+                this.students[3].addCount(); // 追加选票
+                this.start();
+                break ;
+            }
+            default: {
+                System.err.println("错误的选项，请重新选择！");
+                this.start();
+                break ;
+            }
+        }
+    }
+    public void result() {
+        Arrays.sort(this.students);
+        System.out.printf("最终%s同学以%d票当选班长！" , this.students[0].getName(), this.students[0].getCount());
+    }
+}
+
+4-3、
+package cn.mldn.demo;
+
+import cn.mldn.service.Vote;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {   // TOM:89|JERRY:90|TONY:95
+        Vote vote = new Vote() ;
+    }
+}
+

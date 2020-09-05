@@ -1,0 +1,29 @@
+1、
+
+package cn.mldn.demo;
+import java.util.Stack;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Stack<String> stack = new Stack<>() ;
+        stack.push("A") ;
+        stack.push("B") ;
+        stack.push("C") ;
+        System.out.print(stack.pop() + "、" + stack.pop() + "、" + stack.pop());
+    }
+}
+
+2、
+
+package cn.mldn.demo;
+import java.util.Stack;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Stack<String> stack = new Stack<>() ;
+        stack.push("A") ;
+        stack.push("B") ;
+        stack.push("C") ;
+        System.out.print(stack.pop() + "、" + stack.pop() + "、" + stack.pop());
+        stack.pop() ;
+    }
+}
+

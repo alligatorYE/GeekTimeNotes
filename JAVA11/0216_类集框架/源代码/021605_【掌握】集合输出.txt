@@ -1,0 +1,245 @@
+1、
+package cn.mldn.demo;
+import java.util.Iterator;
+import java.util.Set;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Set<String> all = Set.of("Hello", "MLDN", "www.mldn.cn");
+        Iterator<String> iter = all.iterator() ; // 获取Iterator实例化对象
+        while(iter.hasNext()) { // 知道结束条件，不知道循环次数
+            System.out.print(iter.next() + "、");
+        }
+    }
+}
+
+
+2、
+
+package cn.mldn.demo;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = List.of("Hello", "MLDN", "www.mldn.cn");
+        for (int x = 0 ; x < all.size() ; x ++) {
+            System.out.print(all.get(x) + "、");
+        }
+    }
+}
+
+3、
+
+
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("delete") ;
+        all.add("www.mldn.cn") ;
+        Iterator<String> iter = all.iterator() ;
+        while (iter.hasNext()) {
+            String val = iter.next() ;
+            if ("delete".equals(val)) { // 删除数据
+                iter.remove(); // 数据删除
+            } else {
+                System.out.print(val + "、");
+            }
+        }
+    }
+}
+
+4、
+
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("delete") ;
+        all.add("www.mldn.cn") ;
+        Iterator<String> iter = all.iterator() ;
+        while (iter.hasNext()) {
+            String val = iter.next() ;
+            if ("delete".equals(val)) { // 删除数据
+                all.remove("delete"); // 数据删除
+            } else {
+                System.out.print(val + "、");
+            }
+        }
+    }
+}
+
+5、
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.List;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("delete") ;
+        all.add("www.mldn.cn") ;
+        all.forEach(System.out :: println);
+    }
+}
+
+6、
+package cn.mldn.demo;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("www.mldn.cn") ;
+        ListIterator<String> iter = all.listIterator() ;
+        System.out.print("正向迭代：");
+        while (iter.hasNext()) {
+            System.out.print(iter.next() + "、");
+        }
+        System.out.print("\n反向迭代：");
+        while (iter.hasPrevious()) {
+            System.out.print(iter.previous() + "、");
+        }
+    }
+}
+
+
+7、
+package cn.mldn.demo;
+
+import java.util.Enumeration;
+import java.util.Vector;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Vector<String> all = new Vector<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("www.mldn.cn") ;
+        Enumeration<String> enu = all.elements() ;
+        while (enu.hasMoreElements()) {
+            System.out.print(enu.nextElement() + "、");
+        }
+    }
+}
+
+8、
+package cn.mldn.demo;
+import java.util.HashSet;
+import java.util.Set;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Set<String> all = new HashSet<>() ;
+        all.add("Hello") ;
+        all.add("MLDN") ;
+        all.add("www.mldn.cn") ;
+        for (String str : all) {
+            System.out.print(str + "");
+        }
+    }
+}
+
+9、
+package cn.mldn.demo;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+class Message implements Iterable<String> {
+    private String content [] = new String [] {"HELLO","MLDNJava","www.mldn.cn"} ;
+    private int foot ; // 进行数组的索引控制
+    @Override
+    public Iterator<String> iterator() {
+        return new MessageIter();
+    }
+    private class MessageIter implements Iterator<String> {
+        @Override
+        public boolean hasNext() {
+            return Message.this.foot < Message.this.content.length ; // 有内容
+        }
+        @Override
+        public String next() {
+            return Message.this.content[Message.this.foot ++]; // 返回内容
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Message msg = new Message() ;
+        for (String str : msg) {    // 自定义类对象
+            System.out.print(str + "、");
+        }
+    }
+}
+
+10、
+package cn.mldn.demo;
+import java.util.Iterator;
+interface ILink<T> extends Iterable<T>{
+    public void add(T e) ;
+}
+class LinkImpl<T> implements ILink<T> {
+    private class Node {
+        private T data ;
+        private Node next ;
+        public Node(T data) {
+            this.data = data ;
+        }
+    }
+    private Node root ;
+    private Node last ; // 保存最后一个节点
+    private Node currentNode ;  // 保存输出的当前节点
+    @Override
+    public void add(T e) {
+        Node newNode = new Node(e) ;
+        if (this.root == null) {
+            this.root = newNode ; // 保存根节点
+        } else {    // 找到一个合适的节点位置
+            this.last.next = newNode ;
+        }
+        this.last = newNode ; // 现在假设新的节点为最后一个节点
+    }
+    @Override
+    public Iterator iterator() {
+        this.currentNode = this.root ; // 从根元素开始
+        return new LinkIter() ; // 返回一个迭代对象
+    }
+    class LinkIter implements Iterator<T> {
+        @Override
+        public boolean hasNext() {
+            return LinkImpl.this.currentNode != null ;
+        }
+        @Override
+        public T next() {
+            T data = LinkImpl.this.currentNode.data ;
+            LinkImpl.this.currentNode = LinkImpl.this.currentNode.next ;
+            return data;
+        }
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        ILink<String> all = new LinkImpl<>() ;
+        all.add("Hello MLDN");
+        all.add("Hello WORLD");
+        all.add("Hello Everyone");
+        for (String str : all) {
+            System.out.print(str + "、");
+        }
+    }
+}

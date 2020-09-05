@@ -1,0 +1,102 @@
+1、
+
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        Collections.addAll(all, "Java", "JavaScript", "Ruby", "Python", "Go");
+        Stream<String> stream = all.stream() ;   // 数据转为数据流的形式
+        System.out.println(stream.filter((ele)->ele.toLowerCase().contains("j")).count());
+    }
+}
+
+2、
+
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        Collections.addAll(all, "Java", "JavaScript", "Ruby", "Python", "Go");
+        Stream<String> stream = all.stream() ;   // 数据转为数据流的形式
+        List<String> subList = stream.filter((ele)->ele.toLowerCase().contains("j")).collect(Collectors.toList()) ;
+        System.out.println(subList);
+    }
+}
+
+3、
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<String> all = new ArrayList<>() ;
+        Collections.addAll(all, "Java", "JavaScript", "Ruby", "Python", "Go");
+        Stream<String> stream = all.stream() ;   // 数据转为数据流的形式
+        List<String> subList = stream.filter((ele) -> ele.toLowerCase().contains("j")).skip(1).limit(3).collect(Collectors.toList());
+        System.out.println(subList);
+    }
+}
+
+4、
+package cn.mldn.demo;
+
+import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
+
+class Order {   // 订单信息存储
+    private String name ;
+    private double price ;
+    private int amount ;
+    public Order(String name, double price, int amount) {
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+    public String getName() {
+        return name;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public int getAmount() {
+        return amount;
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        List<Order> all = new ArrayList<>() ;
+        all.add(new Order("佩琪猪娃娃",19.8,200)) ;
+        all.add(new Order("辛博娃娃",0.8,20000)) ;
+        all.add(new Order("成成娃娃",32000.8,20)) ;
+        all.add(new Order("Java学习",98.8,200)) ;
+        DoubleSummaryStatistics statistics = all.stream().filter((ele) -> ele.getName().contains("娃娃")).mapToDouble((orderObject) -> orderObject.getPrice() * orderObject.getAmount()).summaryStatistics();
+        System.out.println("购买数量：" + statistics.getCount());
+        System.out.println("总花销：" + statistics.getSum());
+        System.out.println("最高价格：" + statistics.getMax());
+        System.out.println("最低价格：" + statistics.getMin());
+        System.out.println("平均价格：" + statistics.getAverage());
+
+    }
+}
+
+
+

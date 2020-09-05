@@ -1,0 +1,49 @@
+1、
+
+package cn.mldn.demo;
+import java.util.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Queue<String> queue = new LinkedList<>() ;
+        queue.offer("X") ;  // 保存数据
+        queue.offer("B") ;  // 保存数据
+        queue.offer("Y") ;  // 保存数据
+        while (!queue.isEmpty()) {  // 队列现在还有内容
+            System.out.print(queue.poll() + "、");
+        }
+    }
+}
+
+2、
+package cn.mldn.demo;
+import java.util.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Queue<String> queue = new PriorityQueue<>() ;
+        queue.offer("X") ;  // 保存数据
+        queue.offer("B") ;  // 保存数据
+        queue.offer("Y") ;  // 保存数据
+        while (!queue.isEmpty()) {  // 队列现在还有内容
+            System.out.print(queue.poll() + "、");
+        }
+    }
+}
+
+3、
+package cn.mldn.demo;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        Deque<String> deque = new ArrayDeque<>() ;  // 默认的队列大小为16
+        deque.offerFirst("【HEAD】Hello") ;
+        deque.offerLast("【TAIL】MLDN") ;
+        deque.offerLast("【TAIL】MLDNJava") ;
+        while (!deque.isEmpty()) {
+            System.out.print(deque.poll() + "、");   // Queue接口继承来的方法
+        }
+    }
+}
+
+4、

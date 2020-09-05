@@ -1,0 +1,65 @@
+1、
+package cn.mldn.demo;
+import java.io.*;
+
+class PrintUtil implements Closeable {   // 设计一个打印流的功能类，该类支持有各种数据类型输出流处理
+    private OutputStream output ;
+    public PrintUtil(OutputStream output) { // 设置输出的位置
+        this.output = output ;
+    }
+    public void print(String str) {
+        try {
+            this.output.write(str.getBytes());
+        } catch (IOException e) {
+        }
+    }
+    public void print(int num) {
+        this.print(String.valueOf(num));
+    }
+    public void println(String str) {
+        this.println(str + "\r\n");
+    }
+    public void println(int num) {
+        this.println(String.valueOf(num));
+    }
+    @Override
+    public void close() throws IOException {
+        this.output.close();
+    }
+}
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        PrintUtil pu = new PrintUtil(new FileOutputStream(new File("D:" + File.separator + "info.txt"))) ;
+        pu.print("姓名：辛博") ;
+        pu.print("、年龄：");
+        pu.println(64);
+        pu.close();
+    }
+}
+
+2、
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        PrintWriter pw = new PrintWriter(new FileOutputStream(new File("D:" + File.separator + "info.txt"))) ;
+        pw.print("姓名：辛博") ;
+        pw.print("、年龄：");
+        pw.println(64);
+        pw.close();
+    }
+}
+
+3、
+package cn.mldn.demo;
+import java.io.*;
+public class TestDemo {
+    public static void main(String args[]) throws Exception {
+        PrintWriter pw = new PrintWriter(new FileOutputStream(new File("D:" + File.separator + "info.txt"))) ;
+        String name = "辛博" ;
+        int age = 67 ;
+        double score = 111.1234567889 ;
+        pw.printf("姓名：%s、年龄：%d、成绩：%5.2f", name,age,score) ;
+        pw.close();
+    }
+}

@@ -1,0 +1,99 @@
+1、
+
+class Ball {		// 定义一个球类
+	// 方法上并没有返回值类型的定义
+	public Ball() {	// 方法名称与类名称相同
+		System.out.println("Ball类的构造方法被调用...") ;
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩球er ...") ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = null ;		// 实例化对象
+		ball = new Ball() ;	// 实例化对象（开辟堆内存）
+		ball.play() ; // 实例化对象调用普通方法
+	}
+}
+
+
+2、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	// 如果已经明确的定义了一个构造方法，那么默认的无参构造不会生成
+	public Ball(String c,double p) {
+		classify = c ;	// 属性赋值
+		price = p ;	// 属性赋值
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + classify + "，此球价值：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball("篮球",99.9) ;
+		ball.play() ; // 实例化对象调用普通方法
+	}
+}
+
+
+3、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball() {	// 构造方法重载
+		classify = "空球" ;
+		price = 0.0 ;
+	}
+	public Ball(String c) {	// 构造方法重载
+		classify = c ;
+		price = 9.9 ;
+	}
+	public Ball(String c,double p) {	// 构造方法重载
+		classify = c ;	// 属性赋值
+		price = p ;	// 属性赋值
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + classify + "，此球价值：" + price) ;
+	}
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		Ball ball = new Ball("足球") ;
+		ball.play() ; // 实例化对象调用普通方法
+	}
+}
+
+
+4、
+class Ball {		// 定义一个球类
+	private String classify ;
+	private double price ;
+	public Ball() {	// 构造方法重载
+		classify = "空球" ;
+		price = 0.0 ;
+	}
+	public Ball(String c) {	// 构造方法重载
+		classify = c ;
+		price = 9.9 ;
+	}
+	public Ball(String c,double p) {	// 构造方法重载
+		classify = c ;	// 属性赋值
+		price = p ;	// 属性赋值
+	}
+	public void play() {	// 普通方法
+		System.out.println("玩" + classify + "，此球价值：" + price) ;
+	}
+	// setter、getter略
+}
+public class TestDemo {	// 主类
+	public static void main(String args[]) {	// 主方法
+		new Ball().play() ;
+		new Ball("足球").play() ;
+		new Ball("篮球",99.9).play() ;
+	}
+}
+
+
